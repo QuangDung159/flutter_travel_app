@@ -48,44 +48,6 @@ class MyHomePage extends StatelessWidget {
           'Flutter Travel',
         ),
       ),
-      bottomNavigationBar: SalomonBottomBar(
-        selectedItemColor: ColorPalette.primaryColor,
-        unselectedItemColor: ColorPalette.primaryColor.withOpacity(0.2),
-        margin: EdgeInsets.symmetric(
-          horizontal: kMediumPadding,
-          vertical: kDefaultPadding,
-        ),
-        items: [
-          SalomonBottomBarItem(
-            icon: Icon(
-              Icons.house,
-              size: kDefaultIconSize,
-            ),
-            title: Text('Home'),
-          ),
-          SalomonBottomBarItem(
-            icon: Icon(
-              Icons.heart_broken,
-              size: kDefaultIconSize,
-            ),
-            title: Text('Like'),
-          ),
-          SalomonBottomBarItem(
-            icon: Icon(
-              Icons.work,
-              size: kDefaultIconSize,
-            ),
-            title: Text('Booking'),
-          ),
-          SalomonBottomBarItem(
-            icon: Icon(
-              Icons.account_box,
-              size: kDefaultIconSize,
-            ),
-            title: Text('Account'),
-          ),
-        ],
-      ),
     );
   }
 }

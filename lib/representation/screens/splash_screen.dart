@@ -24,13 +24,13 @@ class _SplashScreenState extends State<SplashScreen> {
       () => {
         if (ignoreIntroScreen)
           {
-            Navigator.of(context).pushNamed(
+            Navigator.of(context).pushReplacementNamed(
               MainScreen.routerName,
             ),
           }
         else
           {
-            Navigator.of(context).pushNamed(
+            Navigator.of(context).pushReplacementNamed(
               IntroScreen.routerName,
             )
           }

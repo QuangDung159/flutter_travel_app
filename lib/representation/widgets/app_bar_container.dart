@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_travel_app/core/constants/color_constants.dart';
+import 'package:flutter_travel_app/core/constants/dimension_constants.dart';
 import 'package:flutter_travel_app/core/helpers/asset_helper.dart';
 import 'package:flutter_travel_app/core/helpers/image_helper.dart';
 
 class AppBarContainer extends StatelessWidget {
-  const AppBarContainer({super.key});
+  const AppBarContainer({super.key, required this.child});
+
+  final Widget child;
 
   @override
   Widget build(BuildContext context) {
@@ -52,7 +53,16 @@ class AppBarContainer extends StatelessWidget {
                 ],
               ),
             ),
-          )
+          ),
+          Container(
+            margin: EdgeInsets.only(
+              top: 156,
+            ),
+            padding: EdgeInsets.symmetric(
+              horizontal: kDefaultPadding,
+            ),
+            child: child,
+          ),
         ],
       ),
     );

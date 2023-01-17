@@ -5,6 +5,7 @@ import 'package:flutter_travel_app/core/constants/dimension_constants.dart';
 import 'package:flutter_travel_app/core/constants/text_style_constants.dart';
 import 'package:flutter_travel_app/core/helpers/asset_helper.dart';
 import 'package:flutter_travel_app/core/helpers/image_helper.dart';
+import 'package:flutter_travel_app/core/helpers/local_storage_helper.dart';
 import 'package:flutter_travel_app/representation/screens/main_screen.dart';
 import 'package:flutter_travel_app/representation/widgets/button_widget.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
@@ -138,6 +139,8 @@ class _IntroScreenState extends State<IntroScreen> {
                             } else {
                               Navigator.of(context)
                                   .pushNamed(MainScreen.routerName);
+                              LocalStorageHelper.setValue(
+                                  'ignoreIntroScreen', true);
                             }
                           },
                         ),

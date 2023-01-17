@@ -60,7 +60,39 @@ class _HomeScreenState extends State<HomeScreen> {
           ],
         ),
       ),
-      child: Container(color: Colors.amber),
+      child: Column(
+        children: [
+          TextField(
+            decoration: InputDecoration(
+              hintText: 'Search your destination',
+              prefixIcon: Padding(
+                padding: EdgeInsets.all(kTopPadding),
+                child: Icon(
+                  Icons.search,
+                  size: kDefaultIconSize,
+                  color: Colors.black,
+                ),
+              ),
+              filled: true,
+              fillColor: Colors.white,
+              border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10),
+                  borderSide: BorderSide.none),
+              contentPadding: EdgeInsets.symmetric(
+                horizontal: kItemPadding,
+              ),
+            ),
+          ),
+          SizedBox(
+            height: kDefaultPadding,
+          ),
+          Row(
+            children: [
+              Column()
+            ],
+          )
+        ],
+      ),
     );
   }
 }

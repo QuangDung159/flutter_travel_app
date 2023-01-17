@@ -133,8 +133,8 @@ class _IntroScreenState extends State<IntroScreen> {
                           onTap: () {
                             if (snapshot.data != 2) {
                               _pageController.nextPage(
-                                  curve: Curves.easeIn,
-                                  duration: const Duration(milliseconds: 200));
+                                  curve: Curves.ease,
+                                  duration: const Duration(milliseconds: 700));
                             } else {
                               Navigator.of(context)
                                   .pushNamed(MainScreen.routerName);

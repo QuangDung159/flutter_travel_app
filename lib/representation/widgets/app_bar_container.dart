@@ -5,9 +5,18 @@ import 'package:flutter_travel_app/core/helpers/asset_helper.dart';
 import 'package:flutter_travel_app/core/helpers/image_helper.dart';
 
 class AppBarContainer extends StatelessWidget {
-  const AppBarContainer({super.key, required this.child});
+  const AppBarContainer({
+    super.key,
+    required this.child,
+    this.title,
+    this.implementLeading = false,
+    this.titleString,
+  });
 
   final Widget child;
+  final Widget? title;
+  final bool implementLeading;
+  final String? titleString;
 
   @override
   Widget build(BuildContext context) {
@@ -22,6 +31,40 @@ class AppBarContainer extends StatelessWidget {
               elevation: 0,
               toolbarHeight: 190,
               backgroundColor: ColorPalette.backgroundScaffoldColor,
+              title: title ??
+                  Row(
+                    children: [
+                      implementLeading
+                          ? Container(
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(
+                                  kDefaultPadding,
+                                ),
+                              ),
+                              padding: EdgeInsets.all(kItemPadding),
+                              child: Icon(
+                                Icons.arrow_back,
+                                size: kDefaultIconSize,
+                                color: Colors.black,
+                              ),
+                            )
+                          : Container(),
+                      Expanded(
+                        child: Column(
+                          children: [
+                            Text(
+                              titleString ?? '',
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 20,
+                              ),
+                            ),
+                          ],
+                        ),
+                      )
+                    ],
+                  ),
               flexibleSpace: Stack(
                 children: [
                   Container(

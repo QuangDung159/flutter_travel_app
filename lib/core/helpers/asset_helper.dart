@@ -13,4 +13,7 @@ class AssetHelper {
   static const String iconPlane = '$iconDir/icon_plane.png';
   static const String iconHotel = '$iconDir/icon_hotel.png';
   static const String iconHotelPlane = '$iconDir/icon_hotel_plane.png';
+  static const String iconLocation = '$iconDir/icon_location.png';
+  static const String iconBed = '$iconDir/icon_bed.png';
+  static const String iconCalendar = '$iconDir/icon_calendar.png';
 }

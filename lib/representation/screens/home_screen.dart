@@ -13,6 +13,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return AppBarContainer(
       implementLeading: true,
+      implementTrailing: true,
       titleString: 'asdqwd',
       child: Container(
         color: Colors.amber

@@ -11,12 +11,14 @@ class AppBarContainer extends StatelessWidget {
     this.title,
     this.implementLeading = false,
     this.titleString,
+    this.implementTrailing = false,
   });
 
   final Widget child;
   final Widget? title;
   final bool implementLeading;
   final String? titleString;
+  final bool implementTrailing;
 
   @override
   Widget build(BuildContext context) {
@@ -34,22 +36,21 @@ class AppBarContainer extends StatelessWidget {
               title: title ??
                   Row(
                     children: [
-                      implementLeading
-                          ? Container(
-                              decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: BorderRadius.circular(
-                                  kDefaultPadding,
-                                ),
-                              ),
-                              padding: EdgeInsets.all(kItemPadding),
-                              child: Icon(
-                                Icons.arrow_back,
-                                size: kDefaultIconSize,
-                                color: Colors.black,
-                              ),
-                            )
-                          : Container(),
+                      if (implementLeading)
+                        Container(
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(
+                              kDefaultPadding,
+                            ),
+                          ),
+                          padding: EdgeInsets.all(kItemPadding),
+                          child: Icon(
+                            Icons.arrow_back,
+                            size: kDefaultIconSize,
+                            color: Colors.black,
+                          ),
+                        ),
                       Expanded(
                         child: Column(
                           children: [
@@ -62,7 +63,22 @@ class AppBarContainer extends StatelessWidget {
                             ),
                           ],
                         ),
-                      )
+                      ),
+                      if (implementTrailing)
+                        Container(
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(
+                              kDefaultPadding,
+                            ),
+                          ),
+                          padding: EdgeInsets.all(kItemPadding),
+                          child: Icon(
+                            Icons.menu,
+                            size: kDefaultIconSize,
+                            color: Colors.black,
+                          ),
+                        )
                     ],
                   ),
               flexibleSpace: Stack(

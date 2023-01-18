@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_travel_app/core/constants/dimension_constants.dart';
-import 'package:flutter_travel_app/core/helpers/asset_helper.dart';
 import 'package:flutter_travel_app/representation/widgets/app_bar_container.dart';
+import 'package:flutter_travel_app/representation/widgets/guest_and_booking_widget.dart';
 
 class GuestAndRoomBookingScreen extends StatefulWidget {
   const GuestAndRoomBookingScreen({super.key});
@@ -24,33 +24,14 @@ class _GuestAndRoomBookingScreenState extends State<GuestAndRoomBookingScreen> {
           SizedBox(
             height: kMediumPadding * 2,
           ),
-          Container(
-            padding: EdgeInsets.all(20),
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(8),
-            ),
-            child: Row(
-              children: [
-                Container(
-                  padding: EdgeInsets.all(6.4),
-                  decoration: BoxDecoration(
-                    color: Color(0xffFE9C5E).withOpacity(0.2),
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                  child: SizedBox(
-                    width: 19.2,
-                    height: 19.2,
-                    child: Image.asset(AssetHelper.iconGuest),
-                  ),
-                ),
-                SizedBox(
-                  width: kDefaultPadding,
-                ),
-                Text('Guest'),
-              ],
-            ),
-          )
+          GuestAndBookingWidget(
+            type: 'guest',
+            count: 1,
+          ),
+          GuestAndBookingWidget(
+            type: 'room',
+            count: 2,
+          ),
         ],
       ),
     );

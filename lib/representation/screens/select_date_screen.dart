@@ -59,12 +59,7 @@ class _SelectDateScreenState extends State<SelectDateScreen> {
           ),
           ButtonWidget(
             title: 'Cancel',
-            onTap: () {
-              setState(() {
-                rangeStartDate = null;
-                rangeEndDate = null;
-              });
-            },
+            onTap: () => Navigator.of(context).pop([null, null]),
           )
         ],
       ),

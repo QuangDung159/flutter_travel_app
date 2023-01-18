@@ -55,16 +55,20 @@ class _HotelBookingScreenState extends State<HotelBookingScreen> {
               ),
               color: Color(0xffF77777),
               title: 'Select Date',
-              subTitle: selectedDate ?? '13 Feb - 18 Feb 2021',
+              subTitle: selectedDate ?? 'When your plan',
               onTap: () async {
                 final result = await Navigator.of(context)
                     .pushNamed(SelectDateScreen.routerName);
+                if (result == null) {
+                  return;
+                }
                 if (!(result as List<DateTime?>)
                     .any((element) => element == null)) {
-                      setState(() {
-                        selectedDate = '${result[0]?.getStartDate} - ${result[1]?.getEndDate}';
-                      });
-                    }
+                  setState(() {
+                    selectedDate =
+                        '${result[0]?.getStartDate} - ${result[1]?.getEndDate}';
+                  });
+                }
               },
             ),
             ItemBookingWidget(

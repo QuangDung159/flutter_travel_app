@@ -18,7 +18,9 @@ class _HotelBookingScreenState extends State<HotelBookingScreen> {
   @override
   Widget build(BuildContext context) {
     return AppBarContainer(
-      titleString: 'Hotel booking',
+      onTap: () => Navigator.of(context).pop(),
+      implementLeading: true,
+      titleString: 'Hotel Booking',
       child: SingleChildScrollView(
         child: Column(
           children: [

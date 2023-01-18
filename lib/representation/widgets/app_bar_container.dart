@@ -12,6 +12,7 @@ class AppBarContainer extends StatelessWidget {
     this.implementLeading = false,
     this.titleString,
     this.implementTrailing = false,
+    this.onTap,
   });
 
   final Widget child;
@@ -19,6 +20,7 @@ class AppBarContainer extends StatelessWidget {
   final bool implementLeading;
   final String? titleString;
   final bool implementTrailing;
+  final Function()? onTap;
 
   @override
   Widget build(BuildContext context) {
@@ -37,18 +39,21 @@ class AppBarContainer extends StatelessWidget {
                   Row(
                     children: [
                       if (implementLeading)
-                        Container(
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(
-                              kDefaultPadding,
+                        GestureDetector(
+                          onTap: onTap,
+                          child: Container(
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(
+                                kDefaultPadding,
+                              ),
                             ),
-                          ),
-                          padding: EdgeInsets.all(kItemPadding),
-                          child: Icon(
-                            Icons.arrow_back,
-                            size: kDefaultIconSize,
-                            color: Colors.black,
+                            padding: EdgeInsets.all(kItemPadding),
+                            child: Icon(
+                              Icons.arrow_back,
+                              size: kDefaultIconSize,
+                              color: Colors.black,
+                            ),
                           ),
                         ),
                       Expanded(

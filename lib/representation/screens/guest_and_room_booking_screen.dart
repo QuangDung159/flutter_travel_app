@@ -6,20 +6,14 @@ import 'package:flutter_travel_app/representation/widgets/button_widget.dart';
 import 'package:flutter_travel_app/representation/widgets/guest_and_booking_widget.dart';
 import 'package:get/get.dart';
 
-class GuestAndRoomBookingScreen extends StatefulWidget {
+class GuestAndRoomBookingScreen extends StatelessWidget {
   const GuestAndRoomBookingScreen({super.key});
 
   static String routerName = '/guest_and_room_booking_screen';
 
   @override
-  State<GuestAndRoomBookingScreen> createState() =>
-      _GuestAndRoomBookingScreenState();
-}
-
-class _GuestAndRoomBookingScreenState extends State<GuestAndRoomBookingScreen> {
-  @override
   Widget build(BuildContext context) {
-    final getXController = Get.put(GetXController());
+    final getXController = Get.find<GetXController>();
     return AppBarContainer(
       titleString: 'Add guest and room',
       implementLeading: true,
@@ -42,7 +36,7 @@ class _GuestAndRoomBookingScreenState extends State<GuestAndRoomBookingScreen> {
           ),
           ButtonWidget(
             title: 'Done',
-            onTap: () {},
+            onTap: () => Get.back(),
           )
         ],
       ),

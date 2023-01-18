@@ -4,7 +4,7 @@ import 'package:flutter_travel_app/core/constants/dimension_constants.dart';
 import 'package:flutter_travel_app/core/helpers/asset_helper.dart';
 import 'package:get/get.dart';
 
-class GuestAndBookingWidget extends StatefulWidget {
+class GuestAndBookingWidget extends StatelessWidget {
   const GuestAndBookingWidget({
     Key? key,
     required this.type,
@@ -14,11 +14,6 @@ class GuestAndBookingWidget extends StatefulWidget {
   final String type;
   final int count;
 
-  @override
-  State<GuestAndBookingWidget> createState() => _GuestAndBookingWidgetState();
-}
-
-class _GuestAndBookingWidgetState extends State<GuestAndBookingWidget> {
   @override
   Widget build(BuildContext context) {
     final getXController = Get.find<GetXController>();
@@ -51,7 +46,7 @@ class _GuestAndBookingWidgetState extends State<GuestAndBookingWidget> {
         children: [
           GestureDetector(
             onTap: () {
-              if (widget.type == 'Guest') {
+              if (type == 'Guest') {
                 getXController.decreaseGuest();
               } else {
                 getXController.decreaseRoom();
@@ -61,8 +56,7 @@ class _GuestAndBookingWidgetState extends State<GuestAndBookingWidget> {
               width: 32,
               height: 32,
               decoration: BoxDecoration(
-                color:
-                    widget.count == 1 ? Color(0xffD9EDEB) : Color(0xff3EC8BC),
+                color: count == 1 ? Color(0xffD9EDEB) : Color(0xff3EC8BC),
                 borderRadius: BorderRadius.circular(32),
               ),
               child: Icon(
@@ -73,7 +67,7 @@ class _GuestAndBookingWidgetState extends State<GuestAndBookingWidget> {
           ),
           Spacer(),
           Text(
-            widget.count.toString(),
+            count.toString(),
             style: TextStyle(
               fontSize: 16,
               fontWeight: FontWeight.bold,
@@ -82,7 +76,7 @@ class _GuestAndBookingWidgetState extends State<GuestAndBookingWidget> {
           Spacer(),
           GestureDetector(
             onTap: () {
-              if (widget.type == 'Guest') {
+              if (type == 'Guest') {
                 getXController.increaseGuest();
               } else {
                 getXController.increaseRoom();
@@ -116,7 +110,7 @@ class _GuestAndBookingWidgetState extends State<GuestAndBookingWidget> {
             width: kDefaultPadding,
           ),
           Text(
-            widget.type,
+            type,
             style: TextStyle(
               fontSize: 16,
               fontWeight: FontWeight.bold,
@@ -128,7 +122,7 @@ class _GuestAndBookingWidgetState extends State<GuestAndBookingWidget> {
   }
 
   Container renderIconByType() {
-    if (widget.type == 'Guest') {
+    if (type == 'Guest') {
       return Container(
         padding: EdgeInsets.all(6.4),
         decoration: BoxDecoration(

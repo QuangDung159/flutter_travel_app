@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_travel_app/core/Controllers/get_x_controller.dart';
 import 'package:flutter_travel_app/core/constants/dimension_constants.dart';
+import 'package:flutter_travel_app/core/extensions/date_ext.dart';
 import 'package:flutter_travel_app/core/helpers/asset_helper.dart';
 import 'package:flutter_travel_app/representation/screens/guest_and_room_booking_screen.dart';
 import 'package:flutter_travel_app/representation/screens/select_date_screen.dart';
 import 'package:flutter_travel_app/representation/widgets/app_bar_container.dart';
 import 'package:flutter_travel_app/representation/widgets/button_widget.dart';
 import 'package:flutter_travel_app/representation/widgets/item_booking_widget.dart';
-import 'package:flutter_travel_app/core/extensions/date_ext.dart';
+import 'package:get/get.dart';
 
 class HotelBookingScreen extends StatefulWidget {
   const HotelBookingScreen({super.key});
@@ -22,6 +24,7 @@ class _HotelBookingScreenState extends State<HotelBookingScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final getXController = Get.put(GetXController());
     return AppBarContainer(
       implementLeading: true,
       titleString: 'Hotel Booking',
@@ -72,19 +75,22 @@ class _HotelBookingScreenState extends State<HotelBookingScreen> {
                 }
               },
             ),
-            ItemBookingWidget(
-              icon: SizedBox(
-                width: 23,
-                height: 20,
-                child: Image.asset(
-                  AssetHelper.iconBed,
+            Obx(
+              () => ItemBookingWidget(
+                icon: SizedBox(
+                  width: 23,
+                  height: 20,
+                  child: Image.asset(
+                    AssetHelper.iconBed,
+                  ),
                 ),
-              ),
-              color: Color(0xff3EC8BC),
-              title: 'Guest and Room',
-              subTitle: '2 Guest, 1 Room',
-              onTap: () => Navigator.of(context).pushNamed(
-                GuestAndRoomBookingScreen.routerName,
+                color: Color(0xff3EC8BC),
+                title: 'Guest and Room',
+                subTitle:
+                    '${getXController.countGuest.value} Guest, ${getXController.countRoom.value} Room',
+                onTap: () => Navigator.of(context).pushNamed(
+                  GuestAndRoomBookingScreen.routerName,
+                ),
               ),
             ),
             SizedBox(

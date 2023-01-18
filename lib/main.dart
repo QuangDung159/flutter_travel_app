@@ -2,12 +2,11 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_travel_app/core/constants/color_constants.dart';
-import 'package:flutter_travel_app/core/constants/dimension_constants.dart';
 import 'package:flutter_travel_app/core/helpers/local_storage_helper.dart';
 import 'package:flutter_travel_app/representation/screens/splash_screen.dart';
 import 'package:flutter_travel_app/routes.dart';
+import 'package:get/get.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
 
 void main() async {
   await Hive.initFlutter();
@@ -21,7 +20,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return GetMaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
         // primarySwatch: Colors.blue,

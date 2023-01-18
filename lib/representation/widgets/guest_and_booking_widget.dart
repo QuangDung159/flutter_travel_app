@@ -112,53 +112,11 @@ class _GuestAndBookingWidgetState extends State<GuestAndBookingWidget> {
   }
 
   Expanded renderIconTitle() {
-    if (widget.type == 'Guest') {
-      return Expanded(
-        flex: 6,
-        child: Row(
-          children: [
-            Container(
-              padding: EdgeInsets.all(6.4),
-              decoration: BoxDecoration(
-                color: Color(0xffFE9C5E).withOpacity(0.2),
-                borderRadius: BorderRadius.circular(12),
-              ),
-              child: SizedBox(
-                width: 19.2,
-                height: 19.2,
-                child: Image.asset(AssetHelper.iconGuest),
-              ),
-            ),
-            SizedBox(
-              width: kDefaultPadding,
-            ),
-            Text(
-              widget.type,
-              style: TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-          ],
-        ),
-      );
-    }
     return Expanded(
       flex: 6,
       child: Row(
         children: [
-          Container(
-            padding: EdgeInsets.symmetric(horizontal: 4.8, vertical: 6.4),
-            decoration: BoxDecoration(
-              color: Color(0xffF77777).withOpacity(0.2),
-              borderRadius: BorderRadius.circular(12),
-            ),
-            child: SizedBox(
-              width: 22.4,
-              height: 19.2,
-              child: Image.asset(AssetHelper.iconRoom),
-            ),
-          ),
+          renderIconByType(),
           SizedBox(
             width: kDefaultPadding,
           ),
@@ -170,6 +128,35 @@ class _GuestAndBookingWidgetState extends State<GuestAndBookingWidget> {
             ),
           ),
         ],
+      ),
+    );
+  }
+
+  Container renderIconByType() {
+    if (widget.type == 'Guest') {
+      return Container(
+        padding: EdgeInsets.all(6.4),
+        decoration: BoxDecoration(
+          color: Color(0xffFE9C5E).withOpacity(0.2),
+          borderRadius: BorderRadius.circular(12),
+        ),
+        child: SizedBox(
+          width: 19.2,
+          height: 19.2,
+          child: Image.asset(AssetHelper.iconGuest),
+        ),
+      );
+    }
+    return Container(
+      padding: EdgeInsets.symmetric(horizontal: 4.8, vertical: 6.4),
+      decoration: BoxDecoration(
+        color: Color(0xffF77777).withOpacity(0.2),
+        borderRadius: BorderRadius.circular(12),
+      ),
+      child: SizedBox(
+        width: 22.4,
+        height: 19.2,
+        child: Image.asset(AssetHelper.iconRoom),
       ),
     );
   }

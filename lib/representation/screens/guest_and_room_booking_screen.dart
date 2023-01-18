@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_travel_app/core/Controllers/get_x_controller.dart';
 import 'package:flutter_travel_app/core/constants/dimension_constants.dart';
 import 'package:flutter_travel_app/representation/widgets/app_bar_container.dart';
 import 'package:flutter_travel_app/representation/widgets/button_widget.dart';
 import 'package:flutter_travel_app/representation/widgets/guest_and_booking_widget.dart';
+import 'package:get/get.dart';
 
 class GuestAndRoomBookingScreen extends StatefulWidget {
   const GuestAndRoomBookingScreen({super.key});
@@ -17,6 +19,7 @@ class GuestAndRoomBookingScreen extends StatefulWidget {
 class _GuestAndRoomBookingScreenState extends State<GuestAndRoomBookingScreen> {
   @override
   Widget build(BuildContext context) {
+    final getXController = Get.put(GetXController());
     return AppBarContainer(
       titleString: 'Add guest and room',
       implementLeading: true,
@@ -25,13 +28,17 @@ class _GuestAndRoomBookingScreenState extends State<GuestAndRoomBookingScreen> {
           SizedBox(
             height: kMediumPadding * 2,
           ),
-          GuestAndBookingWidget(
-            type: 'Guest',
-            count: 1,
+          Obx(
+            () => GuestAndBookingWidget(
+              type: 'Guest',
+              count: getXController.countGuest.value,
+            ),
           ),
-          GuestAndBookingWidget(
-            type: 'Room',
-            count: 2,
+          Obx(
+            () => GuestAndBookingWidget(
+              type: 'Room',
+              count: getXController.countRoom.value,
+            ),
           ),
           ButtonWidget(
             title: 'Done',

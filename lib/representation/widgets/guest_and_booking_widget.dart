@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_travel_app/core/Controllers/get_x_controller.dart';
 import 'package:flutter_travel_app/core/constants/dimension_constants.dart';
 import 'package:flutter_travel_app/core/helpers/asset_helper.dart';
+import 'package:get/get.dart';
 
 class GuestAndBookingWidget extends StatefulWidget {
   const GuestAndBookingWidget({
@@ -17,32 +19,9 @@ class GuestAndBookingWidget extends StatefulWidget {
 }
 
 class _GuestAndBookingWidgetState extends State<GuestAndBookingWidget> {
-  int _count = 0;
-
-  @override
-  void initState() {
-    super.initState();
-    setState(() {
-      _count = widget.count;
-    });
-  }
-
-  void increaseCount() {
-    setState(() {
-      _count += 1;
-    });
-  }
-
-  void decreaseCount() {
-    if (_count > 1) {
-      setState(() {
-        _count -= 1;
-      });
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
+    final getXController = Get.find<GetXController>();
     return Column(
       children: [
         Container(
@@ -52,7 +31,10 @@ class _GuestAndBookingWidgetState extends State<GuestAndBookingWidget> {
             borderRadius: BorderRadius.circular(8),
           ),
           child: Row(
-            children: [renderIconTitle(), renderCountPanel()],
+            children: [
+              renderIconTitle(),
+              renderCountPanel(getXController),
+            ],
           ),
         ),
         SizedBox(
@@ -62,18 +44,25 @@ class _GuestAndBookingWidgetState extends State<GuestAndBookingWidget> {
     );
   }
 
-  Expanded renderCountPanel() {
+  Expanded renderCountPanel(GetXController getXController) {
     return Expanded(
       flex: 5,
       child: Row(
         children: [
           GestureDetector(
-            onTap: () => decreaseCount(),
+            onTap: () {
+              if (widget.type == 'Guest') {
+                getXController.decreaseGuest();
+              } else {
+                getXController.decreaseRoom();
+              }
+            },
             child: Container(
               width: 32,
               height: 32,
               decoration: BoxDecoration(
-                color: _count == 1 ? Color(0xffD9EDEB) : Color(0xff3EC8BC),
+                color:
+                    widget.count == 1 ? Color(0xffD9EDEB) : Color(0xff3EC8BC),
                 borderRadius: BorderRadius.circular(32),
               ),
               child: Icon(
@@ -84,7 +73,7 @@ class _GuestAndBookingWidgetState extends State<GuestAndBookingWidget> {
           ),
           Spacer(),
           Text(
-            _count.toString(),
+            widget.count.toString(),
             style: TextStyle(
               fontSize: 16,
               fontWeight: FontWeight.bold,
@@ -92,7 +81,13 @@ class _GuestAndBookingWidgetState extends State<GuestAndBookingWidget> {
           ),
           Spacer(),
           GestureDetector(
-            onTap: () => increaseCount(),
+            onTap: () {
+              if (widget.type == 'Guest') {
+                getXController.increaseGuest();
+              } else {
+                getXController.increaseRoom();
+              }
+            },
             child: Container(
               width: 32,
               height: 32,

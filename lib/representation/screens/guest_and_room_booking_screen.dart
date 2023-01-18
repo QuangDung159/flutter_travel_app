@@ -33,7 +33,10 @@ class _GuestAndRoomBookingScreenState extends State<GuestAndRoomBookingScreen> {
             type: 'Room',
             count: 2,
           ),
-          ButtonWidget(title: 'Done')
+          ButtonWidget(
+            title: 'Done',
+            onTap: () {},
+          )
         ],
       ),
     );

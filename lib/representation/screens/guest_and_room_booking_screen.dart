@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_travel_app/core/constants/dimension_constants.dart';
 import 'package:flutter_travel_app/representation/widgets/app_bar_container.dart';
+import 'package:flutter_travel_app/representation/widgets/button_widget.dart';
 import 'package:flutter_travel_app/representation/widgets/guest_and_booking_widget.dart';
 
 class GuestAndRoomBookingScreen extends StatefulWidget {
@@ -25,13 +26,14 @@ class _GuestAndRoomBookingScreenState extends State<GuestAndRoomBookingScreen> {
             height: kMediumPadding * 2,
           ),
           GuestAndBookingWidget(
-            type: 'guest',
+            type: 'Guest',
             count: 1,
           ),
           GuestAndBookingWidget(
-            type: 'room',
+            type: 'Room',
             count: 2,
           ),
+          ButtonWidget(title: 'Done')
         ],
       ),
     );

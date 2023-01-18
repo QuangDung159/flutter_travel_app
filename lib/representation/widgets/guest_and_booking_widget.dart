@@ -17,6 +17,30 @@ class GuestAndBookingWidget extends StatefulWidget {
 }
 
 class _GuestAndBookingWidgetState extends State<GuestAndBookingWidget> {
+  int _count = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    setState(() {
+      _count = widget.count;
+    });
+  }
+
+  void increaseCount() {
+    setState(() {
+      _count += 1;
+    });
+  }
+
+  void decreaseCount() {
+    if (_count > 1) {
+      setState(() {
+        _count -= 1;
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -28,48 +52,7 @@ class _GuestAndBookingWidgetState extends State<GuestAndBookingWidget> {
             borderRadius: BorderRadius.circular(8),
           ),
           child: Row(
-            children: [
-              renderIconTitle(),
-              Expanded(
-                child: Row(
-                  children: [
-                    Container(
-                      width: 32,
-                      height: 32,
-                      decoration: BoxDecoration(
-                        color: Color(0xff3EC8BC),
-                        borderRadius: BorderRadius.circular(32),
-                      ),
-                      child: Icon(
-                        Icons.remove,
-                        color: Colors.white,
-                      ),
-                    ),
-                    Spacer(),
-                    Text(
-                      widget.count.toString(),
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    Spacer(),
-                    Container(
-                      width: 32,
-                      height: 32,
-                      decoration: BoxDecoration(
-                        color: Color(0xff3EC8BC),
-                        borderRadius: BorderRadius.circular(32),
-                      ),
-                      child: Icon(
-                        Icons.add,
-                        color: Colors.white,
-                      ),
-                    ),
-                  ],
-                ),
-              )
-            ],
+            children: [renderIconTitle(), renderCountPanel()],
           ),
         ),
         SizedBox(
@@ -79,9 +62,59 @@ class _GuestAndBookingWidgetState extends State<GuestAndBookingWidget> {
     );
   }
 
+  Expanded renderCountPanel() {
+    return Expanded(
+      flex: 5,
+      child: Row(
+        children: [
+          GestureDetector(
+            onTap: () => decreaseCount(),
+            child: Container(
+              width: 32,
+              height: 32,
+              decoration: BoxDecoration(
+                color: _count == 1 ? Color(0xffD9EDEB) : Color(0xff3EC8BC),
+                borderRadius: BorderRadius.circular(32),
+              ),
+              child: Icon(
+                Icons.remove,
+                color: Colors.white,
+              ),
+            ),
+          ),
+          Spacer(),
+          Text(
+            _count.toString(),
+            style: TextStyle(
+              fontSize: 16,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          Spacer(),
+          GestureDetector(
+            onTap: () => increaseCount(),
+            child: Container(
+              width: 32,
+              height: 32,
+              decoration: BoxDecoration(
+                color: Color(0xff3EC8BC),
+                borderRadius: BorderRadius.circular(32),
+              ),
+              child: Icon(
+                Icons.add,
+                color: Colors.white,
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
   Expanded renderIconTitle() {
-    if (widget.type == 'guest') {
+    if (widget.type == 'Guest') {
       return Expanded(
+        flex: 6,
         child: Row(
           children: [
             Container(
@@ -100,7 +133,7 @@ class _GuestAndBookingWidgetState extends State<GuestAndBookingWidget> {
               width: kDefaultPadding,
             ),
             Text(
-              'Guest',
+              widget.type,
               style: TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.bold,
@@ -111,6 +144,7 @@ class _GuestAndBookingWidgetState extends State<GuestAndBookingWidget> {
       );
     }
     return Expanded(
+      flex: 6,
       child: Row(
         children: [
           Container(
@@ -129,7 +163,7 @@ class _GuestAndBookingWidgetState extends State<GuestAndBookingWidget> {
             width: kDefaultPadding,
           ),
           Text(
-            'Room',
+            widget.type,
             style: TextStyle(
               fontSize: 16,
               fontWeight: FontWeight.bold,

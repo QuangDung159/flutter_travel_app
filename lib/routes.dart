@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_travel_app/representation/screens/all_screen.dart';
+import 'package:flutter_travel_app/representation/screens/guest_and_room_booking_screen.dart';
 import 'package:flutter_travel_app/representation/screens/hotel_booking_screen.dart';
 import 'package:flutter_travel_app/representation/screens/hotel_screen.dart';
 import 'package:flutter_travel_app/representation/screens/intro_screen.dart';
@@ -17,4 +18,6 @@ final Map<String, WidgetBuilder> routes = {
   AllScreen.routerName: (context) => const AllScreen(),
   HotelBookingScreen.routerName: (context) => const HotelBookingScreen(),
   SelectDateScreen.routerName: (context) => const SelectDateScreen(),
+  GuestAndRoomBookingScreen.routerName: (context) =>
+      const GuestAndRoomBookingScreen(),
 };

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_travel_app/core/constants/dimension_constants.dart';
 import 'package:flutter_travel_app/core/helpers/asset_helper.dart';
+import 'package:flutter_travel_app/representation/screens/guest_and_room_booking_screen.dart';
 import 'package:flutter_travel_app/representation/screens/select_date_screen.dart';
 import 'package:flutter_travel_app/representation/widgets/app_bar_container.dart';
 import 'package:flutter_travel_app/representation/widgets/button_widget.dart';
@@ -82,11 +83,19 @@ class _HotelBookingScreenState extends State<HotelBookingScreen> {
               color: Color(0xff3EC8BC),
               title: 'Guest and Room',
               subTitle: '2 Guest, 1 Room',
+              onTap: () => Navigator.of(context).pushNamed(
+                GuestAndRoomBookingScreen.routerName,
+              ),
             ),
             SizedBox(
               height: kDefaultPadding,
             ),
-            ButtonWidget(title: 'Search')
+            ButtonWidget(
+              title: 'Search',
+              onTap: () => Navigator.of(context).pushNamed(
+                GuestAndRoomBookingScreen.routerName,
+              ),
+            )
           ],
         ),
       ),

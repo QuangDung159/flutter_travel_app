@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_travel_app/core/constants/dimension_constants.dart';
 import 'package:flutter_travel_app/core/helpers/asset_helper.dart';
 import 'package:flutter_travel_app/representation/widgets/app_bar_container.dart';
+import 'package:flutter_travel_app/representation/widgets/button_widget.dart';
 import 'package:flutter_travel_app/representation/widgets/item_booking_widget.dart';
 
 class HotelBookingScreen extends StatefulWidget {
@@ -63,6 +64,10 @@ class _HotelBookingScreenState extends State<HotelBookingScreen> {
               title: 'Guest and Room',
               subTitle: '2 Guest, 1 Room',
             ),
+            SizedBox(
+              height: kDefaultPadding,
+            ),
+            ButtonWidget(title: 'Search')
           ],
         ),
       ),

@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_travel_app/core/constants/dimension_constants.dart';
-import 'package:flutter_travel_app/core/helpers/asset_helper.dart';
-import 'package:flutter_travel_app/core/helpers/image_helper.dart';
 
 class ItemBookingWidget extends StatelessWidget {
   const ItemBookingWidget({
@@ -30,14 +28,13 @@ class ItemBookingWidget extends StatelessWidget {
           child: Row(
             children: [
               Container(
-                alignment: Alignment.center,
-                width: 32,
-                height: 32,
-                decoration: BoxDecoration(
-                    color: color.withOpacity(0.2),
-                    borderRadius: BorderRadius.circular(12)),
-                child: icon
-              ),
+                  alignment: Alignment.center,
+                  width: 32,
+                  height: 32,
+                  decoration: BoxDecoration(
+                      color: color.withOpacity(0.2),
+                      borderRadius: BorderRadius.circular(12)),
+                  child: icon),
               SizedBox(
                 width: kDefaultPadding,
               ),
@@ -46,6 +43,9 @@ class ItemBookingWidget extends StatelessWidget {
                 children: [
                   Text(
                     title,
+                  ),
+                  SizedBox(
+                    height: 6,
                   ),
                   Text(
                     subTitle,

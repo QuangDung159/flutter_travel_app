@@ -11,7 +11,8 @@ class HotelServiceItemWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Flexible(
+    return Expanded(
+      flex: 1,
       child: Column(
         children: [
           Container(

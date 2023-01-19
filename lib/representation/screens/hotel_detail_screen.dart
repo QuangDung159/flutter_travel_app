@@ -283,7 +283,7 @@ class _HotelDetailScreenState extends State<HotelDetailScreen> {
 
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: list,
     );
   }

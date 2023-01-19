@@ -27,6 +27,7 @@ class _SelectRoomScreenState extends State<SelectRoomScreen> {
       listCardRoom.add(
         CardRoomWidget(
           roomModel: listRoom[i],
+          isShowChooseButton: true,
         ),
       );
     }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_travel_app/core/Controllers/get_x_controller.dart';
 import 'package:flutter_travel_app/core/helpers/asset_helper.dart';
 import 'package:flutter_travel_app/core/helpers/image_helper.dart';
 import 'package:flutter_travel_app/data/models/hotel_service_model.dart';
@@ -6,11 +7,18 @@ import 'package:flutter_travel_app/data/models/room_model.dart';
 import 'package:flutter_travel_app/representation/screens/checkout_screen.dart';
 import 'package:flutter_travel_app/representation/widgets/button_widget.dart';
 import 'package:flutter_travel_app/representation/widgets/hotel_service_item_widget.dart';
+import 'package:get/get.dart';
+import 'package:get/get_state_manager/get_state_manager.dart';
 
 class CardRoomWidget extends StatelessWidget {
-  const CardRoomWidget({super.key, required this.roomModel});
+  const CardRoomWidget({
+    super.key,
+    required this.roomModel,
+    this.isShowChooseButton = false,
+  });
 
   final RoomModel roomModel;
+  final bool? isShowChooseButton;
 
   @override
   Widget build(BuildContext context) {
@@ -60,6 +68,7 @@ class CardRoomWidget extends StatelessWidget {
   }
 
   Widget renderPrice(RoomModel roomModel, context) {
+    final GetXController getXController = Get.find<GetXController>();
     return Row(
       children: [
         Expanded(
@@ -86,11 +95,23 @@ class CardRoomWidget extends StatelessWidget {
         ),
         Expanded(
           flex: 5,
-          child: ButtonWidget(
-            title: 'Choose',
-            onTap: () => Navigator.of(context)
-                .pushNamed(CheckoutScreen.routerName, arguments: roomModel),
-          ),
+          child: isShowChooseButton!
+              ? ButtonWidget(
+                  title: 'Choose',
+                  onTap: () => Navigator.of(context).pushNamed(
+                      CheckoutScreen.routerName,
+                      arguments: roomModel),
+                )
+              : Obx(
+                  () => Text(
+                    '${getXController.countRoom.value} room',
+                    textAlign: TextAlign.end,
+                    style: TextStyle(
+                      fontSize: 12,
+                      fontWeight: FontWeight.w400,
+                    ),
+                  ),
+                ),
         )
       ],
     );

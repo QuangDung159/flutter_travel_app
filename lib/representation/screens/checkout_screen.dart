@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_travel_app/data/models/room_model.dart';
 import 'package:flutter_travel_app/representation/widgets/app_bar_container.dart';
+import 'package:flutter_travel_app/representation/widgets/card_room_widget.dart';
 
 class CheckoutScreen extends StatefulWidget {
   const CheckoutScreen({super.key});
@@ -19,12 +18,18 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
     RoomModel roomModel =
         ModalRoute.of(context)?.settings.arguments as RoomModel;
 
-    
-
     return AppBarContainer(
       implementLeading: true,
       titleString: 'Checkout',
-      child: Container(),
+      child: SingleChildScrollView(
+        child: Column(
+          children: [
+            CardRoomWidget(
+              roomModel: roomModel,
+            ),
+          ],
+        ),
+      ),
     );
   }
 }

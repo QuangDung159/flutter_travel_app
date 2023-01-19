@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_travel_app/core/helpers/asset_helper.dart';
+import 'package:flutter_travel_app/core/helpers/image_helper.dart';
 import 'package:flutter_travel_app/data/models/room_model.dart';
 import 'package:flutter_travel_app/representation/widgets/app_bar_container.dart';
+import 'package:flutter_travel_app/representation/widgets/button_widget.dart';
+import 'package:flutter_travel_app/representation/widgets/card_checkout_info_widget.dart';
 import 'package:flutter_travel_app/representation/widgets/card_room_widget.dart';
 
 class CheckoutScreen extends StatefulWidget {
@@ -27,6 +31,46 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
             CardRoomWidget(
               roomModel: roomModel,
             ),
+            CardCheckoutInfoWidget(
+              title: 'Contact Details',
+              subTitle: 'Add Contact',
+              icon: Container(
+                alignment: Alignment.center,
+                width: 32,
+                height: 32,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(12),
+                  color: Color(0xff6155CC).withOpacity(0.2),
+                ),
+                child: ImageHelper.loadFromAsset(
+                  AssetHelper.iconContact,
+                  width: 19.2,
+                  height: 16,
+                ),
+              ),
+            ),
+            CardCheckoutInfoWidget(
+              title: 'Promo Code',
+              subTitle: 'Add Promo Code',
+              icon: Container(
+                alignment: Alignment.center,
+                width: 32,
+                height: 32,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(12),
+                  color: Color(0xffFE9C5E).withOpacity(0.2),
+                ),
+                child: ImageHelper.loadFromAsset(
+                  AssetHelper.iconDiscount,
+                  width: 19.2,
+                  height: 19.2,
+                ),
+              ),
+            ),
+            ButtonWidget(title: 'Payment'),
+            SizedBox(
+              height: 15,
+            )
           ],
         ),
       ),

@@ -32,4 +32,6 @@ class AssetHelper {
   static const String iconNoRefund = '$iconDir/icon_no_refund.png';
   static const String iconNoSmoking = '$iconDir/icon_no_smoking.png';
   static const String iconFreeBreakfast = '$iconDir/icon_free_breakfast.png';
+  static const String iconContact = '$iconDir/icon_contact.png';
+  static const String iconDiscount = '$iconDir/icon_discount.png';
 }

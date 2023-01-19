@@ -26,12 +26,11 @@ class AppBarContainer extends StatelessWidget {
       body: Stack(
         children: [
           SizedBox(
-            height: 186,
+            height: 200,
             child: AppBar(
               centerTitle: true,
               automaticallyImplyLeading: false,
               elevation: 0,
-              toolbarHeight: 190,
               backgroundColor: ColorPalette.backgroundScaffoldColor,
               title: title ??
                   Row(
@@ -118,7 +117,7 @@ class AppBarContainer extends StatelessWidget {
           ),
           Container(
             margin: EdgeInsets.only(
-              top: 156,
+              top: 144,
             ),
             padding: EdgeInsets.symmetric(
               horizontal: kDefaultPadding,

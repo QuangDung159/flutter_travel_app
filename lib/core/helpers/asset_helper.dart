@@ -11,6 +11,7 @@ class AssetHelper {
   static const String imageOval2 = '$imageDir/oval_2.png';
   static const String imageDashLine = '$imageDir/image_dash_line.png';
   static const String imageHotelDetail = '$imageDir/hotel_detail.png';
+  static const String imageMap = '$imageDir/image_map.png';
 
   static const String iconPlane = '$iconDir/icon_plane.png';
   static const String iconHotel = '$iconDir/icon_hotel.png';

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_travel_app/core/helpers/asset_helper.dart';
+import 'package:flutter_travel_app/core/helpers/image_helper.dart';
 import 'package:flutter_travel_app/data/models/hotel_service_model.dart';
 
 class HotelServiceItemWidget extends StatelessWidget {

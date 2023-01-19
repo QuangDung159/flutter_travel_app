@@ -4,6 +4,7 @@ import 'package:flutter_travel_app/core/constants/dimension_constants.dart';
 import 'package:flutter_travel_app/core/extensions/date_ext.dart';
 import 'package:flutter_travel_app/core/helpers/asset_helper.dart';
 import 'package:flutter_travel_app/representation/screens/guest_and_room_booking_screen.dart';
+import 'package:flutter_travel_app/representation/screens/hotels_screen.dart';
 import 'package:flutter_travel_app/representation/screens/select_date_screen.dart';
 import 'package:flutter_travel_app/representation/widgets/app_bar_container.dart';
 import 'package:flutter_travel_app/representation/widgets/button_widget.dart';
@@ -45,9 +46,8 @@ class _HotelBookingScreenState extends State<HotelBookingScreen> {
               color: Color(0xffFE9C5E),
               title: 'Destination',
               subTitle: 'South Korea',
-              onTap: () {
-                print('object');
-              },
+              onTap: () =>
+                  Navigator.of(context).pushNamed(HotelsScreen.routerName),
             ),
             ItemBookingWidget(
               icon: SizedBox(

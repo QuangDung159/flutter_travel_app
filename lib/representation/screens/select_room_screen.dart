@@ -125,6 +125,7 @@ class _SelectRoomScreenState extends State<SelectRoomScreen> {
 
   Widget renderRoomInfo(RoomModel roomModel) {
     return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,

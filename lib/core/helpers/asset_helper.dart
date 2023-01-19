@@ -23,4 +23,9 @@ class AssetHelper {
   static const String iconRoom = '$iconDir/icon_room.png';
   static const String iconStar = '$iconDir/icon_star.png';
   static const String iconHeart = '$iconDir/icon_heart.png';
+  static const String iconRestaurant = '$iconDir/icon_restaurant.png';
+  static const String iconWifi = '$iconDir/icon_wifi.png';
+  static const String iconMoneyExchange = '$iconDir/icon_money_exchange.png';
+  static const String iconReception = '$iconDir/icon_reception.png';
+  static const String iconMore = '$iconDir/icon_more.png';
 }

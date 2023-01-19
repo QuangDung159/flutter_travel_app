@@ -3,8 +3,10 @@ import 'package:flutter_travel_app/core/constants/dimension_constants.dart';
 import 'package:flutter_travel_app/core/helpers/asset_helper.dart';
 import 'package:flutter_travel_app/core/helpers/image_helper.dart';
 import 'package:flutter_travel_app/data/models/hotel_model.dart';
+import 'package:flutter_travel_app/data/models/hotel_service_model.dart';
 import 'package:flutter_travel_app/representation/widgets/hotel_location_widget.dart';
 import 'package:flutter_travel_app/representation/widgets/hotel_review_widget.dart';
+import 'package:flutter_travel_app/representation/widgets/hotel_service_item_widget.dart';
 
 class HotelDetailScreen extends StatefulWidget {
   const HotelDetailScreen({super.key});
@@ -188,6 +190,70 @@ class _HotelDetailScreenState extends State<HotelDetailScreen> {
                         fontSize: 14,
                         fontWeight: FontWeight.w400,
                       ),
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        HotelServiceItemWidget(
+                          hotelServiceModel: new HotelServiceModel(
+                            title: 'Restaurant',
+                            backgroundColor: Color(0xff6150CF).withOpacity(0.2),
+                            content: ImageHelper.loadFromAsset(
+                              AssetHelper.iconRestaurant,
+                              width: 19.2,
+                              height: 19.2,
+                            ),
+                          ),
+                        ),
+                        HotelServiceItemWidget(
+                          hotelServiceModel: new HotelServiceModel(
+                            title: 'Wifi',
+                            backgroundColor: Color(0xffFF9C57).withOpacity(0.2),
+                            content: ImageHelper.loadFromAsset(
+                              AssetHelper.iconWifi,
+                              width: 22.4,
+                              height: 19.2,
+                            ),
+                          ),
+                        ),
+                        HotelServiceItemWidget(
+                          hotelServiceModel: new HotelServiceModel(
+                            title: 'Currency Exchange',
+                            backgroundColor: Color(0xffF97674).withOpacity(0.2),
+                            content: ImageHelper.loadFromAsset(
+                              AssetHelper.iconMoneyExchange,
+                              width: 20,
+                              height: 19.2,
+                            ),
+                          ),
+                        ),
+                        HotelServiceItemWidget(
+                          hotelServiceModel: new HotelServiceModel(
+                            title: '24-hour Front Desk',
+                            backgroundColor: Color(0xff34C9BD).withOpacity(0.2),
+                            content: ImageHelper.loadFromAsset(
+                              AssetHelper.iconReception,
+                              width: 19.2,
+                              height: 19.2,
+                            ),
+                          ),
+                        ),
+                        HotelServiceItemWidget(
+                          hotelServiceModel: new HotelServiceModel(
+                            title: 'More',
+                            backgroundColor: Color(0xf2D3143).withOpacity(0.2),
+                            content: ImageHelper.loadFromAsset(
+                              AssetHelper.iconMore,
+                              width: 16.8,
+                              height: 4,
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
                   ],
                 ),

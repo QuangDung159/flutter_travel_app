@@ -122,7 +122,7 @@ class ItemHotelWidget extends StatelessWidget {
                 child: ButtonWidget(
                   title: 'Book a room',
                   onTap: () => Navigator.of(context)
-                      .pushNamed(HotelDetailScreen.routerName),
+                      .pushNamed(HotelDetailScreen.routerName, arguments: hotelModel),
                 ),
               ),
             ],

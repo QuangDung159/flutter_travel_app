@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_travel_app/core/constants/dimension_constants.dart';
 import 'package:flutter_travel_app/core/helpers/asset_helper.dart';
 import 'package:flutter_travel_app/core/helpers/image_helper.dart';
+import 'package:flutter_travel_app/data/models/hotel_model.dart';
 
 class HotelDetailScreen extends StatefulWidget {
   const HotelDetailScreen({super.key});
@@ -15,6 +16,9 @@ class HotelDetailScreen extends StatefulWidget {
 class _HotelDetailScreenState extends State<HotelDetailScreen> {
   @override
   Widget build(BuildContext context) {
+    final HotelModel hotelModel =
+        ModalRoute.of(context)!.settings.arguments as HotelModel;
+
     return Scaffold(
       body: Stack(
         children: [
@@ -24,7 +28,7 @@ class _HotelDetailScreenState extends State<HotelDetailScreen> {
               fit: BoxFit.fill,
             ),
           ),
-          renderBottomSheet(),
+          renderBottomSheet(hotelModel),
           Positioned(
             left: kDefaultPadding,
             top: 60,
@@ -76,7 +80,7 @@ class _HotelDetailScreenState extends State<HotelDetailScreen> {
     );
   }
 
-  Widget renderBottomSheet() {
+  Widget renderBottomSheet(HotelModel hotelModel) {
     return DraggableScrollableSheet(
       initialChildSize: 0.3,
       maxChildSize: 0.8,
@@ -105,12 +109,43 @@ class _HotelDetailScreenState extends State<HotelDetailScreen> {
                   color: Colors.grey.withOpacity(0.4),
                 ),
               ),
-              SizedBox(
-                height: kDefaultPadding,
-              ),
               Expanded(
                 child: ListView(
                   controller: scrollController,
+                  children: [
+                    SizedBox(
+                      height: 37,
+                    ),
+                    Row(
+                      children: [
+                        Text(
+                          hotelModel.hotelName,
+                          style: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                        Spacer(),
+                        Text(
+                          '\$${hotelModel.price.toString()}',
+                          style: TextStyle(
+                            fontSize: 24,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                        Container(
+                          margin: EdgeInsets.only(top: 10),
+                          child: Text(
+                            '/night',
+                            style: TextStyle(
+                              fontSize: 10,
+                              fontWeight: FontWeight.w400,
+                            ),
+                          ),
+                        ),
+                      ],
+                    )
+                  ],
                 ),
               ),
             ],

@@ -15,8 +15,8 @@ class HotelsScreen extends StatefulWidget {
 class _HotelsScreenState extends State<HotelsScreen> {
   final HotelModel dummy = new HotelModel(
     hotelImage: 'https://picsum.photos/250?image=1',
-    hotelName: 'hotelName',
-    location: 'location',
+    hotelName: 'Grand Luxury’s',
+    location: 'Seoul, South Korea',
     awayKilometer: '2',
     star: 3.4,
     numberOfReview: 1,

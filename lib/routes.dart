@@ -23,5 +23,5 @@ final Map<String, WidgetBuilder> routes = {
   GuestAndRoomBookingScreen.routerName: (context) =>
       const GuestAndRoomBookingScreen(),
   HotelsScreen.routerName: (context) => const HotelsScreen(),
-  HotelDetailScreen.routerName: (context) => const HotelDetailScreen(),
+  HotelDetailScreen.routerName: (context) => HotelDetailScreen(),
 };

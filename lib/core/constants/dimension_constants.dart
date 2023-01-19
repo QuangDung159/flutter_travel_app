@@ -9,6 +9,8 @@ const double kTopPadding = 8.0;
 
 const double kDefaultIconSize = 18;
 
+const double containerPaddingWithAppBar = 56;
+
 const BorderRadius kDefaultBorderRadius = BorderRadius.all(
   Radius.circular(8),
 );

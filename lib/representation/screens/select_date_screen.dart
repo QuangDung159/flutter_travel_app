@@ -26,7 +26,7 @@ class _SelectDateScreenState extends State<SelectDateScreen> {
       child: Column(
         children: [
           SizedBox(
-            height: kMediumPadding * 1.5,
+            height: containerPaddingWithAppBar + 29,
           ),
           SfDateRangePicker(
             view: DateRangePickerView.month,

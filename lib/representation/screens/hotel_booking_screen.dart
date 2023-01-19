@@ -33,7 +33,7 @@ class _HotelBookingScreenState extends State<HotelBookingScreen> {
         child: Column(
           children: [
             SizedBox(
-              height: kMediumPadding * 2,
+              height: containerPaddingWithAppBar + 25,
             ),
             ItemBookingWidget(
               icon: SizedBox(

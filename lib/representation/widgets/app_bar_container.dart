@@ -28,6 +28,7 @@ class AppBarContainer extends StatelessWidget {
           SizedBox(
             height: 200,
             child: AppBar(
+              toolbarHeight: 60,
               centerTitle: true,
               automaticallyImplyLeading: false,
               elevation: 0,

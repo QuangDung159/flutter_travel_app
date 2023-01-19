@@ -20,7 +20,7 @@ class GuestAndRoomBookingScreen extends StatelessWidget {
       child: Column(
         children: [
           SizedBox(
-            height: kMediumPadding * 2,
+            height: containerPaddingWithAppBar + 25,
           ),
           Obx(
             () => GuestAndBookingWidget(

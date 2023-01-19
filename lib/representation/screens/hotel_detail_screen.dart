@@ -155,7 +155,6 @@ class _HotelDetailScreenState extends State<HotelDetailScreen> {
                     ),
                     HotelLocationWidget(
                       hotelModel: hotelModel,
-                      isShowAway: true,
                     ),
                     SizedBox(
                       height: 14,

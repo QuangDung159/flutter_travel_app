@@ -4,6 +4,7 @@ import 'package:flutter_travel_app/core/helpers/image_helper.dart';
 import 'package:flutter_travel_app/data/models/hotel_model.dart';
 import 'package:flutter_travel_app/data/models/hotel_service_model.dart';
 import 'package:flutter_travel_app/data/models/room_model.dart';
+import 'package:flutter_travel_app/representation/screens/checkout_screen.dart';
 import 'package:flutter_travel_app/representation/widgets/app_bar_container.dart';
 import 'package:flutter_travel_app/representation/widgets/button_widget.dart';
 import 'package:flutter_travel_app/representation/widgets/hotel_service_item_widget.dart';
@@ -28,7 +29,9 @@ class _SelectRoomScreenState extends State<SelectRoomScreen> {
     List<Widget> listCardRoom = [];
 
     for (var i = 0; i < listRoom.length; i++) {
-      listCardRoom.add(renderCardRoom(listRoom[i]));
+      listCardRoom.add(
+        renderCardRoom(listRoom[i]),
+      );
     }
 
     return AppBarContainer(
@@ -86,7 +89,7 @@ class _SelectRoomScreenState extends State<SelectRoomScreen> {
     );
   }
 
-  Widget renderPrice(RoomModel listRoom) {
+  Widget renderPrice(RoomModel roomModel) {
     return Row(
       children: [
         Expanded(
@@ -95,7 +98,7 @@ class _SelectRoomScreenState extends State<SelectRoomScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                '\$${listRoom.price.toString()}',
+                '\$${roomModel.price.toString()}',
                 style: TextStyle(
                   fontSize: 24,
                   fontWeight: FontWeight.w500,
@@ -115,7 +118,8 @@ class _SelectRoomScreenState extends State<SelectRoomScreen> {
           flex: 5,
           child: ButtonWidget(
             title: 'Choose',
-            onTap: () {},
+            onTap: () => Navigator.of(context)
+                .pushNamed(CheckoutScreen.routerName, arguments: roomModel),
           ),
         )
       ],

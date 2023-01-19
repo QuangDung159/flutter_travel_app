@@ -194,7 +194,7 @@ class _HotelDetailScreenState extends State<HotelDetailScreen> {
                     SizedBox(
                       height: 20,
                     ),
-                    renderHotelListService(),
+                    renderHotelListService(hotelModel),
                     SizedBox(
                       height: 20,
                     ),
@@ -236,55 +236,24 @@ class _HotelDetailScreenState extends State<HotelDetailScreen> {
     );
   }
 
-  Row renderHotelListService() {
-    return Row(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      children: [
-        HotelServiceItemWidget(
-          hotelServiceModel: new HotelServiceModel(
-            title: 'Restaurant',
-            backgroundColor: Color(0xff6150CF).withOpacity(0.2),
-            content: ImageHelper.loadFromAsset(
-              AssetHelper.iconRestaurant,
-              width: 19.2,
-              height: 19.2,
+  Row renderHotelListService(HotelModel hotelModel) {
+    List<HotelServiceModel> listService = hotelModel.listService ?? [];
+
+    List<Widget> list = [];
+    if (listService.length > 4) {
+      for (var i = 0; i < 4; i++) {
+        HotelServiceModel hotelService = listService[i];
+        list.add(
+          HotelServiceItemWidget(
+            hotelServiceModel: new HotelServiceModel(
+              title: '${hotelService.title}',
+              backgroundColor: hotelService.backgroundColor,
+              content: hotelService.content,
             ),
           ),
-        ),
-        HotelServiceItemWidget(
-          hotelServiceModel: new HotelServiceModel(
-            title: 'Wifi',
-            backgroundColor: Color(0xffFF9C57).withOpacity(0.2),
-            content: ImageHelper.loadFromAsset(
-              AssetHelper.iconWifi,
-              width: 22.4,
-              height: 19.2,
-            ),
-          ),
-        ),
-        HotelServiceItemWidget(
-          hotelServiceModel: new HotelServiceModel(
-            title: 'Currency Exchange',
-            backgroundColor: Color(0xffF97674).withOpacity(0.2),
-            content: ImageHelper.loadFromAsset(
-              AssetHelper.iconMoneyExchange,
-              width: 20,
-              height: 19.2,
-            ),
-          ),
-        ),
-        HotelServiceItemWidget(
-          hotelServiceModel: new HotelServiceModel(
-            title: '24-hour Front Desk',
-            backgroundColor: Color(0xff34C9BD).withOpacity(0.2),
-            content: ImageHelper.loadFromAsset(
-              AssetHelper.iconReception,
-              width: 19.2,
-              height: 19.2,
-            ),
-          ),
-        ),
+        );
+      }
+      list.add(
         HotelServiceItemWidget(
           hotelServiceModel: new HotelServiceModel(
             title: 'More',
@@ -296,7 +265,26 @@ class _HotelDetailScreenState extends State<HotelDetailScreen> {
             ),
           ),
         ),
-      ],
+      );
+    } else {
+      for (var i = 0; i < listService.length; i++) {
+        HotelServiceModel hotelService = listService[i];
+        list.add(
+          HotelServiceItemWidget(
+            hotelServiceModel: new HotelServiceModel(
+              title: '${hotelService.title}',
+              backgroundColor: hotelService.backgroundColor,
+              content: hotelService.content,
+            ),
+          ),
+        );
+      }
+    }
+
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      children: list,
     );
   }
 }

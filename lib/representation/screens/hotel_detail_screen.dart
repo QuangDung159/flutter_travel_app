@@ -225,8 +225,10 @@ class _HotelDetailScreenState extends State<HotelDetailScreen> {
                     ),
                     ButtonWidget(
                       title: 'Select Room',
-                      onTap: () => Navigator.of(context)
-                          .pushNamed(SelectRoomScreen.routerName),
+                      onTap: () => Navigator.of(context).pushNamed(
+                        SelectRoomScreen.routerName,
+                        arguments: hotelModel,
+                      ),
                     )
                   ],
                 ),

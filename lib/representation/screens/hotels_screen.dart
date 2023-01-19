@@ -3,6 +3,7 @@ import 'package:flutter_travel_app/core/helpers/asset_helper.dart';
 import 'package:flutter_travel_app/core/helpers/image_helper.dart';
 import 'package:flutter_travel_app/data/models/hotel_model.dart';
 import 'package:flutter_travel_app/data/models/hotel_service_model.dart';
+import 'package:flutter_travel_app/data/models/room_model.dart';
 import 'package:flutter_travel_app/representation/widgets/app_bar_container.dart';
 import 'package:flutter_travel_app/representation/widgets/item_hotel_widget.dart';
 
@@ -28,6 +29,74 @@ class _HotelsScreenState extends State<HotelsScreen> {
         'Located in the famous neighborhood of Seoul, Grand Luxury’s is set in a building built in the 2010s.',
     information:
         'You will find every comfort because many of the services that the hotel offers for travellers and of course the hotel is very comfortable.',
+    listRoom: [
+      new RoomModel(
+        name: 'Deluxe Room',
+        image: 'https://picsum.photos/250?image=1',
+        size: 27,
+        isFreeCancellation: true,
+        price: 245,
+        listRoomService: [
+          new HotelServiceModel(
+            title: 'Free Wifi',
+            backgroundColor: Color(0xff6155CC).withOpacity(0.2),
+            content: ImageHelper.loadFromAsset(
+              AssetHelper.iconWifi,
+              width: 22.4,
+              height: 19.2,
+            ),
+          ),
+          new HotelServiceModel(
+            title: 'Non-Refundable',
+            backgroundColor: Color(0xffFE9C5E).withOpacity(0.2),
+            content: ImageHelper.loadFromAsset(
+              AssetHelper.iconNoRefund,
+              width: 19.2,
+              height: 19.2,
+            ),
+          ),
+          new HotelServiceModel(
+            title: 'Free Breakfast',
+            backgroundColor: Color(0xffF77777).withOpacity(0.2),
+            content: ImageHelper.loadFromAsset(
+              AssetHelper.iconFreeBreakfast,
+              width: 19.2,
+              height: 19.2,
+            ),
+          ),
+          new HotelServiceModel(
+            title: 'Non-Smoking',
+            backgroundColor: Color(0xff3EC8BC).withOpacity(0.2),
+            content: ImageHelper.loadFromAsset(
+              AssetHelper.iconNoSmoking,
+              width: 19.2,
+              height: 19.2,
+            ),
+          ),
+        ],
+      ),
+      new RoomModel(
+        name: 'Deluxe Room 12',
+        image: 'https://picsum.photos/250?image=2',
+        size: 40,
+        isFreeCancellation: false,
+        price: 245,
+      ),
+      new RoomModel(
+        name: 'Deluxe Room',
+        image: 'https://picsum.photos/250?image=3',
+        size: 27,
+        isFreeCancellation: true,
+        price: 245,
+      ),
+      new RoomModel(
+        name: 'Deluxe Room',
+        image: 'https://picsum.photos/250?image=4',
+        size: 27,
+        isFreeCancellation: true,
+        price: 245,
+      ),
+    ],
     listService: [
       new HotelServiceModel(
         title: 'Restaurant',

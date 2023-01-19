@@ -4,7 +4,6 @@ import 'package:flutter_travel_app/core/helpers/asset_helper.dart';
 import 'package:flutter_travel_app/core/helpers/image_helper.dart';
 import 'package:flutter_travel_app/representation/screens/all_screen.dart';
 import 'package:flutter_travel_app/representation/screens/hotel_booking_screen.dart';
-import 'package:flutter_travel_app/representation/screens/hotel_screen.dart';
 import 'package:flutter_travel_app/representation/screens/plane_screen.dart';
 import 'package:flutter_travel_app/representation/widgets/app_bar_container.dart';
 

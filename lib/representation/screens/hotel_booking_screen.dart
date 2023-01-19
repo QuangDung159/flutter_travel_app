@@ -99,7 +99,7 @@ class _HotelBookingScreenState extends State<HotelBookingScreen> {
             ButtonWidget(
               title: 'Search',
               onTap: () => Navigator.of(context).pushNamed(
-                GuestAndRoomBookingScreen.routerName,
+                HotelsScreen.routerName,
               ),
             )
           ],

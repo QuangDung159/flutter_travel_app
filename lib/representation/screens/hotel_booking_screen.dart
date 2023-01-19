@@ -87,7 +87,7 @@ class _HotelBookingScreenState extends State<HotelBookingScreen> {
                 color: Color(0xff3EC8BC),
                 title: 'Guest and Room',
                 subTitle:
-                    '${getXController.countGuest.value} Guest, ${getXController.countRoom.value} Room',
+                    '${getXController.countGuest.value} Guest${getXController.countGuest.value > 1 ? 's' : ''}, ${getXController.countRoom.value} Room${getXController.countRoom.value > 1 ? 's' : ''}',
                 onTap: () => Navigator.of(context).pushNamed(
                   GuestAndRoomBookingScreen.routerName,
                 ),

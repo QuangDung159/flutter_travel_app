@@ -26,7 +26,7 @@ class HotelReviewWidget extends StatelessWidget {
           width: 8,
         ),
         Text(
-          hotelModel.star.toString(),
+          '${hotelModel.star.toString()} / 5',
           style: TextStyle(
             fontSize: 14,
             fontWeight: FontWeight.w400,

@@ -4,6 +4,7 @@ import 'package:flutter_travel_app/core/helpers/asset_helper.dart';
 import 'package:flutter_travel_app/core/helpers/image_helper.dart';
 import 'package:flutter_travel_app/data/models/hotel_model.dart';
 import 'package:flutter_travel_app/data/models/hotel_service_model.dart';
+import 'package:flutter_travel_app/representation/screens/select_room_screen.dart';
 import 'package:flutter_travel_app/representation/widgets/button_widget.dart';
 import 'package:flutter_travel_app/representation/widgets/hotel_location_widget.dart';
 import 'package:flutter_travel_app/representation/widgets/hotel_review_widget.dart';
@@ -224,7 +225,8 @@ class _HotelDetailScreenState extends State<HotelDetailScreen> {
                     ),
                     ButtonWidget(
                       title: 'Select Room',
-                      onTap: () {},
+                      onTap: () => Navigator.of(context)
+                          .pushNamed(SelectRoomScreen.routerName),
                     )
                   ],
                 ),

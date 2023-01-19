@@ -35,6 +35,12 @@ class _HotelsScreenState extends State<HotelsScreen> {
             ItemHotelWidget(
               hotelModel: dummy,
             ),
+            ItemHotelWidget(
+              hotelModel: dummy,
+            ),
+            ItemHotelWidget(
+              hotelModel: dummy,
+            ),
           ],
         ),
       ),

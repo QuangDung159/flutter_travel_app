@@ -74,6 +74,15 @@ class _HotelsScreenState extends State<HotelsScreen> {
           height: 19.2,
         ),
       ),
+      new HotelServiceModel(
+        title: '24-hour Front Desk',
+        backgroundColor: Color(0xff34C9BD).withOpacity(0.2),
+        content: ImageHelper.loadFromAsset(
+          AssetHelper.iconReception,
+          width: 19.2,
+          height: 19.2,
+        ),
+      ),
     ],
   );
 

@@ -240,7 +240,9 @@ class _HotelDetailScreenState extends State<HotelDetailScreen> {
     List<HotelServiceModel> listService = hotelModel.listService ?? [];
 
     List<Widget> list = [];
-    if (listService.length > 4) {
+    // if greater than 5 item ==> render 4 and more
+    // if has less and equal than 5 item => render 1 -> 5
+    if (listService.length > 5) {
       for (var i = 0; i < 4; i++) {
         HotelServiceModel hotelService = listService[i];
         list.add(
@@ -283,7 +285,6 @@ class _HotelDetailScreenState extends State<HotelDetailScreen> {
 
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: list,
     );
   }

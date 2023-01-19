@@ -13,30 +13,33 @@ class HotelServiceItemWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Expanded(
       flex: 1,
-      child: Column(
-        children: [
-          Container(
-            alignment: Alignment.center,
-            decoration: BoxDecoration(
-              color: hotelServiceModel.backgroundColor,
-              borderRadius: BorderRadius.circular(12),
+      child: Padding(
+        padding: EdgeInsets.symmetric(horizontal: 5),
+        child: Column(
+          children: [
+            Container(
+              alignment: Alignment.center,
+              decoration: BoxDecoration(
+                color: hotelServiceModel.backgroundColor,
+                borderRadius: BorderRadius.circular(12),
+              ),
+              height: 32,
+              width: 32,
+              child: hotelServiceModel.content,
             ),
-            height: 32,
-            width: 32,
-            child: hotelServiceModel.content,
-          ),
-          SizedBox(
-            height: 15,
-          ),
-          Text(
-            '${hotelServiceModel.title}',
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              fontSize: 10,
-              fontWeight: FontWeight.w400,
+            SizedBox(
+              height: 15,
             ),
-          ),
-        ],
+            Text(
+              '${hotelServiceModel.title}',
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontSize: 10,
+                fontWeight: FontWeight.w400,
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

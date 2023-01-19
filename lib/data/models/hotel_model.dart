@@ -1,4 +1,5 @@
 import 'package:flutter_travel_app/data/models/hotel_service_model.dart';
+import 'package:flutter_travel_app/data/models/room_model.dart';
 
 class HotelModel {
   final String hotelImage;
@@ -11,6 +12,7 @@ class HotelModel {
   final String locationDesc;
   final String information;
   final List<HotelServiceModel>? listService;
+  final List<RoomModel>? listRoom;
 
   HotelModel({
     required this.hotelImage,
@@ -22,6 +24,7 @@ class HotelModel {
     required this.price,
     required this.locationDesc,
     required this.information,
-    this.listService
+    this.listService,
+    this.listRoom,
   });
 }

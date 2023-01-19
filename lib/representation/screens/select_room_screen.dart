@@ -17,7 +17,30 @@ class _SelectRoomScreenState extends State<SelectRoomScreen> {
       implementLeading: true,
       titleString: 'Select Room',
       child: Container(
-        child: Text('asd'),
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              Container(
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                child: Row(
+                  children: [
+                    Column(
+                      children: [
+                        Text('sdasd'),
+                        Text('sdasd'),
+                        Text('sdasd'),
+                      ],
+                    ),
+                    // Image.network(''),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }

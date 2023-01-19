@@ -6,6 +6,7 @@ import 'package:flutter_travel_app/data/models/hotel_model.dart';
 import 'package:flutter_travel_app/representation/screens/hotel_detail_screen.dart';
 import 'package:flutter_travel_app/representation/widgets/button_widget.dart';
 import 'package:flutter_travel_app/representation/widgets/hotel_location_widget.dart';
+import 'package:flutter_travel_app/representation/widgets/hotel_review_widget.dart';
 
 class ItemHotelWidget extends StatelessWidget {
   ItemHotelWidget({super.key, required this.hotelModel});
@@ -81,32 +82,8 @@ class ItemHotelWidget extends StatelessWidget {
           SizedBox(
             height: 16,
           ),
-          Row(
-            children: [
-              ImageHelper.loadFromAsset(
-                AssetHelper.iconStar,
-                width: 16,
-                height: 16,
-              ),
-              SizedBox(
-                width: 8,
-              ),
-              Text(
-                hotelModel.star.toString(),
-                style: TextStyle(
-                  fontSize: 14,
-                  fontWeight: FontWeight.w400,
-                ),
-              ),
-              Text(
-                ' (${hotelModel.numberOfReview} reviews)',
-                style: TextStyle(
-                  fontSize: 14,
-                  fontWeight: FontWeight.w400,
-                  color: Color(0xffA5A5A7),
-                ),
-              ),
-            ],
+          HotelReviewWidget(
+            hotelModel: hotelModel,
           ),
           SizedBox(
             height: 14.5,

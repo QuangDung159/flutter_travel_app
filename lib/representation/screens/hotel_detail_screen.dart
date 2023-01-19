@@ -3,6 +3,8 @@ import 'package:flutter_travel_app/core/constants/dimension_constants.dart';
 import 'package:flutter_travel_app/core/helpers/asset_helper.dart';
 import 'package:flutter_travel_app/core/helpers/image_helper.dart';
 import 'package:flutter_travel_app/data/models/hotel_model.dart';
+import 'package:flutter_travel_app/representation/widgets/hotel_location_widget.dart';
+import 'package:flutter_travel_app/representation/widgets/hotel_review_widget.dart';
 
 class HotelDetailScreen extends StatefulWidget {
   const HotelDetailScreen({super.key});
@@ -144,7 +146,49 @@ class _HotelDetailScreenState extends State<HotelDetailScreen> {
                           ),
                         ),
                       ],
-                    )
+                    ),
+                    SizedBox(
+                      height: 12,
+                    ),
+                    HotelLocationWidget(
+                      hotelModel: hotelModel,
+                      isShowAway: true,
+                    ),
+                    SizedBox(
+                      height: 14,
+                    ),
+                    ImageHelper.loadFromAsset(AssetHelper.imageDashLine),
+                    SizedBox(
+                      height: 14,
+                    ),
+                    HotelReviewWidget(
+                      hotelModel: hotelModel,
+                      isShowSeeAll: true,
+                    ),
+                    SizedBox(
+                      height: 14,
+                    ),
+                    ImageHelper.loadFromAsset(AssetHelper.imageDashLine),
+                    SizedBox(
+                      height: 19,
+                    ),
+                    Text(
+                      'Information',
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                    SizedBox(
+                      height: 14,
+                    ),
+                    Text(
+                      hotelModel.information,
+                      style: TextStyle(
+                        fontSize: 14,
+                        fontWeight: FontWeight.w400,
+                      ),
+                    ),
                   ],
                 ),
               ),

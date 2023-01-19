@@ -24,33 +24,42 @@ class _SelectRoomScreenState extends State<SelectRoomScreen> {
         ModalRoute.of(context)?.settings.arguments as HotelModel;
     List<RoomModel> listRoom = hotelModel.listRoom ?? [];
 
+    List<Widget> listCardRoom = [];
+
+    for (var i = 0; i < listRoom.length; i++) {
+      listCardRoom.add(
+        Container(
+          padding: EdgeInsets.only(left: 20, top: 15, right: 20),
+          margin: EdgeInsets.only(bottom: 20),
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(12),
+          ),
+          child: renderCardRoom(listRoom[i]),
+        ),
+      );
+    }
+
     return AppBarContainer(
       implementLeading: true,
       titleString: 'Select Room',
       child: Container(
         child: SingleChildScrollView(
           child: Column(
-            children: [
-              Container(
-                padding: EdgeInsets.only(left: 20, top: 15, right: 20),
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(12),
-                ),
-                child: renderCardRoom(listRoom[0]),
-              ),
-            ],
+            children: listCardRoom,
           ),
         ),
       ),
     );
   }
 
-  Column renderCardRoom(RoomModel roomModel) {
+  Widget renderCardRoom(RoomModel roomModel) {
     List<HotelServiceModel> listRoomService = roomModel.listRoomService ?? [];
     List<Widget> list = [];
     for (var i = 0; i < listRoomService.length; i++) {
-      list.add(HotelServiceItemWidget(hotelServiceModel: listRoomService[i]));
+      list.add(
+        HotelServiceItemWidget(hotelServiceModel: listRoomService[i]),
+      );
     }
 
     return Column(

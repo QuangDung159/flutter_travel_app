@@ -81,6 +81,44 @@ class _HotelsScreenState extends State<HotelsScreen> {
         size: 40,
         isFreeCancellation: false,
         price: 245,
+        listRoomService: [
+          new HotelServiceModel(
+            title: 'Free Wifi',
+            backgroundColor: Color(0xff6155CC).withOpacity(0.2),
+            content: ImageHelper.loadFromAsset(
+              AssetHelper.iconWifi,
+              width: 22.4,
+              height: 19.2,
+            ),
+          ),
+          new HotelServiceModel(
+            title: 'Non-Refundable',
+            backgroundColor: Color(0xffFE9C5E).withOpacity(0.2),
+            content: ImageHelper.loadFromAsset(
+              AssetHelper.iconNoRefund,
+              width: 19.2,
+              height: 19.2,
+            ),
+          ),
+          new HotelServiceModel(
+            title: 'Free Breakfast',
+            backgroundColor: Color(0xffF77777).withOpacity(0.2),
+            content: ImageHelper.loadFromAsset(
+              AssetHelper.iconFreeBreakfast,
+              width: 19.2,
+              height: 19.2,
+            ),
+          ),
+          new HotelServiceModel(
+            title: 'Non-Smoking',
+            backgroundColor: Color(0xff3EC8BC).withOpacity(0.2),
+            content: ImageHelper.loadFromAsset(
+              AssetHelper.iconNoSmoking,
+              width: 19.2,
+              height: 19.2,
+            ),
+          ),
+        ],
       ),
       new RoomModel(
         name: 'Deluxe Room',
@@ -88,6 +126,44 @@ class _HotelsScreenState extends State<HotelsScreen> {
         size: 27,
         isFreeCancellation: true,
         price: 245,
+        listRoomService: [
+          new HotelServiceModel(
+            title: 'Free Wifi',
+            backgroundColor: Color(0xff6155CC).withOpacity(0.2),
+            content: ImageHelper.loadFromAsset(
+              AssetHelper.iconWifi,
+              width: 22.4,
+              height: 19.2,
+            ),
+          ),
+          new HotelServiceModel(
+            title: 'Non-Refundable',
+            backgroundColor: Color(0xffFE9C5E).withOpacity(0.2),
+            content: ImageHelper.loadFromAsset(
+              AssetHelper.iconNoRefund,
+              width: 19.2,
+              height: 19.2,
+            ),
+          ),
+          new HotelServiceModel(
+            title: 'Free Breakfast',
+            backgroundColor: Color(0xffF77777).withOpacity(0.2),
+            content: ImageHelper.loadFromAsset(
+              AssetHelper.iconFreeBreakfast,
+              width: 19.2,
+              height: 19.2,
+            ),
+          ),
+          new HotelServiceModel(
+            title: 'Non-Smoking',
+            backgroundColor: Color(0xff3EC8BC).withOpacity(0.2),
+            content: ImageHelper.loadFromAsset(
+              AssetHelper.iconNoSmoking,
+              width: 19.2,
+              height: 19.2,
+            ),
+          ),
+        ],
       ),
       new RoomModel(
         name: 'Deluxe Room',
@@ -95,6 +171,44 @@ class _HotelsScreenState extends State<HotelsScreen> {
         size: 27,
         isFreeCancellation: true,
         price: 245,
+        listRoomService: [
+          new HotelServiceModel(
+            title: 'Free Wifi',
+            backgroundColor: Color(0xff6155CC).withOpacity(0.2),
+            content: ImageHelper.loadFromAsset(
+              AssetHelper.iconWifi,
+              width: 22.4,
+              height: 19.2,
+            ),
+          ),
+          new HotelServiceModel(
+            title: 'Non-Refundable',
+            backgroundColor: Color(0xffFE9C5E).withOpacity(0.2),
+            content: ImageHelper.loadFromAsset(
+              AssetHelper.iconNoRefund,
+              width: 19.2,
+              height: 19.2,
+            ),
+          ),
+          new HotelServiceModel(
+            title: 'Free Breakfast',
+            backgroundColor: Color(0xffF77777).withOpacity(0.2),
+            content: ImageHelper.loadFromAsset(
+              AssetHelper.iconFreeBreakfast,
+              width: 19.2,
+              height: 19.2,
+            ),
+          ),
+          new HotelServiceModel(
+            title: 'Non-Smoking',
+            backgroundColor: Color(0xff3EC8BC).withOpacity(0.2),
+            content: ImageHelper.loadFromAsset(
+              AssetHelper.iconNoSmoking,
+              width: 19.2,
+              height: 19.2,
+            ),
+          ),
+        ],
       ),
     ],
     listService: [

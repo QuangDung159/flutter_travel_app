@@ -3,6 +3,7 @@ import 'package:flutter_travel_app/core/constants/dimension_constants.dart';
 import 'package:flutter_travel_app/core/helpers/asset_helper.dart';
 import 'package:flutter_travel_app/core/helpers/image_helper.dart';
 import 'package:flutter_travel_app/data/models/hotel_model.dart';
+import 'package:flutter_travel_app/representation/screens/hotel_detail_screen.dart';
 import 'package:flutter_travel_app/representation/widgets/button_widget.dart';
 
 class ItemHotelWidget extends StatelessWidget {
@@ -38,7 +39,7 @@ class ItemHotelWidget extends StatelessWidget {
                   ),
                 ),
               ),
-              renderHotelInfo(),
+              renderHotelInfo(context),
             ],
           ),
         ),
@@ -56,7 +57,7 @@ class ItemHotelWidget extends StatelessWidget {
     );
   }
 
-  Container renderHotelInfo() {
+  Container renderHotelInfo(context) {
     return Container(
       padding: EdgeInsets.all(20),
       child: Column(
@@ -163,7 +164,11 @@ class ItemHotelWidget extends StatelessWidget {
                 ),
               ),
               Expanded(
-                child: ButtonWidget(title: 'Book a room'),
+                child: ButtonWidget(
+                  title: 'Book a room',
+                  onTap: () => Navigator.of(context)
+                      .pushNamed(HotelDetailScreen.routerName),
+                ),
               ),
             ],
           )

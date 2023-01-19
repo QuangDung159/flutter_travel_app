@@ -22,22 +22,13 @@ class _SelectRoomScreenState extends State<SelectRoomScreen> {
   Widget build(BuildContext context) {
     HotelModel hotelModel =
         ModalRoute.of(context)?.settings.arguments as HotelModel;
+
     List<RoomModel> listRoom = hotelModel.listRoom ?? [];
 
     List<Widget> listCardRoom = [];
 
     for (var i = 0; i < listRoom.length; i++) {
-      listCardRoom.add(
-        Container(
-          padding: EdgeInsets.only(left: 20, top: 15, right: 20),
-          margin: EdgeInsets.only(bottom: 20),
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(12),
-          ),
-          child: renderCardRoom(listRoom[i]),
-        ),
-      );
+      listCardRoom.add(renderCardRoom(listRoom[i]));
     }
 
     return AppBarContainer(
@@ -62,28 +53,36 @@ class _SelectRoomScreenState extends State<SelectRoomScreen> {
       );
     }
 
-    return Column(
-      children: [
-        renderRoomInfo(roomModel),
-        SizedBox(
-          height: 15,
-        ),
-        Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: list,
-        ),
-        SizedBox(
-          height: 15,
-        ),
-        ImageHelper.loadFromAsset(AssetHelper.imageDashLine),
-        SizedBox(
-          height: 15,
-        ),
-        renderPrice(roomModel),
-        SizedBox(
-          height: 17.5,
-        ),
-      ],
+    return Container(
+      padding: EdgeInsets.only(left: 20, top: 15, right: 20),
+      margin: EdgeInsets.only(bottom: 20),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(12),
+      ),
+      child: Column(
+        children: [
+          renderRoomInfo(roomModel),
+          SizedBox(
+            height: 15,
+          ),
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: list,
+          ),
+          SizedBox(
+            height: 15,
+          ),
+          ImageHelper.loadFromAsset(AssetHelper.imageDashLine),
+          SizedBox(
+            height: 15,
+          ),
+          renderPrice(roomModel),
+          SizedBox(
+            height: 17.5,
+          ),
+        ],
+      ),
     );
   }
 

@@ -5,6 +5,7 @@ import 'package:flutter_travel_app/core/helpers/image_helper.dart';
 import 'package:flutter_travel_app/data/models/hotel_model.dart';
 import 'package:flutter_travel_app/representation/screens/hotel_detail_screen.dart';
 import 'package:flutter_travel_app/representation/widgets/button_widget.dart';
+import 'package:flutter_travel_app/representation/widgets/hotel_location_widget.dart';
 
 class ItemHotelWidget extends StatelessWidget {
   ItemHotelWidget({super.key, required this.hotelModel});
@@ -73,32 +74,9 @@ class ItemHotelWidget extends StatelessWidget {
           SizedBox(
             height: 10,
           ),
-          Row(
-            children: [
-              ImageHelper.loadFromAsset(
-                AssetHelper.iconLocationHotel,
-                height: 16,
-                width: 11.96,
-              ),
-              SizedBox(
-                width: 8,
-              ),
-              Text(
-                '${hotelModel.location} - ',
-                style: TextStyle(
-                  fontSize: 12,
-                  fontWeight: FontWeight.w400,
-                ),
-              ),
-              Text(
-                '${hotelModel.awayKilometer} km from destination',
-                style: TextStyle(
-                  fontSize: 12,
-                  fontWeight: FontWeight.w400,
-                  color: Color(0xff838383),
-                ),
-              ),
-            ],
+          HotelLocationWidget(
+            hotelModel: hotelModel,
+            isShowAway: true,
           ),
           SizedBox(
             height: 16,

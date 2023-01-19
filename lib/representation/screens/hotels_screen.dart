@@ -21,6 +21,10 @@ class _HotelsScreenState extends State<HotelsScreen> {
     star: 3.4,
     numberOfReview: 1,
     price: 123,
+    locationDesc:
+        'Located in the famous neighborhood of Seoul, Grand Luxury’s is set in a building built in the 2010s.',
+    information:
+        'You will find every comfort because many of the services that the hotel offers for travellers and of course the hotel is very comfortable.',
   );
 
   @override

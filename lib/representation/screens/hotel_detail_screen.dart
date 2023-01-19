@@ -194,66 +194,26 @@ class _HotelDetailScreenState extends State<HotelDetailScreen> {
                     SizedBox(
                       height: 20,
                     ),
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        HotelServiceItemWidget(
-                          hotelServiceModel: new HotelServiceModel(
-                            title: 'Restaurant',
-                            backgroundColor: Color(0xff6150CF).withOpacity(0.2),
-                            content: ImageHelper.loadFromAsset(
-                              AssetHelper.iconRestaurant,
-                              width: 19.2,
-                              height: 19.2,
-                            ),
-                          ),
-                        ),
-                        HotelServiceItemWidget(
-                          hotelServiceModel: new HotelServiceModel(
-                            title: 'Wifi',
-                            backgroundColor: Color(0xffFF9C57).withOpacity(0.2),
-                            content: ImageHelper.loadFromAsset(
-                              AssetHelper.iconWifi,
-                              width: 22.4,
-                              height: 19.2,
-                            ),
-                          ),
-                        ),
-                        HotelServiceItemWidget(
-                          hotelServiceModel: new HotelServiceModel(
-                            title: 'Currency Exchange',
-                            backgroundColor: Color(0xffF97674).withOpacity(0.2),
-                            content: ImageHelper.loadFromAsset(
-                              AssetHelper.iconMoneyExchange,
-                              width: 20,
-                              height: 19.2,
-                            ),
-                          ),
-                        ),
-                        HotelServiceItemWidget(
-                          hotelServiceModel: new HotelServiceModel(
-                            title: '24-hour Front Desk',
-                            backgroundColor: Color(0xff34C9BD).withOpacity(0.2),
-                            content: ImageHelper.loadFromAsset(
-                              AssetHelper.iconReception,
-                              width: 19.2,
-                              height: 19.2,
-                            ),
-                          ),
-                        ),
-                        HotelServiceItemWidget(
-                          hotelServiceModel: new HotelServiceModel(
-                            title: 'More',
-                            backgroundColor: Color(0xf2D3143).withOpacity(0.2),
-                            content: ImageHelper.loadFromAsset(
-                              AssetHelper.iconMore,
-                              width: 16.8,
-                              height: 4,
-                            ),
-                          ),
-                        ),
-                      ],
+                    renderHotelListService(),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    Text(
+                      'Location',
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                    SizedBox(
+                      height: 14,
+                    ),
+                    Text(
+                      hotelModel.locationDesc,
+                      style: TextStyle(
+                        fontSize: 14,
+                        fontWeight: FontWeight.w400,
+                      ),
                     ),
                   ],
                 ),
@@ -262,6 +222,70 @@ class _HotelDetailScreenState extends State<HotelDetailScreen> {
           ),
         );
       },
+    );
+  }
+
+  Row renderHotelListService() {
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      children: [
+        HotelServiceItemWidget(
+          hotelServiceModel: new HotelServiceModel(
+            title: 'Restaurant',
+            backgroundColor: Color(0xff6150CF).withOpacity(0.2),
+            content: ImageHelper.loadFromAsset(
+              AssetHelper.iconRestaurant,
+              width: 19.2,
+              height: 19.2,
+            ),
+          ),
+        ),
+        HotelServiceItemWidget(
+          hotelServiceModel: new HotelServiceModel(
+            title: 'Wifi',
+            backgroundColor: Color(0xffFF9C57).withOpacity(0.2),
+            content: ImageHelper.loadFromAsset(
+              AssetHelper.iconWifi,
+              width: 22.4,
+              height: 19.2,
+            ),
+          ),
+        ),
+        HotelServiceItemWidget(
+          hotelServiceModel: new HotelServiceModel(
+            title: 'Currency Exchange',
+            backgroundColor: Color(0xffF97674).withOpacity(0.2),
+            content: ImageHelper.loadFromAsset(
+              AssetHelper.iconMoneyExchange,
+              width: 20,
+              height: 19.2,
+            ),
+          ),
+        ),
+        HotelServiceItemWidget(
+          hotelServiceModel: new HotelServiceModel(
+            title: '24-hour Front Desk',
+            backgroundColor: Color(0xff34C9BD).withOpacity(0.2),
+            content: ImageHelper.loadFromAsset(
+              AssetHelper.iconReception,
+              width: 19.2,
+              height: 19.2,
+            ),
+          ),
+        ),
+        HotelServiceItemWidget(
+          hotelServiceModel: new HotelServiceModel(
+            title: 'More',
+            backgroundColor: Color(0xf2D3143).withOpacity(0.2),
+            content: ImageHelper.loadFromAsset(
+              AssetHelper.iconMore,
+              width: 16.8,
+              height: 4,
+            ),
+          ),
+        ),
+      ],
     );
   }
 }

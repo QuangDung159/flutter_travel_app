@@ -3,6 +3,7 @@ import 'package:flutter_travel_app/core/constants/dimension_constants.dart';
 import 'package:flutter_travel_app/core/helpers/asset_helper.dart';
 import 'package:flutter_travel_app/core/helpers/image_helper.dart';
 import 'package:flutter_travel_app/data/models/hotel_model.dart';
+import 'package:flutter_travel_app/representation/widgets/button_widget.dart';
 
 class ItemHotelWidget extends StatelessWidget {
   ItemHotelWidget({super.key, required this.hotelModel});
@@ -37,7 +38,7 @@ class ItemHotelWidget extends StatelessWidget {
                   ),
                 ),
               ),
-              renderHotelInfo()
+              renderHotelInfo(),
             ],
           ),
         ),
@@ -131,7 +132,41 @@ class ItemHotelWidget extends StatelessWidget {
           SizedBox(
             height: 14.5,
           ),
-          ImageHelper.loadFromAsset(AssetHelper.imageDashLine)
+          ImageHelper.loadFromAsset(AssetHelper.imageDashLine),
+          SizedBox(
+            height: 14.5,
+          ),
+          Row(
+            children: [
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      '\$${hotelModel.price.toString()}',
+                      style: TextStyle(
+                        fontSize: 24,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Text(
+                      '/night',
+                      style: TextStyle(
+                        fontSize: 10,
+                        fontWeight: FontWeight.w400,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Expanded(
+                child: ButtonWidget(title: 'Book a room'),
+              ),
+            ],
+          )
         ],
       ),
     );

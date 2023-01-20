@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
+import 'package:flutter_travel_app/data/models/room_model.dart';
 import 'package:flutter_travel_app/representation/widgets/app_bar_container.dart';
 import 'package:flutter_travel_app/representation/widgets/button_widget.dart';
 import 'package:flutter_travel_app/representation/widgets/checkout_process_widget.dart';
@@ -17,6 +16,8 @@ class CheckoutConfirmScreen extends StatefulWidget {
 class _CheckoutConfirmScreenState extends State<CheckoutConfirmScreen> {
   @override
   Widget build(BuildContext context) {
+    RoomModel room = ModalRoute.of(context)?.settings.arguments as RoomModel;
+
     return AppBarContainer(
       implementLeading: true,
       titleString: 'Checkout',
@@ -27,6 +28,23 @@ class _CheckoutConfirmScreenState extends State<CheckoutConfirmScreen> {
             child: SingleChildScrollView(
               child: Column(
                 children: [
+                  Container(
+                    padding: EdgeInsets.all(20),
+                    margin: EdgeInsets.only(bottom: 20),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(12),
+                      color: Colors.white,
+                    ),
+                    child: Column(
+                      children: [
+                        Row(
+                          children: [
+                            Column(),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
                   ButtonWidget(
                     title: 'Pay Now',
                     onTap: () {},

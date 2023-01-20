@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_travel_app/core/helpers/asset_helper.dart';
 import 'package:flutter_travel_app/core/helpers/image_helper.dart';
 import 'package:flutter_travel_app/data/models/room_model.dart';
-import 'package:flutter_travel_app/representation/screens/checkout_paymern_screen.dart';
+import 'package:flutter_travel_app/representation/screens/checkout_payment_screen.dart';
 import 'package:flutter_travel_app/representation/widgets/app_bar_container.dart';
 import 'package:flutter_travel_app/representation/widgets/button_widget.dart';
 import 'package:flutter_travel_app/representation/widgets/card_checkout_info_widget.dart';

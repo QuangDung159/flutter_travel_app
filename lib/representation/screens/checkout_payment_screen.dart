@@ -4,6 +4,7 @@ import 'package:flutter_travel_app/core/helpers/asset_helper.dart';
 import 'package:flutter_travel_app/core/helpers/image_helper.dart';
 import 'package:flutter_travel_app/data/models/payment_method_model.dart';
 import 'package:flutter_travel_app/data/models/room_model.dart';
+import 'package:flutter_travel_app/representation/screens/checkout_confirm_screen.dart';
 import 'package:flutter_travel_app/representation/widgets/app_bar_container.dart';
 import 'package:flutter_travel_app/representation/widgets/button_widget.dart';
 import 'package:flutter_travel_app/representation/widgets/card_checkout_info_widget.dart';
@@ -66,7 +67,10 @@ class _CheckoutPaymentScreenState extends State<CheckoutPaymentScreen> {
                   renderListPaymentMethod(listPaymentMethod),
                   ButtonWidget(
                     title: 'Done',
-                    onTap: () {},
+                    onTap: () => Navigator.of(context).pushNamed(
+                      CheckoutConfirmScreen.routerName,
+                      arguments: roomModel,
+                    ),
                   ),
                   SizedBox(
                     height: 15,

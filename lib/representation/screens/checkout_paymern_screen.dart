@@ -37,8 +37,7 @@ class _CheckoutPaymentScreenState extends State<CheckoutPaymentScreen> {
                   CardCheckoutInfoWidget(
                     isShowCheckbox: true,
                     isChecked: true,
-                    title: 'Promo Code',
-                    subTitle: 'Add Promo Code',
+                    title: 'Mini Market',
                     icon: Container(
                       alignment: Alignment.center,
                       width: 32,
@@ -48,49 +47,48 @@ class _CheckoutPaymentScreenState extends State<CheckoutPaymentScreen> {
                         color: Color(0xffFE9C5E).withOpacity(0.2),
                       ),
                       child: ImageHelper.loadFromAsset(
-                        AssetHelper.iconDiscount,
-                        width: 19.2,
-                        height: 19.2,
+                        AssetHelper.iconMiniMarket,
+                        width: 12,
+                        height: 32,
                       ),
                     ),
                   ),
                   CardCheckoutInfoWidget(
                     isShowCheckbox: true,
                     isChecked: true,
-                    title: 'Promo Code',
-                    subTitle: 'Add Promo Code',
+                    title: 'Credit / Debit Card',
+                    addButtonTitle: 'Add Card',
                     icon: Container(
                       alignment: Alignment.center,
                       width: 32,
                       height: 32,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(12),
-                        color: Color(0xffFE9C5E).withOpacity(0.2),
+                        color: Color(0xffF77777).withOpacity(0.2),
                       ),
                       child: ImageHelper.loadFromAsset(
-                        AssetHelper.iconDiscount,
-                        width: 19.2,
-                        height: 19.2,
+                        AssetHelper.iconCreditDebitCard,
+                        width: 18,
+                        height: 32,
                       ),
                     ),
                   ),
                   CardCheckoutInfoWidget(
                     isShowCheckbox: true,
                     isChecked: true,
-                    title: 'Promo Code',
-                    subTitle: 'Add Promo Code',
+                    title: 'Bank Transfer',
                     icon: Container(
                       alignment: Alignment.center,
                       width: 32,
                       height: 32,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(12),
-                        color: Color(0xffFE9C5E).withOpacity(0.2),
+                        color: Color(0xff3EC8BC).withOpacity(0.2),
                       ),
                       child: ImageHelper.loadFromAsset(
-                        AssetHelper.iconDiscount,
-                        width: 19.2,
-                        height: 19.2,
+                        AssetHelper.iconBankTransfer,
+                        width: 18,
+                        height: 32
                       ),
                     ),
                   ),

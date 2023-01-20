@@ -4,20 +4,18 @@ class CardCheckoutInfoWidget extends StatelessWidget {
   const CardCheckoutInfoWidget({
     Key? key,
     required this.title,
-    required this.subTitle,
     required this.icon,
+    this.addButtonTitle,
     this.isShowCheckbox = false,
     this.isChecked = false,
-    this.isShowButtonAdd = false,
     this.onCheck,
   }) : super(key: key);
 
   final String title;
-  final String subTitle;
+  final String? addButtonTitle;
   final Widget icon;
   final bool? isShowCheckbox;
   final bool? isChecked;
-  final bool? isShowButtonAdd;
   final Function()? onCheck;
 
   @override
@@ -71,7 +69,7 @@ class CardCheckoutInfoWidget extends StatelessWidget {
                 ),
             ],
           ),
-          if (isShowButtonAdd!) renderButtonAdd()
+          if (addButtonTitle != null && addButtonTitle! != '') renderButtonAdd()
         ],
       ),
     );
@@ -112,7 +110,7 @@ class CardCheckoutInfoWidget extends StatelessWidget {
                 width: 15,
               ),
               Text(
-                subTitle,
+                addButtonTitle ?? '',
                 style: TextStyle(
                   fontSize: 14,
                   fontWeight: FontWeight.w500,

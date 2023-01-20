@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_travel_app/core/helpers/asset_helper.dart';
 import 'package:flutter_travel_app/data/models/room_model.dart';
+import 'package:flutter_travel_app/representation/screens/main_screen.dart';
 import 'package:flutter_travel_app/representation/widgets/app_bar_container.dart';
 import 'package:flutter_travel_app/representation/widgets/button_widget.dart';
 import 'package:flutter_travel_app/representation/widgets/checkout_process_widget.dart';
@@ -159,9 +160,72 @@ class _CheckoutConfirmScreenState extends State<CheckoutConfirmScreen> {
                       ],
                     ),
                   ),
+                  Container(
+                    padding: EdgeInsets.all(20),
+                    margin: EdgeInsets.only(bottom: 20),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(12),
+                      color: Colors.white,
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Row(
+                          children: [
+                            IconBackgroundWidget(
+                              child: Image.asset(
+                                AssetHelper.iconMastercard,
+                                width: 28.44,
+                                height: 17.7,
+                              ),
+                              backgroundColor:
+                                  Color(0xffFE9C5E).withOpacity(0.2),
+                            ),
+                            SizedBox(
+                              width: 15,
+                            ),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  'Credit / Debit Card',
+                                  style: TextStyle(
+                                    fontSize: 12,
+                                    fontWeight: FontWeight.w400,
+                                    color: Color(0xff636363),
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: 6,
+                                ),
+                                Text(
+                                  'Master Card',
+                                  style: TextStyle(
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                                ),
+                              ],
+                            )
+                          ],
+                        ),
+                        Text(
+                          'Change',
+                          style: TextStyle(
+                            fontSize: 12,
+                            fontWeight: FontWeight.w400,
+                            color: Color(0xff6155CC),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
                   ButtonWidget(
                     title: 'Pay Now',
-                    onTap: () {},
+                    onTap: () => Navigator.of(context).pushNamedAndRemoveUntil(
+                      MainScreen.routerName,
+                      (Route<dynamic> route) => false,
+                    ),
                   ),
                   SizedBox(
                     height: 15,
@@ -171,7 +235,7 @@ class _CheckoutConfirmScreenState extends State<CheckoutConfirmScreen> {
             ),
           ),
           CheckoutProcessWidget(
-            stepActive: 2,
+            stepActive: 3,
           )
         ],
       ),
@@ -201,7 +265,6 @@ class _CheckoutConfirmScreenState extends State<CheckoutConfirmScreen> {
   }
 
   Widget renderRoomInfo(RoomModel roomModel) {
-    print(roomModel.subTitle);
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [

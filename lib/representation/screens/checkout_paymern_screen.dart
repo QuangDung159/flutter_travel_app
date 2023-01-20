@@ -57,75 +57,7 @@ class _CheckoutPaymentScreenState extends State<CheckoutPaymentScreen> {
             child: SingleChildScrollView(
               child: Column(
                 children: [
-                  CardCheckoutInfoWidget(
-                    isShowCheckbox: true,
-                    isChecked: true,
-                    title: listPaymentMethod[0].title,
-                    icon: Container(
-                      alignment: Alignment.center,
-                      width: 32,
-                      height: 32,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(12),
-                        color: Color(0xffFE9C5E).withOpacity(0.2),
-                      ),
-                      child: ImageHelper.loadFromAsset(
-                        AssetHelper.iconMiniMarket,
-                        width: 12,
-                        height: 32,
-                      ),
-                    ),
-                    paymentMethod: listPaymentMethod[0],
-                    onCheck: () => getX.updatePaymentMethodSelected(
-                      listPaymentMethod[0].id,
-                    ),
-                  ),
-                  CardCheckoutInfoWidget(
-                    isShowCheckbox: true,
-                    isChecked: true,
-                    title: listPaymentMethod[1].title,
-                    addButtonTitle: listPaymentMethod[1].addButtonTitle,
-                    icon: Container(
-                      alignment: Alignment.center,
-                      width: 32,
-                      height: 32,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(12),
-                        color: Color(0xffF77777).withOpacity(0.2),
-                      ),
-                      child: ImageHelper.loadFromAsset(
-                        AssetHelper.iconCreditDebitCard,
-                        width: 18,
-                        height: 32,
-                      ),
-                    ),
-                    paymentMethod: listPaymentMethod[1],
-                    onCheck: () => getX.updatePaymentMethodSelected(
-                      listPaymentMethod[1].id,
-                    ),
-                  ),
-                  CardCheckoutInfoWidget(
-                    isShowCheckbox: true,
-                    isChecked: true,
-                    title: listPaymentMethod[2].title,
-                    icon: Container(
-                      alignment: Alignment.center,
-                      width: 32,
-                      height: 32,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(12),
-                        color: Color(0xff3EC8BC).withOpacity(0.2),
-                      ),
-                      child: ImageHelper.loadFromAsset(
-                          AssetHelper.iconBankTransfer,
-                          width: 18,
-                          height: 32),
-                    ),
-                    paymentMethod: listPaymentMethod[2],
-                    onCheck: () => getX.updatePaymentMethodSelected(
-                      listPaymentMethod[2].id,
-                    ),
-                  ),
+                  renderListPaymentMethod(listPaymentMethod),
                   ButtonWidget(
                     title: 'Done',
                     onTap: () {},
@@ -142,6 +74,84 @@ class _CheckoutPaymentScreenState extends State<CheckoutPaymentScreen> {
           )
         ],
       ),
+    );
+  }
+
+  Widget renderIconByPaymentType(String paymentType) {
+    switch (paymentType) {
+      case 'icon_mini_market':
+        return Container(
+          alignment: Alignment.center,
+          width: 32,
+          height: 32,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(12),
+            color: Color(0xffFE9C5E).withOpacity(0.2),
+          ),
+          child: ImageHelper.loadFromAsset(
+            AssetHelper.iconMiniMarket,
+            width: 12,
+            height: 32,
+          ),
+        );
+      case 'icon_credit_debit_card':
+        return Container(
+          alignment: Alignment.center,
+          width: 32,
+          height: 32,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(12),
+            color: Color(0xffF77777).withOpacity(0.2),
+          ),
+          child: ImageHelper.loadFromAsset(
+            AssetHelper.iconCreditDebitCard,
+            width: 18,
+            height: 32,
+          ),
+        );
+      case 'icon_bank_transfer':
+        return Container(
+          alignment: Alignment.center,
+          width: 32,
+          height: 32,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(12),
+            color: Color(0xff3EC8BC).withOpacity(0.2),
+          ),
+          child: ImageHelper.loadFromAsset(AssetHelper.iconBankTransfer,
+              width: 18, height: 32),
+        );
+      default:
+        return ImageHelper.loadFromAsset(
+          AssetHelper.iconMiniMarket,
+          width: 12,
+          height: 32,
+        );
+    }
+  }
+
+  Widget renderListPaymentMethod(List<PaymentMethodModel> listPaymentMethod) {
+    List<Widget> listRender = [];
+
+    for (var i = 0; i < listPaymentMethod.length; i++) {
+      PaymentMethodModel paymentItem = listPaymentMethod[i];
+      listRender.add(
+        CardCheckoutInfoWidget(
+          isShowCheckbox: true,
+          isChecked: true,
+          title: paymentItem.title,
+          addButtonTitle: paymentItem.addButtonTitle,
+          icon: renderIconByPaymentType(paymentItem.iconType),
+          paymentMethod: paymentItem,
+          onCheck: () => getX.updatePaymentMethodSelected(
+            paymentItem.id,
+          ),
+        ),
+      );
+    }
+
+    return Column(
+      children: listRender,
     );
   }
 }

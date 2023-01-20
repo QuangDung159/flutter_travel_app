@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_travel_app/core/Controllers/get_x_controller.dart';
 import 'package:flutter_travel_app/core/helpers/asset_helper.dart';
+import 'package:flutter_travel_app/data/models/payment_method_model.dart';
 import 'package:flutter_travel_app/data/models/room_model.dart';
 import 'package:flutter_travel_app/representation/screens/main_screen.dart';
 import 'package:flutter_travel_app/representation/widgets/app_bar_container.dart';
 import 'package:flutter_travel_app/representation/widgets/button_widget.dart';
 import 'package:flutter_travel_app/representation/widgets/checkout_process_widget.dart';
 import 'package:flutter_travel_app/representation/widgets/icon_background_widget.dart';
+import 'package:flutter_travel_app/representation/widgets/payment_method_icon_widget.dart';
 import 'package:get/get.dart';
 
 class CheckoutConfirmScreen extends StatefulWidget {
@@ -184,7 +186,10 @@ class _CheckoutConfirmScreenState extends State<CheckoutConfirmScreen> {
                           height: 15,
                         ),
                         renderBookingInfoRow(
-                            'Total', '\$${room.price * numberOfNight}', true),
+                          'Total',
+                          '\$${room.price * numberOfNight}',
+                          true,
+                        ),
                       ],
                     ),
                   ),
@@ -200,17 +205,12 @@ class _CheckoutConfirmScreenState extends State<CheckoutConfirmScreen> {
                       children: [
                         Obx(
                           () {
+                            PaymentMethodModel paymentMethod =
+                                getX.paymentMethodSelected.value!;
                             return Row(
                               children: [
-                                IconBackgroundWidget(
-                                  child: Image.asset(
-                                    AssetHelper.iconMastercard,
-                                    width: 28.44,
-                                    height: 17.7,
-                                  ),
-                                  backgroundColor:
-                                      Color(0xffFE9C5E).withOpacity(0.2),
-                                ),
+                                PaymentMethodIconWidget(
+                                    paymentMethod: paymentMethod),
                                 SizedBox(
                                   width: 15,
                                 ),
@@ -218,23 +218,23 @@ class _CheckoutConfirmScreenState extends State<CheckoutConfirmScreen> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(
-                                      '${getX.paymentMethodSelected.value?.title ?? ''}',
+                                      '${paymentMethod.title}',
                                       style: TextStyle(
                                         fontSize: 12,
                                         fontWeight: FontWeight.w400,
                                         color: Color(0xff636363),
                                       ),
                                     ),
-                                    SizedBox(
-                                      height: 6,
-                                    ),
-                                    Text(
-                                      'Master Card',
-                                      style: TextStyle(
-                                        fontSize: 14,
-                                        fontWeight: FontWeight.w500,
-                                      ),
-                                    ),
+                                    // SizedBox(
+                                    //   height: 6,
+                                    // ),
+                                    // Text(
+                                    //   'Master Card',
+                                    //   style: TextStyle(
+                                    //     fontSize: 14,
+                                    //     fontWeight: FontWeight.w500,
+                                    //   ),
+                                    // ),
                                   ],
                                 )
                               ],

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_travel_app/core/Controllers/get_x_controller.dart';
-import 'package:flutter_travel_app/core/helpers/asset_helper.dart';
 import 'package:flutter_travel_app/data/models/payment_method_model.dart';
 import 'package:flutter_travel_app/data/models/room_model.dart';
 import 'package:flutter_travel_app/representation/screens/checkout_confirm_screen.dart';
@@ -8,7 +7,7 @@ import 'package:flutter_travel_app/representation/widgets/app_bar_container.dart
 import 'package:flutter_travel_app/representation/widgets/button_widget.dart';
 import 'package:flutter_travel_app/representation/widgets/card_checkout_info_widget.dart';
 import 'package:flutter_travel_app/representation/widgets/checkout_process_widget.dart';
-import 'package:flutter_travel_app/representation/widgets/icon_background_widget.dart';
+import 'package:flutter_travel_app/representation/widgets/payment_method_icon_widget.dart';
 import 'package:get/get.dart';
 
 class CheckoutPaymentScreen extends StatefulWidget {
@@ -92,47 +91,6 @@ class _CheckoutPaymentScreenState extends State<CheckoutPaymentScreen> {
     );
   }
 
-  Widget renderIconByType(String paymentType) {
-    switch (paymentType) {
-      case 'icon_mini_market':
-        return IconBackgroundWidget(
-          child: Image.asset(
-            AssetHelper.iconMiniMarket,
-            width: 12,
-            height: 32,
-          ),
-          backgroundColor: Color(0xffFE9C5E).withOpacity(0.2),
-        );
-      case 'icon_credit_debit_card':
-        return IconBackgroundWidget(
-          child: Image.asset(
-            AssetHelper.iconCreditDebitCard,
-            width: 18,
-            height: 32,
-          ),
-          backgroundColor: Color(0xffF77777).withOpacity(0.2),
-        );
-      case 'icon_bank_transfer':
-        return IconBackgroundWidget(
-          child: Image.asset(
-            AssetHelper.iconBankTransfer,
-            width: 18,
-            height: 32,
-          ),
-          backgroundColor: Color(0xff3EC8BC).withOpacity(0.2),
-        );
-      default:
-        return IconBackgroundWidget(
-          child: Image.asset(
-            AssetHelper.iconBankTransfer,
-            width: 18,
-            height: 32,
-          ),
-          backgroundColor: Color(0xff3EC8BC).withOpacity(0.2),
-        );
-    }
-  }
-
   Widget renderListPaymentMethod(List<PaymentMethodModel> listPaymentMethod) {
     List<Widget> listRender = [];
 
@@ -144,7 +102,7 @@ class _CheckoutPaymentScreenState extends State<CheckoutPaymentScreen> {
           isChecked: true,
           title: paymentItem.title,
           addButtonTitle: paymentItem.addButtonTitle,
-          icon: renderIconByType(paymentItem.iconType),
+          icon: PaymentMethodIconWidget(paymentMethod: paymentItem),
           paymentMethod: paymentItem,
           onCheck: () {
             getX.updatePaymentMethodSelected(

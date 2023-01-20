@@ -4,6 +4,7 @@ class GetXController extends GetxController {
   RxInt countRoom = 1.obs;
   RxInt countGuest = 1.obs;
   RxInt checkoutStepActive = 1.obs;
+  RxInt paymentMethodSelected = 1.obs;
 
   void increaseRoom() {
     countRoom++;
@@ -27,5 +28,9 @@ class GetXController extends GetxController {
 
   void updateCheckoutStepActive(int step) {
     checkoutStepActive.value = step;
+  }
+
+  void updatePaymentMethodSelected(int paymentMethodId) {
+    paymentMethodSelected.value = paymentMethodId;
   }
 }

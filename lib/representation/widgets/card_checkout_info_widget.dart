@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_travel_app/core/Controllers/get_x_controller.dart';
+import 'package:flutter_travel_app/data/models/payment_method_model.dart';
+import 'package:get/get.dart';
 
-class CardCheckoutInfoWidget extends StatelessWidget {
+class CardCheckoutInfoWidget extends StatefulWidget {
   const CardCheckoutInfoWidget({
     Key? key,
     required this.title,
@@ -9,6 +12,7 @@ class CardCheckoutInfoWidget extends StatelessWidget {
     this.isShowCheckbox = false,
     this.isChecked = false,
     this.onCheck,
+    this.paymentMethod,
   }) : super(key: key);
 
   final String title;
@@ -17,6 +21,14 @@ class CardCheckoutInfoWidget extends StatelessWidget {
   final bool? isShowCheckbox;
   final bool? isChecked;
   final Function()? onCheck;
+  final PaymentMethodModel? paymentMethod;
+
+  @override
+  State<CardCheckoutInfoWidget> createState() => _CardCheckoutInfoWidgetState();
+}
+
+class _CardCheckoutInfoWidgetState extends State<CardCheckoutInfoWidget> {
+  GetXController getX = Get.find<GetXController>();
 
   @override
   Widget build(BuildContext context) {
@@ -35,12 +47,12 @@ class CardCheckoutInfoWidget extends StatelessWidget {
             children: [
               Row(
                 children: [
-                  icon,
+                  widget.icon,
                   SizedBox(
                     width: 15,
                   ),
                   Text(
-                    title,
+                    widget.title,
                     style: TextStyle(
                       fontSize: 14,
                       fontWeight: FontWeight.w500,
@@ -48,28 +60,31 @@ class CardCheckoutInfoWidget extends StatelessWidget {
                   ),
                 ],
               ),
-              if (isShowCheckbox!)
-                GestureDetector(
-                  onTap: onCheck,
-                  child: Container(
-                    width: 24,
-                    height: 24,
-                    alignment: Alignment.center,
-                    decoration: BoxDecoration(
-                      color: Color(0xffE0DDF5),
-                      borderRadius: BorderRadius.circular(12),
+              if (widget.isShowCheckbox!)
+                Obx(
+                  () => GestureDetector(
+                    onTap: widget.onCheck,
+                    child: Container(
+                      width: 24,
+                      height: 24,
+                      alignment: Alignment.center,
+                      decoration: BoxDecoration(
+                        color: Color(0xffE0DDF5),
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      child: getX.paymentMethodSelected == 1
+                          ? Icon(
+                              Icons.check,
+                              size: 15,
+                            )
+                          : null,
                     ),
-                    child: isChecked!
-                        ? Icon(
-                            Icons.check,
-                            size: 15,
-                          )
-                        : null,
                   ),
-                ),
+                )
             ],
           ),
-          if (addButtonTitle != null && addButtonTitle! != '') renderButtonAdd()
+          if (widget.addButtonTitle != null && widget.addButtonTitle! != '')
+            renderButtonAdd()
         ],
       ),
     );
@@ -110,7 +125,7 @@ class CardCheckoutInfoWidget extends StatelessWidget {
                 width: 15,
               ),
               Text(
-                addButtonTitle ?? '',
+                widget.addButtonTitle ?? '',
                 style: TextStyle(
                   fontSize: 14,
                   fontWeight: FontWeight.w500,

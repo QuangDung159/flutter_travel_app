@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_travel_app/core/helpers/asset_helper.dart';
 import 'package:flutter_travel_app/core/helpers/image_helper.dart';
+import 'package:flutter_travel_app/data/models/payment_method_model.dart';
 import 'package:flutter_travel_app/data/models/room_model.dart';
 import 'package:flutter_travel_app/representation/widgets/app_bar_container.dart';
 import 'package:flutter_travel_app/representation/widgets/button_widget.dart';
@@ -24,6 +25,25 @@ class _CheckoutPaymentScreenState extends State<CheckoutPaymentScreen> {
     RoomModel roomModel =
         ModalRoute.of(context)?.settings.arguments as RoomModel;
 
+    List<PaymentMethodModel> listPaymentMethod = [
+      new PaymentMethodModel(
+        title: 'Mini Market',
+        id: 1,
+        iconType: 'icon_mini_market',
+      ),
+      new PaymentMethodModel(
+        title: 'Credit / Debit Card',
+        id: 1,
+        iconType: 'icon_credit_debit_card',
+        addButtonTitle: 'Add Card',
+      ),
+      new PaymentMethodModel(
+        title: 'Bank Transfer',
+        id: 1,
+        iconType: 'icon_bank_transfer',
+      ),
+    ];
+
     return AppBarContainer(
       implementLeading: true,
       titleString: 'Checkout',
@@ -37,7 +57,7 @@ class _CheckoutPaymentScreenState extends State<CheckoutPaymentScreen> {
                   CardCheckoutInfoWidget(
                     isShowCheckbox: true,
                     isChecked: true,
-                    title: 'Mini Market',
+                    title: listPaymentMethod[0].title,
                     icon: Container(
                       alignment: Alignment.center,
                       width: 32,
@@ -52,12 +72,13 @@ class _CheckoutPaymentScreenState extends State<CheckoutPaymentScreen> {
                         height: 32,
                       ),
                     ),
+                    paymentMethod: listPaymentMethod[0],
                   ),
                   CardCheckoutInfoWidget(
                     isShowCheckbox: true,
                     isChecked: true,
-                    title: 'Credit / Debit Card',
-                    addButtonTitle: 'Add Card',
+                    title: listPaymentMethod[1].title,
+                    addButtonTitle: listPaymentMethod[1].addButtonTitle,
                     icon: Container(
                       alignment: Alignment.center,
                       width: 32,
@@ -72,11 +93,12 @@ class _CheckoutPaymentScreenState extends State<CheckoutPaymentScreen> {
                         height: 32,
                       ),
                     ),
+                    paymentMethod: listPaymentMethod[1],
                   ),
                   CardCheckoutInfoWidget(
                     isShowCheckbox: true,
                     isChecked: true,
-                    title: 'Bank Transfer',
+                    title: listPaymentMethod[2].title,
                     icon: Container(
                       alignment: Alignment.center,
                       width: 32,
@@ -86,11 +108,11 @@ class _CheckoutPaymentScreenState extends State<CheckoutPaymentScreen> {
                         color: Color(0xff3EC8BC).withOpacity(0.2),
                       ),
                       child: ImageHelper.loadFromAsset(
-                        AssetHelper.iconBankTransfer,
-                        width: 18,
-                        height: 32
-                      ),
+                          AssetHelper.iconBankTransfer,
+                          width: 18,
+                          height: 32),
                     ),
+                    paymentMethod: listPaymentMethod[2],
                   ),
                   ButtonWidget(
                     title: 'Done',

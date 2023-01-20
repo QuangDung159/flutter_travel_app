@@ -5,8 +5,12 @@ class GetXController extends GetxController {
   RxInt countGuest = 1.obs;
   RxInt checkoutStepActive = 1.obs;
   RxInt paymentMethodSelected = 1.obs;
-  RxList<DateTime> datetimeRangeSelected =
-      [DateTime(2022, 1, 1, 0, 0, 0), DateTime(2022, 1, 3, 0, 0, 0)].obs;
+  RxList<DateTime> datetimeRangeSelected = [
+    new DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day)
+        .add(Duration(days: 1)),
+    DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day)
+        .add(Duration(days: 2))
+  ].obs;
 
   void increaseRoom() {
     countRoom++;

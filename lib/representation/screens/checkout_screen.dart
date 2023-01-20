@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_travel_app/core/Controllers/get_x_controller.dart';
 import 'package:flutter_travel_app/core/helpers/asset_helper.dart';
 import 'package:flutter_travel_app/core/helpers/image_helper.dart';
 import 'package:flutter_travel_app/data/models/room_model.dart';
+import 'package:flutter_travel_app/representation/screens/checkout_paymern_screen.dart';
 import 'package:flutter_travel_app/representation/widgets/app_bar_container.dart';
 import 'package:flutter_travel_app/representation/widgets/button_widget.dart';
 import 'package:flutter_travel_app/representation/widgets/card_checkout_info_widget.dart';
 import 'package:flutter_travel_app/representation/widgets/card_room_widget.dart';
 import 'package:flutter_travel_app/representation/widgets/checkout_process_widget.dart';
-import 'package:get/get.dart';
 
 class CheckoutScreen extends StatefulWidget {
   const CheckoutScreen({super.key});
@@ -20,8 +19,6 @@ class CheckoutScreen extends StatefulWidget {
 }
 
 class _CheckoutScreenState extends State<CheckoutScreen> {
-  GetXController getX = Get.find<GetXController>();
-
   @override
   Widget build(BuildContext context) {
     RoomModel roomModel =
@@ -78,9 +75,10 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                   ),
                   ButtonWidget(
                     title: 'Payment',
-                    onTap: () {
-                      getX.updateCheckoutStepActive(2);
-                    },
+                    onTap: () => Navigator.of(context).pushNamed(
+                      CheckoutPaymentScreen.routerName,
+                      arguments: roomModel,
+                    ),
                   ),
                   SizedBox(
                     height: 15,

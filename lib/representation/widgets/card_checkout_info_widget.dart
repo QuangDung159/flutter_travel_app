@@ -6,11 +6,13 @@ class CardCheckoutInfoWidget extends StatelessWidget {
     required this.title,
     required this.subTitle,
     required this.icon,
+    this.isShowCheckbox = false,
   }) : super(key: key);
 
   final String title;
   final String subTitle;
   final Widget icon;
+  final bool? isShowCheckbox;
 
   @override
   Widget build(BuildContext context) {
@@ -25,18 +27,32 @@ class CardCheckoutInfoWidget extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              icon,
-              SizedBox(
-                width: 15,
+              Row(
+                children: [
+                  icon,
+                  SizedBox(
+                    width: 15,
+                  ),
+                  Text(
+                    title,
+                    style: TextStyle(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                ],
               ),
-              Text(
-                title,
-                style: TextStyle(
-                  fontSize: 14,
-                  fontWeight: FontWeight.w500,
+              if (isShowCheckbox!)
+                Container(
+                  width: 24,
+                  height: 24,
+                  decoration: BoxDecoration(
+                    color: Color(0xffE0DDF5),
+                    borderRadius: BorderRadius.circular(12),
+                  ),
                 ),
-              )
             ],
           ),
           SizedBox(

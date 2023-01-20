@@ -19,10 +19,19 @@ class SelectDateScreen extends StatefulWidget {
 class _SelectDateScreenState extends State<SelectDateScreen> {
   DateTime? rangeStartDate;
   DateTime? rangeEndDate;
+  GetXController getX = Get.find<GetXController>();
+
+  @override
+  void initState() {
+    super.initState();
+    setState(() {
+      rangeStartDate = getX.datetimeRangeSelected[0];
+      rangeEndDate = getX.datetimeRangeSelected[1];
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
-    GetXController getX = Get.find<GetXController>();
     return AppBarContainer(
       implementLeading: true,
       titleString: 'Select date',
@@ -56,7 +65,9 @@ class _SelectDateScreenState extends State<SelectDateScreen> {
             title: 'Select',
             onTap: () {
               Navigator.of(context).pop([rangeStartDate, rangeEndDate]);
-              getX.updateDatetimeRangeSelected([rangeStartDate!, rangeEndDate!]);
+              if (rangeStartDate == null) return;
+              getX.updateDatetimeRangeSelected(
+                  [rangeStartDate as DateTime, rangeEndDate as DateTime]);
             },
           ),
           SizedBox(

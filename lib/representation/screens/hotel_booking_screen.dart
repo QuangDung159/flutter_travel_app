@@ -21,27 +21,16 @@ class HotelBookingScreen extends StatefulWidget {
 }
 
 class _HotelBookingScreenState extends State<HotelBookingScreen> {
-  String? selectedDate;
-
   @override
   Widget build(BuildContext context) {
     final getXController = Get.put(GetXController());
+    final datetimeRangeSelected = getXController.datetimeRangeSelected;
     return AppBarContainer(
       implementLeading: true,
       titleString: 'Hotel Booking',
       child: SingleChildScrollView(
         child: Column(
           children: [
-            Obx(
-              () {
-                if (getXController.datetimeRangeSelected[0] != null) {
-                  return Text(
-                    '${(getXController.datetimeRangeSelected[0] as DateTime).getStartDate} - ${(getXController.datetimeRangeSelected[1] as DateTime).getEndDate}',
-                  );
-                }
-                return Container();
-              },
-            ),
             SizedBox(
               height: containerPaddingWithAppBar + 25,
             ),
@@ -59,31 +48,23 @@ class _HotelBookingScreenState extends State<HotelBookingScreen> {
               onTap: () =>
                   Navigator.of(context).pushNamed(HotelsScreen.routerName),
             ),
-            ItemBookingWidget(
-              icon: SizedBox(
-                width: 19.2,
-                height: 19.2,
-                child: Image.asset(
-                  AssetHelper.iconCalendar,
+            Obx(
+              () => ItemBookingWidget(
+                icon: SizedBox(
+                  width: 19.2,
+                  height: 19.2,
+                  child: Image.asset(
+                    AssetHelper.iconCalendar,
+                  ),
                 ),
+                color: Color(0xffF77777),
+                title: 'Select Date',
+                subTitle:
+                    '${datetimeRangeSelected[0].getStartDate} - ${datetimeRangeSelected[1].getEndDate}',
+                onTap: () async {
+                  Navigator.of(context).pushNamed(SelectDateScreen.routerName);
+                },
               ),
-              color: Color(0xffF77777),
-              title: 'Select Date',
-              subTitle: selectedDate ?? 'When your plan',
-              onTap: () async {
-                final result = await Navigator.of(context)
-                    .pushNamed(SelectDateScreen.routerName);
-                if (result == null) {
-                  return;
-                }
-                if (!(result as List<DateTime?>)
-                    .any((element) => element == null)) {
-                  setState(() {
-                    selectedDate =
-                        '${result[0]?.getStartDate} - ${result[1]?.getEndDate}';
-                  });
-                }
-              },
             ),
             Obx(
               () => ItemBookingWidget(

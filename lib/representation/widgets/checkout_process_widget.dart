@@ -1,27 +1,25 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_travel_app/core/Controllers/get_x_controller.dart';
 import 'package:flutter_travel_app/data/models/checkout_step_model.dart';
-import 'package:get/get.dart';
 
 class CheckoutProcessWidget extends StatefulWidget {
-  const CheckoutProcessWidget({super.key});
+  const CheckoutProcessWidget({
+    super.key,
+    this.stepActive = 1,
+  });
+
+  final int stepActive;
 
   @override
   State<CheckoutProcessWidget> createState() => _CheckoutProcessWidgetState();
 }
 
 class _CheckoutProcessWidgetState extends State<CheckoutProcessWidget> {
-  GetXController getX = Get.find<GetXController>();
-
   @override
   Widget build(BuildContext context) {
     List<CheckoutStepModel> listCheckoutStepModel = [
-      new CheckoutStepModel(
-          step: 1, stepName: 'Book and Review', isCheck: true, isEnd: false),
-      new CheckoutStepModel(
-          step: 2, stepName: 'Payment', isCheck: false, isEnd: false),
-      new CheckoutStepModel(
-          step: 3, stepName: 'Confirm', isCheck: false, isEnd: true),
+      new CheckoutStepModel(step: 1, stepName: 'Book and Review', isEnd: false),
+      new CheckoutStepModel(step: 2, stepName: 'Payment', isEnd: false),
+      new CheckoutStepModel(step: 3, stepName: 'Confirm', isEnd: true),
     ];
 
     return Row(
@@ -39,7 +37,7 @@ class _CheckoutProcessWidgetState extends State<CheckoutProcessWidget> {
       CheckoutStepModel stepItem = listCheckoutStepModel[i];
       listStepRender.add(
         renderItemStepCheckout(
-            stepItem.step, stepItem.stepName, stepItem.isEnd, stepItem.isCheck),
+            stepItem.step, stepItem.stepName, stepItem.isEnd),
       );
       if (!stepItem.isEnd) {
         listStepRender.add(
@@ -58,42 +56,38 @@ class _CheckoutProcessWidgetState extends State<CheckoutProcessWidget> {
     return listStepRender;
   }
 
-  Widget renderItemStepCheckout(
-      int step, String stepName, bool isEnd, bool isCheck) {
-    return Obx(
-      () {
-        return Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Container(
-              width: 24,
-              height: 24,
-              alignment: Alignment.center,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(12),
-                color: getX.checkoutStepActive == step ? Colors.white : Colors.white.withOpacity(0.2),
-              ),
-              child: Text(
-                step.toString(),
-                style: TextStyle(
-                  color: getX.checkoutStepActive == step ? Colors.black : Colors.white,
-                ),
-              ),
+  Widget renderItemStepCheckout(int step, String stepName, bool isEnd) {
+    bool isCheck = widget.stepActive == step;
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Container(
+          width: 24,
+          height: 24,
+          alignment: Alignment.center,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(12),
+            color: isCheck ? Colors.white : Colors.white.withOpacity(0.2),
+          ),
+          child: Text(
+            step.toString(),
+            style: TextStyle(
+              color: isCheck ? Colors.black : Colors.white,
             ),
-            SizedBox(
-              width: 5,
-            ),
-            Text(
-              stepName,
-              style: TextStyle(
-                fontSize: 10,
-                fontWeight: getX.checkoutStepActive == step ? FontWeight.w500 : FontWeight.w400,
-                color: Colors.white,
-              ),
-            ),
-          ],
-        );
-      },
+          ),
+        ),
+        SizedBox(
+          width: 5,
+        ),
+        Text(
+          stepName,
+          style: TextStyle(
+            fontSize: 10,
+            fontWeight: isCheck ? FontWeight.w500 : FontWeight.w400,
+            color: Colors.white,
+          ),
+        ),
+      ],
     );
   }
 }

@@ -5,6 +5,7 @@ class GetXController extends GetxController {
   RxInt countGuest = 1.obs;
   RxInt checkoutStepActive = 1.obs;
   RxInt paymentMethodSelected = 1.obs;
+  RxList<DateTime?> datetimeRangeSelected = [null, null].obs;
 
   void increaseRoom() {
     countRoom++;
@@ -32,5 +33,9 @@ class GetXController extends GetxController {
 
   void updatePaymentMethodSelected(int paymentMethodId) {
     paymentMethodSelected.value = paymentMethodId;
+  }
+
+  void updateDatetimeRangeSelected(List<DateTime?> datetimeRange) {
+    datetimeRangeSelected.value = datetimeRange;
   }
 }

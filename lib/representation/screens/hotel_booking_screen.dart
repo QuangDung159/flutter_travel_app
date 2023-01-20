@@ -32,6 +32,16 @@ class _HotelBookingScreenState extends State<HotelBookingScreen> {
       child: SingleChildScrollView(
         child: Column(
           children: [
+            Obx(
+              () {
+                if (getXController.datetimeRangeSelected[0] != null) {
+                  return Text(
+                    '${(getXController.datetimeRangeSelected[0] as DateTime).getStartDate} - ${(getXController.datetimeRangeSelected[1] as DateTime).getEndDate}',
+                  );
+                }
+                return Container();
+              },
+            ),
             SizedBox(
               height: containerPaddingWithAppBar + 25,
             ),

@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_travel_app/core/Controllers/get_x_controller.dart';
 import 'package:flutter_travel_app/core/constants/color_constants.dart';
 import 'package:flutter_travel_app/core/constants/dimension_constants.dart';
 import 'package:flutter_travel_app/representation/widgets/app_bar_container.dart';
 import 'package:flutter_travel_app/representation/widgets/button_widget.dart';
+import 'package:get/get.dart';
 import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 
 class SelectDateScreen extends StatefulWidget {
@@ -20,6 +22,7 @@ class _SelectDateScreenState extends State<SelectDateScreen> {
 
   @override
   Widget build(BuildContext context) {
+    GetXController getX = Get.find<GetXController>();
     return AppBarContainer(
       implementLeading: true,
       titleString: 'Select date',
@@ -51,8 +54,10 @@ class _SelectDateScreenState extends State<SelectDateScreen> {
           ),
           ButtonWidget(
             title: 'Select',
-            onTap: () =>
-                Navigator.of(context).pop([rangeStartDate, rangeEndDate]),
+            onTap: () {
+              Navigator.of(context).pop([rangeStartDate, rangeEndDate]);
+              getX.updateDatetimeRangeSelected([rangeStartDate!, rangeEndDate!]);
+            },
           ),
           SizedBox(
             height: kDefaultPadding,

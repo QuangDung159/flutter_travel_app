@@ -98,58 +98,65 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
     return AppBarContainer(
       implementLeading: true,
       titleString: 'Checkout',
-      child: SingleChildScrollView(
-        child: Column(
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: renderCheckoutProcess(listCheckoutStepModel),
-            ),
-            CardRoomWidget(
-              roomModel: roomModel,
-            ),
-            CardCheckoutInfoWidget(
-              title: 'Contact Details',
-              subTitle: 'Add Contact',
-              icon: Container(
-                alignment: Alignment.center,
-                width: 32,
-                height: 32,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(12),
-                  color: Color(0xff6155CC).withOpacity(0.2),
-                ),
-                child: ImageHelper.loadFromAsset(
-                  AssetHelper.iconContact,
-                  width: 19.2,
-                  height: 16,
-                ),
+      child: Stack(
+        children: [
+          Padding(
+            padding: EdgeInsets.only(top: 45),
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  CardRoomWidget(
+                    roomModel: roomModel,
+                  ),
+                  CardCheckoutInfoWidget(
+                    title: 'Contact Details',
+                    subTitle: 'Add Contact',
+                    icon: Container(
+                      alignment: Alignment.center,
+                      width: 32,
+                      height: 32,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(12),
+                        color: Color(0xff6155CC).withOpacity(0.2),
+                      ),
+                      child: ImageHelper.loadFromAsset(
+                        AssetHelper.iconContact,
+                        width: 19.2,
+                        height: 16,
+                      ),
+                    ),
+                  ),
+                  CardCheckoutInfoWidget(
+                    title: 'Promo Code',
+                    subTitle: 'Add Promo Code',
+                    icon: Container(
+                      alignment: Alignment.center,
+                      width: 32,
+                      height: 32,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(12),
+                        color: Color(0xffFE9C5E).withOpacity(0.2),
+                      ),
+                      child: ImageHelper.loadFromAsset(
+                        AssetHelper.iconDiscount,
+                        width: 19.2,
+                        height: 19.2,
+                      ),
+                    ),
+                  ),
+                  ButtonWidget(title: 'Payment'),
+                  SizedBox(
+                    height: 15,
+                  ),
+                ],
               ),
             ),
-            CardCheckoutInfoWidget(
-              title: 'Promo Code',
-              subTitle: 'Add Promo Code',
-              icon: Container(
-                alignment: Alignment.center,
-                width: 32,
-                height: 32,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(12),
-                  color: Color(0xffFE9C5E).withOpacity(0.2),
-                ),
-                child: ImageHelper.loadFromAsset(
-                  AssetHelper.iconDiscount,
-                  width: 19.2,
-                  height: 19.2,
-                ),
-              ),
-            ),
-            ButtonWidget(title: 'Payment'),
-            SizedBox(
-              height: 15,
-            ),
-          ],
-        ),
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: renderCheckoutProcess(listCheckoutStepModel),
+          ),
+        ],
       ),
     );
   }

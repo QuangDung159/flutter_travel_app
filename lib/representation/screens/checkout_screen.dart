@@ -100,8 +100,8 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
       titleString: 'Checkout',
       child: Stack(
         children: [
-          Padding(
-            padding: EdgeInsets.only(top: 45),
+          Container(
+            margin: EdgeInsets.only(top: 45),
             child: SingleChildScrollView(
               child: Column(
                 children: [

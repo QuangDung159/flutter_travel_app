@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_travel_app/core/Controllers/get_x_controller.dart';
 import 'package:flutter_travel_app/core/helpers/asset_helper.dart';
 import 'package:flutter_travel_app/core/helpers/image_helper.dart';
 import 'package:flutter_travel_app/data/models/payment_method_model.dart';
@@ -7,6 +8,7 @@ import 'package:flutter_travel_app/representation/widgets/app_bar_container.dart
 import 'package:flutter_travel_app/representation/widgets/button_widget.dart';
 import 'package:flutter_travel_app/representation/widgets/card_checkout_info_widget.dart';
 import 'package:flutter_travel_app/representation/widgets/checkout_process_widget.dart';
+import 'package:get/get.dart';
 
 class CheckoutPaymentScreen extends StatefulWidget {
   const CheckoutPaymentScreen({super.key});
@@ -19,6 +21,7 @@ class CheckoutPaymentScreen extends StatefulWidget {
 
 class _CheckoutPaymentScreenState extends State<CheckoutPaymentScreen> {
   int paymentMethodSelected = 1;
+  GetXController getX = Get.find<GetXController>();
 
   @override
   Widget build(BuildContext context) {
@@ -33,13 +36,13 @@ class _CheckoutPaymentScreenState extends State<CheckoutPaymentScreen> {
       ),
       new PaymentMethodModel(
         title: 'Credit / Debit Card',
-        id: 1,
+        id: 2,
         iconType: 'icon_credit_debit_card',
         addButtonTitle: 'Add Card',
       ),
       new PaymentMethodModel(
         title: 'Bank Transfer',
-        id: 1,
+        id: 3,
         iconType: 'icon_bank_transfer',
       ),
     ];
@@ -73,6 +76,9 @@ class _CheckoutPaymentScreenState extends State<CheckoutPaymentScreen> {
                       ),
                     ),
                     paymentMethod: listPaymentMethod[0],
+                    onCheck: () => getX.updatePaymentMethodSelected(
+                      listPaymentMethod[0].id,
+                    ),
                   ),
                   CardCheckoutInfoWidget(
                     isShowCheckbox: true,
@@ -94,6 +100,9 @@ class _CheckoutPaymentScreenState extends State<CheckoutPaymentScreen> {
                       ),
                     ),
                     paymentMethod: listPaymentMethod[1],
+                    onCheck: () => getX.updatePaymentMethodSelected(
+                      listPaymentMethod[1].id,
+                    ),
                   ),
                   CardCheckoutInfoWidget(
                     isShowCheckbox: true,
@@ -113,6 +122,9 @@ class _CheckoutPaymentScreenState extends State<CheckoutPaymentScreen> {
                           height: 32),
                     ),
                     paymentMethod: listPaymentMethod[2],
+                    onCheck: () => getX.updatePaymentMethodSelected(
+                      listPaymentMethod[2].id,
+                    ),
                   ),
                   ButtonWidget(
                     title: 'Done',

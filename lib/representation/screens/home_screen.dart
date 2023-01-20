@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_travel_app/core/constants/dimension_constants.dart';
 import 'package:flutter_travel_app/core/helpers/asset_helper.dart';
 import 'package:flutter_travel_app/core/helpers/image_helper.dart';
+import 'package:flutter_travel_app/data/models/destination_model.dart';
 import 'package:flutter_travel_app/representation/screens/all_screen.dart';
 import 'package:flutter_travel_app/representation/screens/hotel_booking_screen.dart';
 import 'package:flutter_travel_app/representation/screens/plane_screen.dart';
@@ -15,6 +16,49 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  List<DestinationModel> listDestination = [
+    new DestinationModel(
+      id: 1,
+      name: 'Phú Yên',
+      star: 4.9,
+      isLike: true,
+      imgUrl:
+          'https://lh3.googleusercontent.com/pw/AL9nZEXLKaY-RLbm3Mp2dlo-UYxn_1aWoHSSXnaI8h9z5IWom8Qvuy3XY7pNlBaqcJKIEGP2xR0xz-azXg_NGm3WjC0bBV1krRZpOPTH5Myb-aRdtHV7JDnMPPaTQvchib1x0QTy20maeWcq7hHp4l0yxuJK=w2794-h1572-no?authuser=0',
+    ),
+    new DestinationModel(
+      id: 2,
+      name: 'Ninh Thuận',
+      star: 4.9,
+      isLike: true,
+      imgUrl:
+          'https://lh3.googleusercontent.com/pw/AL9nZEXX0uJq8hoI3qTktZObmjoLJlmFeHfDHoYPdkC3xcplHp4Yr_zeksenLUYYkIJ_JD-UJQ1eP6UjLXmM7GfQ9iKwaqljXYD-EKoNyhh2JC6ekn1IGJI1QorUpYrb8QjGGKKQSM02nLWEpNfFkQT_Iz33=w886-h1572-no?authuser=0',
+    ),
+    new DestinationModel(
+      id: 3,
+      name: 'Vĩnh Hy',
+      star: 4.9,
+      isLike: true,
+      imgUrl:
+          'https://lh3.googleusercontent.com/pw/AL9nZEU80JzjVMBSVfk478Ql7tEdaCY9XUE0RO11BvmfcJXU_qOOQgpCwGj5CsArf_MJ_QYZzqxm7HUL7YC8CiuF8peHSGh6RRyF0tCyfnPVyRp7oyIjcccbqydrUFIxIwP0ttT_6iU1Flf2Yi09JqQDsf5W=w2794-h1572-no?authuser=0',
+    ),
+    new DestinationModel(
+      id: 4,
+      name: 'Bình Tiên',
+      star: 4.9,
+      isLike: true,
+      imgUrl:
+          'https://lh3.googleusercontent.com/pw/AL9nZEXvo2AzqxA4geF5ybzQEyUPUksCFcPT_QOuaD5hT0gH9QV9De1ImaTa7WnwyyQlyZdkIHIydq3avbWbF058M-x9GagC4wDPgBTiaUncKTjeGBXH7-w2bxuQofHoh5HzfwH5iPE7aNXUp3VWrH936j9Y=w2794-h1572-no?authuser=0',
+    ),
+    new DestinationModel(
+      id: 5,
+      name: 'Đại Lãnh',
+      star: 4.9,
+      isLike: true,
+      imgUrl:
+          'https://lh3.googleusercontent.com/pw/AL9nZEVPBkt1dnB6__-jW5H7aQktBZAGzry1c58mTXadSQD1fdBJmQD6t0X_nLArSQ_yFO69nWwAtrhaWBDhnRGiCd_-8uM_GxxKP3Rt3hADFQ1IkHxQozNmbUWFfI_K8LwL03MLZsExey8NX9ivTYBYCLoM=w886-h1572-no?authuser=0',
+    ),
+  ];
+
   Widget _renderItemCategory(
       Widget icon, Color color, Function() onTap, String title) {
     return GestureDetector(
@@ -88,80 +132,123 @@ class _HomeScreenState extends State<HomeScreen> {
           ],
         ),
       ),
-      child: Column(
-        children: [
-          TextField(
-            decoration: InputDecoration(
-              hintText: 'Search your destination',
-              prefixIcon: Padding(
-                padding: EdgeInsets.all(kTopPadding),
-                child: Icon(
-                  Icons.search,
-                  size: kDefaultIconSize,
-                  color: Colors.black,
+      child: SingleChildScrollView(
+        child: Column(
+          children: [
+            TextField(
+              decoration: InputDecoration(
+                hintText: 'Search your destination',
+                prefixIcon: Padding(
+                  padding: EdgeInsets.all(kTopPadding),
+                  child: Icon(
+                    Icons.search,
+                    size: kDefaultIconSize,
+                    color: Colors.black,
+                  ),
                 ),
-              ),
-              filled: true,
-              fillColor: Colors.white,
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(10),
-                borderSide: BorderSide.none,
-              ),
-              contentPadding: EdgeInsets.symmetric(
-                horizontal: kItemPadding,
+                filled: true,
+                fillColor: Colors.white,
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10),
+                  borderSide: BorderSide.none,
+                ),
+                contentPadding: EdgeInsets.symmetric(
+                  horizontal: kItemPadding,
+                ),
               ),
             ),
-          ),
-          SizedBox(
-            height: kDefaultPadding,
-          ),
-          Row(
-            children: [
-              Expanded(
-                child: _renderItemCategory(
-                  ImageHelper.loadFromAsset(
-                    AssetHelper.iconHotel,
-                    width: kDefaultIconSize,
-                    height: kDefaultIconSize,
+            SizedBox(
+              height: kDefaultPadding,
+            ),
+            Row(
+              children: [
+                Expanded(
+                  child: _renderItemCategory(
+                    ImageHelper.loadFromAsset(
+                      AssetHelper.iconHotel,
+                      width: kDefaultIconSize,
+                      height: kDefaultIconSize,
+                    ),
+                    Color(0xffFE9C5E),
+                    () => Navigator.of(context)
+                        .pushNamed(HotelBookingScreen.routerName),
+                    'Hotel',
                   ),
-                  Color(0xffFE9C5E),
-                  () => Navigator.of(context).pushNamed(HotelBookingScreen.routerName),
-                  'Hotel',
                 ),
-              ),
-              SizedBox(
-                width: kDefaultPadding,
-              ),
-              Expanded(
-                child: _renderItemCategory(
-                  ImageHelper.loadFromAsset(
-                    AssetHelper.iconPlane,
-                    width: kDefaultIconSize,
-                    height: kDefaultIconSize,
+                SizedBox(
+                  width: kDefaultPadding,
+                ),
+                Expanded(
+                  child: _renderItemCategory(
+                    ImageHelper.loadFromAsset(
+                      AssetHelper.iconPlane,
+                      width: kDefaultIconSize,
+                      height: kDefaultIconSize,
+                    ),
+                    Color(0xffF77777),
+                    () =>
+                        Navigator.of(context).pushNamed(PlanScreen.routerName),
+                    'Plane',
                   ),
-                  Color(0xffF77777),
-                  () => Navigator.of(context).pushNamed(PlanScreen.routerName),
-                  'Plane',
                 ),
-              ),
-              SizedBox(
-                width: kDefaultPadding,
-              ),
-              Expanded(
-                child: _renderItemCategory(
-                  ImageHelper.loadFromAsset(
-                    AssetHelper.iconHotelPlane,
-                    width: kDefaultIconSize,
-                    height: kDefaultIconSize,
+                SizedBox(
+                  width: kDefaultPadding,
+                ),
+                Expanded(
+                  child: _renderItemCategory(
+                    ImageHelper.loadFromAsset(
+                      AssetHelper.iconHotelPlane,
+                      width: kDefaultIconSize,
+                      height: kDefaultIconSize,
+                    ),
+                    Color(0xff3EC8BC),
+                    () => Navigator.of(context).pushNamed(AllScreen.routerName),
+                    'All',
                   ),
-                  Color(0xff3EC8BC),
-                  () => Navigator.of(context).pushNamed(AllScreen.routerName),
-                  'All',
+                )
+              ],
+            ),
+            SizedBox(
+              height: 20,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  'Popular Destinations',
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.w500,
+                  ),
                 ),
-              )
-            ],
-          )
-        ],
+                Text(
+                  'See All',
+                  style: TextStyle(
+                    fontSize: 14,
+                    fontWeight: FontWeight.w500,
+                    color: Color(0xff6155CC),
+                  ),
+                ),
+              ],
+            ),
+            SizedBox(
+              height: 17,
+            ),
+            Row(
+              children: [
+                Column(
+                  children: [
+                    ClipRRect(
+                      child: Image.network(
+                          'https://lh3.googleusercontent.com/pw/AL9nZEXLKaY-RLbm3Mp2dlo-UYxn_1aWoHSSXnaI8h9z5IWom8Qvuy3XY7pNlBaqcJKIEGP2xR0xz-azXg_NGm3WjC0bBV1krRZpOPTH5Myb-aRdtHV7JDnMPPaTQvchib1x0QTy20maeWcq7hHp4l0yxuJK=w2794-h1572-no?authuser=0'),
+                    ),
+                  ],
+                ),
+                Column(),
+              ],
+            )
+          ],
+        ),
       ),
     );
   }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_travel_app/representation/screens/all_screen.dart';
+import 'package:flutter_travel_app/representation/screens/checkout_confirm_screen.dart';
 import 'package:flutter_travel_app/representation/screens/checkout_paymern_screen.dart';
 import 'package:flutter_travel_app/representation/screens/checkout_screen.dart';
 import 'package:flutter_travel_app/representation/screens/guest_and_room_booking_screen.dart';
@@ -30,4 +31,5 @@ final Map<String, WidgetBuilder> routes = {
   SelectRoomScreen.routerName: (context) => SelectRoomScreen(),
   CheckoutScreen.routerName: (context) => CheckoutScreen(),
   CheckoutPaymentScreen.routerName: (context) => CheckoutPaymentScreen(),
+  CheckoutConfirmScreen.routerName: (context) => CheckoutConfirmScreen(),
 };

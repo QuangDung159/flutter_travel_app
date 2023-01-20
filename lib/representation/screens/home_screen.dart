@@ -21,7 +21,7 @@ class _HomeScreenState extends State<HomeScreen> {
       id: 1,
       name: 'Phú Yên',
       star: 4.9,
-      isLike: true,
+      isLike: false,
       imgUrl:
           'https://lh3.googleusercontent.com/pw/AL9nZEXLKaY-RLbm3Mp2dlo-UYxn_1aWoHSSXnaI8h9z5IWom8Qvuy3XY7pNlBaqcJKIEGP2xR0xz-azXg_NGm3WjC0bBV1krRZpOPTH5Myb-aRdtHV7JDnMPPaTQvchib1x0QTy20maeWcq7hHp4l0yxuJK=w2794-h1572-no?authuser=0',
     ),
@@ -29,7 +29,7 @@ class _HomeScreenState extends State<HomeScreen> {
       id: 2,
       name: 'Ninh Thuận',
       star: 4.9,
-      isLike: true,
+      isLike: false,
       imgUrl:
           'https://lh3.googleusercontent.com/pw/AL9nZEXX0uJq8hoI3qTktZObmjoLJlmFeHfDHoYPdkC3xcplHp4Yr_zeksenLUYYkIJ_JD-UJQ1eP6UjLXmM7GfQ9iKwaqljXYD-EKoNyhh2JC6ekn1IGJI1QorUpYrb8QjGGKKQSM02nLWEpNfFkQT_Iz33=w886-h1572-no?authuser=0',
     ),
@@ -281,12 +281,26 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget renderImage(DestinationModel destination, double imageWith) {
     return Container(
       margin: EdgeInsets.only(bottom: 25),
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(12),
-        child: Image.network(
-          destination.imgUrl,
-          width: imageWith,
-        ),
+      child: Stack(
+        children: [
+          ClipRRect(
+            borderRadius: BorderRadius.circular(12),
+            child: Image.network(
+              destination.imgUrl,
+              width: imageWith,
+            ),
+          ),
+          Positioned(
+            top: 12,
+            right: 12,
+            child: Image.asset(
+              AssetHelper.iconHeart,
+              width: 18,
+              height: 13.99,
+              color: destination.isLike ? Color(0xffF77777) : Colors.white,
+            ),
+          ),
+        ],
       ),
     );
   }

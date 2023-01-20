@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_travel_app/core/constants/dimension_constants.dart';
+import 'package:flutter_travel_app/representation/widgets/icon_background_widget.dart';
 
 class ItemBookingWidget extends StatelessWidget {
   const ItemBookingWidget({
@@ -24,21 +25,17 @@ class ItemBookingWidget extends StatelessWidget {
       child: Column(
         children: [
           Container(
-            padding: EdgeInsets.all(kDefaultPadding),
+            padding: EdgeInsets.all(20),
             decoration: BoxDecoration(
               color: Colors.white,
-              borderRadius: kDefaultBorderRadius,
+              borderRadius: BorderRadius.circular(12),
             ),
             child: Row(
               children: [
-                Container(
-                    alignment: Alignment.center,
-                    width: 32,
-                    height: 32,
-                    decoration: BoxDecoration(
-                        color: color.withOpacity(0.2),
-                        borderRadius: BorderRadius.circular(12)),
-                    child: icon),
+                IconBackgroundWidget(
+                  child: icon,
+                  backgroundColor: color.withOpacity(0.2),
+                ),
                 SizedBox(
                   width: kDefaultPadding,
                 ),

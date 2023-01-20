@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_travel_app/data/models/checkout_step_model.dart';
 
-class CheckoutProcessWidget extends StatefulWidget {
+class CheckoutProcessWidget extends StatelessWidget {
   const CheckoutProcessWidget({
     super.key,
     this.stepActive = 1,
@@ -9,11 +9,6 @@ class CheckoutProcessWidget extends StatefulWidget {
 
   final int stepActive;
 
-  @override
-  State<CheckoutProcessWidget> createState() => _CheckoutProcessWidgetState();
-}
-
-class _CheckoutProcessWidgetState extends State<CheckoutProcessWidget> {
   @override
   Widget build(BuildContext context) {
     List<CheckoutStepModel> listCheckoutStepModel = [
@@ -57,7 +52,7 @@ class _CheckoutProcessWidgetState extends State<CheckoutProcessWidget> {
   }
 
   Widget renderItemStepCheckout(int step, String stepName, bool isEnd) {
-    bool isCheck = widget.stepActive == step;
+    bool isCheck = stepActive == step;
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [

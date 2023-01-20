@@ -8,6 +8,7 @@ import 'package:flutter_travel_app/representation/widgets/app_bar_container.dart
 import 'package:flutter_travel_app/representation/widgets/button_widget.dart';
 import 'package:flutter_travel_app/representation/widgets/card_checkout_info_widget.dart';
 import 'package:flutter_travel_app/representation/widgets/checkout_process_widget.dart';
+import 'package:flutter_travel_app/representation/widgets/icon_background_widget.dart';
 import 'package:get/get.dart';
 
 class CheckoutPaymentScreen extends StatefulWidget {
@@ -85,52 +86,40 @@ class _CheckoutPaymentScreenState extends State<CheckoutPaymentScreen> {
   Widget renderIconByType(String paymentType) {
     switch (paymentType) {
       case 'icon_mini_market':
-        return Container(
-          alignment: Alignment.center,
-          width: 32,
-          height: 32,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(12),
-            color: Color(0xffFE9C5E).withOpacity(0.2),
-          ),
+        return IconBackgroundWidget(
           child: ImageHelper.loadFromAsset(
             AssetHelper.iconMiniMarket,
             width: 12,
             height: 32,
           ),
+          backgroundColor: Color(0xffFE9C5E).withOpacity(0.2),
         );
       case 'icon_credit_debit_card':
-        return Container(
-          alignment: Alignment.center,
-          width: 32,
-          height: 32,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(12),
-            color: Color(0xffF77777).withOpacity(0.2),
-          ),
+        return IconBackgroundWidget(
           child: ImageHelper.loadFromAsset(
             AssetHelper.iconCreditDebitCard,
             width: 18,
             height: 32,
           ),
+          backgroundColor: Color(0xffF77777).withOpacity(0.2),
         );
       case 'icon_bank_transfer':
-        return Container(
-          alignment: Alignment.center,
-          width: 32,
-          height: 32,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(12),
-            color: Color(0xff3EC8BC).withOpacity(0.2),
+        return IconBackgroundWidget(
+          child: ImageHelper.loadFromAsset(
+            AssetHelper.iconBankTransfer,
+            width: 18,
+            height: 32,
           ),
-          child: ImageHelper.loadFromAsset(AssetHelper.iconBankTransfer,
-              width: 18, height: 32),
+          backgroundColor: Color(0xff3EC8BC).withOpacity(0.2),
         );
       default:
-        return ImageHelper.loadFromAsset(
-          AssetHelper.iconMiniMarket,
-          width: 12,
-          height: 32,
+        return IconBackgroundWidget(
+          child: ImageHelper.loadFromAsset(
+            AssetHelper.iconBankTransfer,
+            width: 18,
+            height: 32,
+          ),
+          backgroundColor: Color(0xff3EC8BC).withOpacity(0.2),
         );
     }
   }

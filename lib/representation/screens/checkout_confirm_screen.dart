@@ -133,6 +133,32 @@ class _CheckoutConfirmScreenState extends State<CheckoutConfirmScreen> {
                       ],
                     ),
                   ),
+                  Container(
+                    padding: EdgeInsets.all(20),
+                    margin: EdgeInsets.only(bottom: 20),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(12),
+                      color: Colors.white,
+                    ),
+                    child: Column(
+                      children: [
+                        renderBookingInfoRow(
+                            '1 Night', '\$${room.price}', false),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        renderBookingInfoRow('Taxes and Fees', 'Free', false),
+                        SizedBox(
+                          height: 15,
+                        ),
+                        Image.asset(AssetHelper.imageDashLine),
+                        SizedBox(
+                          height: 15,
+                        ),
+                        renderBookingInfoRow('Total', '\$${room.price}', true),
+                      ],
+                    ),
+                  ),
                   ButtonWidget(
                     title: 'Pay Now',
                     onTap: () {},
@@ -149,6 +175,28 @@ class _CheckoutConfirmScreenState extends State<CheckoutConfirmScreen> {
           )
         ],
       ),
+    );
+  }
+
+  Widget renderBookingInfoRow(String title, String value, bool isBold) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Text(
+          title,
+          style: TextStyle(
+            fontSize: isBold ? 14 : 12,
+            fontWeight: isBold ? FontWeight.w500 : FontWeight.w400,
+          ),
+        ),
+        Text(
+          value,
+          style: TextStyle(
+            fontSize: isBold ? 14 : 12,
+            fontWeight: isBold ? FontWeight.w500 : FontWeight.w400,
+          ),
+        )
+      ],
     );
   }
 

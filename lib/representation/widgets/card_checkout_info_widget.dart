@@ -72,7 +72,7 @@ class _CardCheckoutInfoWidgetState extends State<CardCheckoutInfoWidget> {
                         color: Color(0xffE0DDF5),
                         borderRadius: BorderRadius.circular(12),
                       ),
-                      child: getX.paymentMethodSelected == widget.paymentMethod?.id
+                      child: getX.paymentMethodSelected.value!.id == widget.paymentMethod?.id
                           ? Icon(
                               Icons.check,
                               size: 15,

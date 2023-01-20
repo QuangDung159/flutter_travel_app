@@ -13,7 +13,6 @@ class HotelModel {
   final String information;
   final List<HotelServiceModel>? listService;
   final List<RoomModel>? listRoom;
-  final String? subTitle;
 
   HotelModel({
     required this.hotelImage,
@@ -27,6 +26,5 @@ class HotelModel {
     required this.information,
     this.listService,
     this.listRoom,
-    this.subTitle
   });
 }

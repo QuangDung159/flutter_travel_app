@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_travel_app/core/helpers/asset_helper.dart';
-import 'package:flutter_travel_app/core/helpers/image_helper.dart';
 import 'package:flutter_travel_app/data/models/room_model.dart';
 import 'package:flutter_travel_app/representation/widgets/app_bar_container.dart';
 import 'package:flutter_travel_app/representation/widgets/button_widget.dart';
 import 'package:flutter_travel_app/representation/widgets/checkout_process_widget.dart';
+import 'package:flutter_travel_app/representation/widgets/icon_background_widget.dart';
 
 class CheckoutConfirmScreen extends StatefulWidget {
   const CheckoutConfirmScreen({super.key});
@@ -40,11 +40,95 @@ class _CheckoutConfirmScreenState extends State<CheckoutConfirmScreen> {
                     child: Column(
                       children: [
                         renderRoomInfo(room),
-                        Image.asset(
-                          AssetHelper.iconBed,
-                          color: Color(0xffFE9C5E),
-                          width: 20,
-                          height: 16,
+                        SizedBox(
+                          height: 15,
+                        ),
+                        Image.asset(AssetHelper.imageDashLine),
+                        SizedBox(
+                          height: 15,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Row(
+                              children: [
+                                IconBackgroundWidget(
+                                  child: Image.asset(
+                                    AssetHelper.iconCheckin,
+                                    width: 14,
+                                    height: 20,
+                                  ),
+                                  backgroundColor:
+                                      Color(0xffF77777).withOpacity(0.2),
+                                ),
+                                SizedBox(
+                                  width: 11,
+                                ),
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      'Check-in',
+                                      style: TextStyle(
+                                        fontSize: 12,
+                                        fontWeight: FontWeight.w400,
+                                        color: Color(0xff636363),
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      height: 6,
+                                    ),
+                                    Text(
+                                      'Fri, 13 Feb',
+                                      style: TextStyle(
+                                        fontSize: 15,
+                                        fontWeight: FontWeight.w500,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                            Row(
+                              children: [
+                                IconBackgroundWidget(
+                                  child: Image.asset(
+                                    AssetHelper.iconCheckout,
+                                    width: 14,
+                                    height: 20,
+                                  ),
+                                  backgroundColor:
+                                      Color(0xf3EC8BC).withOpacity(0.2),
+                                ),
+                                SizedBox(
+                                  width: 11,
+                                ),
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      'Check-out',
+                                      style: TextStyle(
+                                        fontSize: 12,
+                                        fontWeight: FontWeight.w400,
+                                        color: Color(0xff636363),
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      height: 6,
+                                    ),
+                                    Text(
+                                      'Sat, 14 Feb',
+                                      style: TextStyle(
+                                        fontSize: 15,
+                                        fontWeight: FontWeight.w500,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                          ],
                         )
                       ],
                     ),
@@ -69,6 +153,7 @@ class _CheckoutConfirmScreenState extends State<CheckoutConfirmScreen> {
   }
 
   Widget renderRoomInfo(RoomModel roomModel) {
+    print(roomModel.subTitle);
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -87,6 +172,34 @@ class _CheckoutConfirmScreenState extends State<CheckoutConfirmScreen> {
             ),
             Text(
               '${roomModel.isFreeCancellation ? 'Free Cancellation' : 'Paid cancellation'}',
+            ),
+            SizedBox(
+              height: 15,
+            ),
+            Row(
+              children: [
+                Image.asset(
+                  AssetHelper.iconBed,
+                  color: Color(0xffFE9C5E),
+                  width: 20,
+                  height: 16,
+                ),
+                if (roomModel.subTitle != null && roomModel.subTitle != '')
+                  Row(
+                    children: [
+                      SizedBox(
+                        width: 12.5,
+                      ),
+                      Text(
+                        roomModel.subTitle ?? '',
+                        style: TextStyle(
+                          fontSize: 13,
+                          fontWeight: FontWeight.w400,
+                        ),
+                      )
+                    ],
+                  )
+              ],
             ),
           ],
         ),

@@ -36,6 +36,7 @@ class _HotelsScreenState extends State<HotelsScreen> {
         size: 27,
         isFreeCancellation: true,
         price: 245,
+        subTitle: '2 King Bed',
         listRoomService: [
           new HotelServiceModel(
             title: 'Free Wifi',
@@ -81,6 +82,7 @@ class _HotelsScreenState extends State<HotelsScreen> {
         size: 40,
         isFreeCancellation: false,
         price: 245,
+        subTitle: '2 King Bed',
         listRoomService: [
           new HotelServiceModel(
             title: 'Free Wifi',
@@ -126,6 +128,7 @@ class _HotelsScreenState extends State<HotelsScreen> {
         size: 27,
         isFreeCancellation: true,
         price: 245,
+        subTitle: '1 King Bed',
         listRoomService: [
           new HotelServiceModel(
             title: 'Free Wifi',

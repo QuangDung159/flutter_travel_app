@@ -7,6 +7,7 @@ class RoomModel {
   final bool isFreeCancellation;
   final List<HotelServiceModel>? listRoomService;
   final int price;
+  final String? subTitle;
 
   RoomModel({
     required this.name,
@@ -15,5 +16,6 @@ class RoomModel {
     required this.isFreeCancellation,
     this.listRoomService,
     required this.price,
+    this.subTitle,
   });
 }

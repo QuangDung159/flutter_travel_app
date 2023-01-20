@@ -45,6 +45,11 @@ class _CheckoutPaymentScreenState extends State<CheckoutPaymentScreen> {
         id: 3,
         iconType: 'icon_bank_transfer',
       ),
+      new PaymentMethodModel(
+        title: 'E-Wallet',
+        id: 4,
+        iconType: 'icon_credit_debit_card',
+      ),
     ];
 
     return AppBarContainer(
@@ -77,7 +82,7 @@ class _CheckoutPaymentScreenState extends State<CheckoutPaymentScreen> {
     );
   }
 
-  Widget renderIconByPaymentType(String paymentType) {
+  Widget renderIconByType(String paymentType) {
     switch (paymentType) {
       case 'icon_mini_market':
         return Container(
@@ -141,7 +146,7 @@ class _CheckoutPaymentScreenState extends State<CheckoutPaymentScreen> {
           isChecked: true,
           title: paymentItem.title,
           addButtonTitle: paymentItem.addButtonTitle,
-          icon: renderIconByPaymentType(paymentItem.iconType),
+          icon: renderIconByType(paymentItem.iconType),
           paymentMethod: paymentItem,
           onCheck: () => getX.updatePaymentMethodSelected(
             paymentItem.id,

@@ -3,6 +3,7 @@ import 'package:flutter_travel_app/core/constants/color_constants.dart';
 import 'package:flutter_travel_app/core/constants/dimension_constants.dart';
 import 'package:flutter_travel_app/core/helpers/asset_helper.dart';
 import 'package:flutter_travel_app/core/helpers/image_helper.dart';
+import 'package:flutter_travel_app/representation/widgets/icon_background_widget.dart';
 
 class AppBarContainer extends StatelessWidget {
   const AppBarContainer({
@@ -28,7 +29,7 @@ class AppBarContainer extends StatelessWidget {
           SizedBox(
             height: 200,
             child: AppBar(
-              toolbarHeight: 60,
+              toolbarHeight: 100,
               centerTitle: true,
               automaticallyImplyLeading: false,
               elevation: 0,
@@ -39,19 +40,13 @@ class AppBarContainer extends StatelessWidget {
                       if (implementLeading)
                         GestureDetector(
                           onTap: () => Navigator.of(context).pop(),
-                          child: Container(
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(
-                                kDefaultPadding,
-                              ),
-                            ),
-                            padding: EdgeInsets.all(kItemPadding),
+                          child: IconBackgroundWidget(
                             child: Icon(
                               Icons.arrow_back,
                               size: kDefaultIconSize,
                               color: Colors.black,
                             ),
+                            backgroundColor: Colors.white,
                           ),
                         ),
                       Expanded(
@@ -68,20 +63,14 @@ class AppBarContainer extends StatelessWidget {
                         ),
                       ),
                       if (implementTrailing)
-                        Container(
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(
-                              kDefaultPadding,
-                            ),
-                          ),
-                          padding: EdgeInsets.all(kItemPadding),
+                        IconBackgroundWidget(
                           child: Icon(
                             Icons.menu,
                             size: kDefaultIconSize,
                             color: Colors.black,
                           ),
-                        )
+                          backgroundColor: Colors.white,
+                        ),
                     ],
                   ),
               flexibleSpace: Stack(

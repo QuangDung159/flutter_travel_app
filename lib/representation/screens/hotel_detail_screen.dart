@@ -9,6 +9,7 @@ import 'package:flutter_travel_app/representation/widgets/button_widget.dart';
 import 'package:flutter_travel_app/representation/widgets/hotel_location_widget.dart';
 import 'package:flutter_travel_app/representation/widgets/hotel_review_widget.dart';
 import 'package:flutter_travel_app/representation/widgets/hotel_service_item_widget.dart';
+import 'package:flutter_travel_app/representation/widgets/icon_background_widget.dart';
 
 class HotelDetailScreen extends StatefulWidget {
   const HotelDetailScreen({super.key});
@@ -37,47 +38,32 @@ class _HotelDetailScreenState extends State<HotelDetailScreen> {
           renderBottomSheet(hotelModel),
           Positioned(
             left: kDefaultPadding,
-            top: 60,
+            top: 80,
             child: GestureDetector(
               onTap: () => Navigator.of(context).pop(),
-              child: Container(
-                height: 32,
-                width: 32,
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(
-                    12,
-                  ),
-                ),
+              child: IconBackgroundWidget(
                 child: Icon(
                   Icons.arrow_back,
                   size: kDefaultIconSize,
                   color: Colors.black,
                 ),
+                backgroundColor: Colors.white,
               ),
             ),
           ),
           Positioned(
             right: kDefaultPadding,
-            top: 60,
+            top: 80,
             child: GestureDetector(
               onTap: () => Navigator.of(context).pop(),
-              child: Container(
-                height: 32,
-                width: 32,
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(12),
+              child: IconBackgroundWidget(
+                child: Image.asset(
+                  AssetHelper.iconHeart,
+                  width: 16,
+                  height: 14,
+                  color: Color(0xffF5DCDC),
                 ),
-                child: Container(
-                  alignment: Alignment.center,
-                  child: ImageHelper.loadFromAsset(
-                    AssetHelper.iconHeart,
-                    width: 16,
-                    height: 14,
-                    tintColor: Color(0xffF5DCDC),
-                  ),
-                ),
+                backgroundColor: Colors.white,
               ),
             ),
           )

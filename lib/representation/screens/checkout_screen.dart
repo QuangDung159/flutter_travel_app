@@ -38,6 +38,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                     roomModel: roomModel,
                   ),
                   CardCheckoutInfoWidget(
+                    isShowButtonAdd: true,
                     title: 'Contact Details',
                     subTitle: 'Add Contact',
                     icon: Container(
@@ -56,6 +57,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                     ),
                   ),
                   CardCheckoutInfoWidget(
+                    isShowButtonAdd: true,
                     title: 'Promo Code',
                     subTitle: 'Add Promo Code',
                     icon: Container(

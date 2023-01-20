@@ -17,6 +17,8 @@ class CheckoutPaymentScreen extends StatefulWidget {
 }
 
 class _CheckoutPaymentScreenState extends State<CheckoutPaymentScreen> {
+  int paymentMethodSelected = 1;
+
   @override
   Widget build(BuildContext context) {
     RoomModel roomModel =
@@ -34,6 +36,7 @@ class _CheckoutPaymentScreenState extends State<CheckoutPaymentScreen> {
                 children: [
                   CardCheckoutInfoWidget(
                     isShowCheckbox: true,
+                    isChecked: true,
                     title: 'Promo Code',
                     subTitle: 'Add Promo Code',
                     icon: Container(

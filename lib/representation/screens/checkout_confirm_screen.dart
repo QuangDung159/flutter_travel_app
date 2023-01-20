@@ -198,44 +198,48 @@ class _CheckoutConfirmScreenState extends State<CheckoutConfirmScreen> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Row(
-                          children: [
-                            IconBackgroundWidget(
-                              child: Image.asset(
-                                AssetHelper.iconMastercard,
-                                width: 28.44,
-                                height: 17.7,
-                              ),
-                              backgroundColor:
-                                  Color(0xffFE9C5E).withOpacity(0.2),
-                            ),
-                            SizedBox(
-                              width: 15,
-                            ),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
+                        Obx(
+                          () {
+                            return Row(
                               children: [
-                                Text(
-                                  'Credit / Debit Card',
-                                  style: TextStyle(
-                                    fontSize: 12,
-                                    fontWeight: FontWeight.w400,
-                                    color: Color(0xff636363),
+                                IconBackgroundWidget(
+                                  child: Image.asset(
+                                    AssetHelper.iconMastercard,
+                                    width: 28.44,
+                                    height: 17.7,
                                   ),
+                                  backgroundColor:
+                                      Color(0xffFE9C5E).withOpacity(0.2),
                                 ),
                                 SizedBox(
-                                  height: 6,
+                                  width: 15,
                                 ),
-                                Text(
-                                  'Master Card',
-                                  style: TextStyle(
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.w500,
-                                  ),
-                                ),
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      '${getX.paymentMethodSelected.value?.title ?? ''}',
+                                      style: TextStyle(
+                                        fontSize: 12,
+                                        fontWeight: FontWeight.w400,
+                                        color: Color(0xff636363),
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      height: 6,
+                                    ),
+                                    Text(
+                                      'Master Card',
+                                      style: TextStyle(
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.w500,
+                                      ),
+                                    ),
+                                  ],
+                                )
                               ],
-                            )
-                          ],
+                            );
+                          },
                         ),
                         Text(
                           'Change',

@@ -91,7 +91,7 @@ class _CheckoutPaymentScreenState extends State<CheckoutPaymentScreen> {
     switch (paymentType) {
       case 'icon_mini_market':
         return IconBackgroundWidget(
-          child: ImageHelper.loadFromAsset(
+          child: Image.asset(
             AssetHelper.iconMiniMarket,
             width: 12,
             height: 32,
@@ -100,7 +100,7 @@ class _CheckoutPaymentScreenState extends State<CheckoutPaymentScreen> {
         );
       case 'icon_credit_debit_card':
         return IconBackgroundWidget(
-          child: ImageHelper.loadFromAsset(
+          child: Image.asset(
             AssetHelper.iconCreditDebitCard,
             width: 18,
             height: 32,
@@ -109,7 +109,7 @@ class _CheckoutPaymentScreenState extends State<CheckoutPaymentScreen> {
         );
       case 'icon_bank_transfer':
         return IconBackgroundWidget(
-          child: ImageHelper.loadFromAsset(
+          child: Image.asset(
             AssetHelper.iconBankTransfer,
             width: 18,
             height: 32,
@@ -118,7 +118,7 @@ class _CheckoutPaymentScreenState extends State<CheckoutPaymentScreen> {
         );
       default:
         return IconBackgroundWidget(
-          child: ImageHelper.loadFromAsset(
+          child: Image.asset(
             AssetHelper.iconBankTransfer,
             width: 18,
             height: 32,

@@ -8,7 +8,6 @@ import 'package:flutter_travel_app/representation/screens/checkout_screen.dart';
 import 'package:flutter_travel_app/representation/widgets/button_widget.dart';
 import 'package:flutter_travel_app/representation/widgets/hotel_service_item_widget.dart';
 import 'package:get/get.dart';
-import 'package:get/get_state_manager/get_state_manager.dart';
 
 class CardRoomWidget extends StatelessWidget {
   const CardRoomWidget({

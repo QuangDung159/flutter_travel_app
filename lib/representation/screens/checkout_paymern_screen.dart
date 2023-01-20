@@ -54,6 +54,46 @@ class _CheckoutPaymentScreenState extends State<CheckoutPaymentScreen> {
                       ),
                     ),
                   ),
+                  CardCheckoutInfoWidget(
+                    isShowCheckbox: true,
+                    isChecked: true,
+                    title: 'Promo Code',
+                    subTitle: 'Add Promo Code',
+                    icon: Container(
+                      alignment: Alignment.center,
+                      width: 32,
+                      height: 32,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(12),
+                        color: Color(0xffFE9C5E).withOpacity(0.2),
+                      ),
+                      child: ImageHelper.loadFromAsset(
+                        AssetHelper.iconDiscount,
+                        width: 19.2,
+                        height: 19.2,
+                      ),
+                    ),
+                  ),
+                  CardCheckoutInfoWidget(
+                    isShowCheckbox: true,
+                    isChecked: true,
+                    title: 'Promo Code',
+                    subTitle: 'Add Promo Code',
+                    icon: Container(
+                      alignment: Alignment.center,
+                      width: 32,
+                      height: 32,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(12),
+                        color: Color(0xffFE9C5E).withOpacity(0.2),
+                      ),
+                      child: ImageHelper.loadFromAsset(
+                        AssetHelper.iconDiscount,
+                        width: 19.2,
+                        height: 19.2,
+                      ),
+                    ),
+                  ),
                   ButtonWidget(
                     title: 'Done',
                     onTap: () {},

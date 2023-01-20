@@ -34,4 +34,7 @@ class AssetHelper {
   static const String iconFreeBreakfast = '$iconDir/icon_free_breakfast.png';
   static const String iconContact = '$iconDir/icon_contact.png';
   static const String iconDiscount = '$iconDir/icon_discount.png';
+  static const String iconMiniMarket = '$iconDir/icon_mini_market.png';
+  static const String iconCreditDebitCard = '$iconDir/icon_credit_debit_card.png';
+  static const String iconBankTransfer = '$iconDir/icon_back_transfer.png';
 }

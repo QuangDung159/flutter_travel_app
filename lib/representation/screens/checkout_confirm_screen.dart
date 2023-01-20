@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_travel_app/core/Controllers/get_x_controller.dart';
 import 'package:flutter_travel_app/core/helpers/asset_helper.dart';
 import 'package:flutter_travel_app/data/models/room_model.dart';
 import 'package:flutter_travel_app/representation/screens/main_screen.dart';
@@ -6,6 +7,7 @@ import 'package:flutter_travel_app/representation/widgets/app_bar_container.dart
 import 'package:flutter_travel_app/representation/widgets/button_widget.dart';
 import 'package:flutter_travel_app/representation/widgets/checkout_process_widget.dart';
 import 'package:flutter_travel_app/representation/widgets/icon_background_widget.dart';
+import 'package:get/get.dart';
 
 class CheckoutConfirmScreen extends StatefulWidget {
   const CheckoutConfirmScreen({super.key});
@@ -17,6 +19,28 @@ class CheckoutConfirmScreen extends StatefulWidget {
 }
 
 class _CheckoutConfirmScreenState extends State<CheckoutConfirmScreen> {
+  GetXController getX = Get.find<GetXController>();
+  int numberOfNight = 1;
+
+  @override
+  void initState() {
+    super.initState();
+    calNumberOfNight();
+  }
+
+  void calNumberOfNight() {
+    final List<DateTime> datetimeRangeSelected = getX.datetimeRangeSelected;
+
+    DateTime startDate = datetimeRangeSelected[0];
+    DateTime endDate = datetimeRangeSelected[1];
+
+    final Duration duration = endDate.difference(startDate);
+
+    setState(() {
+      numberOfNight = duration.inDays;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     RoomModel room = ModalRoute.of(context)?.settings.arguments as RoomModel;
@@ -144,7 +168,10 @@ class _CheckoutConfirmScreenState extends State<CheckoutConfirmScreen> {
                     child: Column(
                       children: [
                         renderBookingInfoRow(
-                            '1 Night', '\$${room.price}', false),
+                          '${numberOfNight} Night',
+                          '\$${room.price * numberOfNight}',
+                          false,
+                        ),
                         SizedBox(
                           height: 10,
                         ),
@@ -156,7 +183,8 @@ class _CheckoutConfirmScreenState extends State<CheckoutConfirmScreen> {
                         SizedBox(
                           height: 15,
                         ),
-                        renderBookingInfoRow('Total', '\$${room.price}', true),
+                        renderBookingInfoRow(
+                            'Total', '\$${room.price * numberOfNight}', true),
                       ],
                     ),
                   ),

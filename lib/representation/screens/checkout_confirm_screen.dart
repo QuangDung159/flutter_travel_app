@@ -241,14 +241,17 @@ class _CheckoutConfirmScreenState extends State<CheckoutConfirmScreen> {
                             );
                           },
                         ),
-                        Text(
-                          'Change',
-                          style: TextStyle(
-                            fontSize: 12,
-                            fontWeight: FontWeight.w400,
-                            color: Color(0xff6155CC),
+                        GestureDetector(
+                          onTap: () => Navigator.of(context).pop(),
+                          child: Text(
+                            'Change',
+                            style: TextStyle(
+                              fontSize: 12,
+                              fontWeight: FontWeight.w400,
+                              color: Color(0xff6155CC),
+                            ),
                           ),
-                        ),
+                        )
                       ],
                     ),
                   ),

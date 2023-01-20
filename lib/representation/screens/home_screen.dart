@@ -85,6 +85,39 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
+  List<Widget> renderListImage(
+      List<DestinationModel> listDestination, context) {
+    double imageWith = (MediaQuery.of(context).size.width - 50) / 2;
+
+    List<DestinationModel> listLeft = [];
+    List<DestinationModel> listRight = [];
+
+    for (var i = 0; i < listDestination.length; i++) {
+      if (i % 2 == 0) {
+        listLeft.add(listDestination[i]);
+      } else {
+        listRight.add(listDestination[i]);
+      }
+    }
+
+    return [
+      renderListImageColumn(listLeft, imageWith),
+      renderListImageColumn(listRight, imageWith),
+    ];
+  }
+
+  Widget renderListImageColumn(
+    List<DestinationModel> listDestination,
+    double imageWith,
+  ) {
+    return Column(
+      children: List.generate(
+        listDestination.length,
+        (index) => renderImage(listDestination[index], imageWith),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return AppBarContainer(
@@ -235,19 +268,24 @@ class _HomeScreenState extends State<HomeScreen> {
               height: 17,
             ),
             Row(
-              children: [
-                Column(
-                  children: [
-                    ClipRRect(
-                      child: Image.network(
-                          'https://lh3.googleusercontent.com/pw/AL9nZEXLKaY-RLbm3Mp2dlo-UYxn_1aWoHSSXnaI8h9z5IWom8Qvuy3XY7pNlBaqcJKIEGP2xR0xz-azXg_NGm3WjC0bBV1krRZpOPTH5Myb-aRdtHV7JDnMPPaTQvchib1x0QTy20maeWcq7hHp4l0yxuJK=w2794-h1572-no?authuser=0'),
-                    ),
-                  ],
-                ),
-                Column(),
-              ],
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: renderListImage(listDestination, context),
             )
           ],
+        ),
+      ),
+    );
+  }
+
+  Widget renderImage(DestinationModel destination, double imageWith) {
+    return Container(
+      margin: EdgeInsets.only(bottom: 25),
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(12),
+        child: Image.network(
+          destination.imgUrl,
+          width: imageWith,
         ),
       ),
     );

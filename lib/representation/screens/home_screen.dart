@@ -249,34 +249,34 @@ class _HomeScreenState extends State<HomeScreen> {
             SizedBox(
               height: 17,
             ),
-            // FutureBuilder(
-            //   future: listPhoto,
-            //   builder: (context, snapshot) {
-            //     if (snapshot.hasData) {
-            //       final data = snapshot.data!;
-            //       return Row(
-            //         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            //         crossAxisAlignment: CrossAxisAlignment.start,
-            //         children: renderListImage(data, context),
-            //       );
-            //     } else {
-            //       if (snapshot.hasData) {
-            //         return const Center(
-            //           child: Text(
-            //             'Fail',
-            //           ),
-            //         );
-            //       }
-            //       return const Center(
-            //         child: SizedBox(
-            //           width: 30,
-            //           height: 30,
-            //           child: CircularProgressIndicator(),
-            //         ),
-            //       );
-            //     }
-            //   },
-            // )
+            FutureBuilder(
+              future: listPhoto,
+              builder: (context, snapshot) {
+                if (snapshot.hasData) {
+                  final data = snapshot.data!;
+                  return Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: renderListImage(data, context),
+                  );
+                } else {
+                  if (snapshot.hasData) {
+                    return const Center(
+                      child: Text(
+                        'Fail',
+                      ),
+                    );
+                  }
+                  return const Center(
+                    child: SizedBox(
+                      width: 30,
+                      height: 30,
+                      child: CircularProgressIndicator(),
+                    ),
+                  );
+                }
+              },
+            )
           ],
         ),
       ),

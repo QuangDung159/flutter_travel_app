@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_travel_app/core/constants/dimension_constants.dart';
 import 'package:flutter_travel_app/core/helpers/asset_helper.dart';
 import 'package:flutter_travel_app/core/helpers/image_helper.dart';
+import 'package:flutter_travel_app/core/services/photo_services.dart';
 import 'package:flutter_travel_app/data/models/destination_model.dart';
+import 'package:flutter_travel_app/data/models/photo_model.dart';
 import 'package:flutter_travel_app/representation/screens/all_screen.dart';
 import 'package:flutter_travel_app/representation/screens/hotel_booking_screen.dart';
 import 'package:flutter_travel_app/representation/screens/plane_screen.dart';
@@ -58,6 +60,14 @@ class _HomeScreenState extends State<HomeScreen> {
           'https://lh3.googleusercontent.com/pw/AL9nZEVPBkt1dnB6__-jW5H7aQktBZAGzry1c58mTXadSQD1fdBJmQD6t0X_nLArSQ_yFO69nWwAtrhaWBDhnRGiCd_-8uM_GxxKP3Rt3hADFQ1IkHxQozNmbUWFfI_K8LwL03MLZsExey8NX9ivTYBYCLoM=w886-h1572-no?authuser=0',
     ),
   ];
+
+  late Future<List<PhotoModel>> listPhoto;
+
+  @override
+  void initState() {
+    super.initState();
+    listPhoto = PhotoServices.fetchListPhoto();
+  }
 
   Widget _renderItemCategory(
       Widget icon, Color color, Function() onTap, String title) {

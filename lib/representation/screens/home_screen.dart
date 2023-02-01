@@ -3,7 +3,6 @@ import 'package:flutter_travel_app/core/constants/dimension_constants.dart';
 import 'package:flutter_travel_app/core/helpers/asset_helper.dart';
 import 'package:flutter_travel_app/core/helpers/image_helper.dart';
 import 'package:flutter_travel_app/core/services/photo_services.dart';
-import 'package:flutter_travel_app/data/models/destination_model.dart';
 import 'package:flutter_travel_app/data/models/photo_model.dart';
 import 'package:flutter_travel_app/representation/screens/all_screen.dart';
 import 'package:flutter_travel_app/representation/screens/hotel_booking_screen.dart';
@@ -18,49 +17,6 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  List<DestinationModel> listDestination = [
-    new DestinationModel(
-      id: 1,
-      name: 'Phú Yên',
-      star: 4.9,
-      isLike: false,
-      imgUrl:
-          'https://lh3.googleusercontent.com/pw/AL9nZEXLKaY-RLbm3Mp2dlo-UYxn_1aWoHSSXnaI8h9z5IWom8Qvuy3XY7pNlBaqcJKIEGP2xR0xz-azXg_NGm3WjC0bBV1krRZpOPTH5Myb-aRdtHV7JDnMPPaTQvchib1x0QTy20maeWcq7hHp4l0yxuJK=w2794-h1572-no?authuser=0',
-    ),
-    new DestinationModel(
-      id: 2,
-      name: 'Ninh Thuận',
-      star: 4.9,
-      isLike: false,
-      imgUrl:
-          'https://lh3.googleusercontent.com/pw/AL9nZEXX0uJq8hoI3qTktZObmjoLJlmFeHfDHoYPdkC3xcplHp4Yr_zeksenLUYYkIJ_JD-UJQ1eP6UjLXmM7GfQ9iKwaqljXYD-EKoNyhh2JC6ekn1IGJI1QorUpYrb8QjGGKKQSM02nLWEpNfFkQT_Iz33=w886-h1572-no?authuser=0',
-    ),
-    new DestinationModel(
-      id: 3,
-      name: 'Vĩnh Hy',
-      star: 4.9,
-      isLike: true,
-      imgUrl:
-          'https://lh3.googleusercontent.com/pw/AL9nZEU80JzjVMBSVfk478Ql7tEdaCY9XUE0RO11BvmfcJXU_qOOQgpCwGj5CsArf_MJ_QYZzqxm7HUL7YC8CiuF8peHSGh6RRyF0tCyfnPVyRp7oyIjcccbqydrUFIxIwP0ttT_6iU1Flf2Yi09JqQDsf5W=w2794-h1572-no?authuser=0',
-    ),
-    new DestinationModel(
-      id: 4,
-      name: 'Bình Tiên',
-      star: 4.9,
-      isLike: true,
-      imgUrl:
-          'https://lh3.googleusercontent.com/pw/AL9nZEXvo2AzqxA4geF5ybzQEyUPUksCFcPT_QOuaD5hT0gH9QV9De1ImaTa7WnwyyQlyZdkIHIydq3avbWbF058M-x9GagC4wDPgBTiaUncKTjeGBXH7-w2bxuQofHoh5HzfwH5iPE7aNXUp3VWrH936j9Y=w2794-h1572-no?authuser=0',
-    ),
-    new DestinationModel(
-      id: 5,
-      name: 'Đại Lãnh',
-      star: 4.9,
-      isLike: true,
-      imgUrl:
-          'https://lh3.googleusercontent.com/pw/AL9nZEVPBkt1dnB6__-jW5H7aQktBZAGzry1c58mTXadSQD1fdBJmQD6t0X_nLArSQ_yFO69nWwAtrhaWBDhnRGiCd_-8uM_GxxKP3Rt3hADFQ1IkHxQozNmbUWFfI_K8LwL03MLZsExey8NX9ivTYBYCLoM=w886-h1572-no?authuser=0',
-    ),
-  ];
-
   late Future<List<PhotoModel>> listPhoto;
 
   @override
@@ -95,18 +51,17 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  List<Widget> renderListImage(
-      List<DestinationModel> listDestination, context) {
+  List<Widget> renderListImage(List<PhotoModel> listPhotoRender, context) {
     double imageWith = (MediaQuery.of(context).size.width - 50) / 2;
 
-    List<DestinationModel> listLeft = [];
-    List<DestinationModel> listRight = [];
+    List<PhotoModel> listLeft = [];
+    List<PhotoModel> listRight = [];
 
-    for (var i = 0; i < listDestination.length; i++) {
+    for (var i = 0; i < listPhotoRender.length; i++) {
       if (i % 2 == 0) {
-        listLeft.add(listDestination[i]);
+        listLeft.add(listPhotoRender[i]);
       } else {
-        listRight.add(listDestination[i]);
+        listRight.add(listPhotoRender[i]);
       }
     }
 
@@ -117,13 +72,13 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Widget renderListImageColumn(
-    List<DestinationModel> listDestination,
+    List<PhotoModel> listPhotoRender,
     double imageWith,
   ) {
     return Column(
       children: List.generate(
-        listDestination.length,
-        (index) => renderImage(listDestination[index], imageWith),
+        listPhotoRender.length,
+        (index) => renderImage(listPhotoRender[index], imageWith, index),
       ),
     );
   }
@@ -277,10 +232,33 @@ class _HomeScreenState extends State<HomeScreen> {
             SizedBox(
               height: 17,
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: renderListImage(listDestination, context),
+            FutureBuilder(
+              future: listPhoto,
+              builder: (context, snapshot) {
+                if (snapshot.hasData) {
+                  final data = snapshot.data!;
+                  return Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: renderListImage(data, context),
+                  );
+                } else {
+                  if (snapshot.hasData) {
+                    return const Center(
+                      child: Text(
+                        'Fail',
+                      ),
+                    );
+                  }
+                  return const Center(
+                    child: SizedBox(
+                      width: 30,
+                      height: 30,
+                      child: CircularProgressIndicator(),
+                    ),
+                  );
+                }
+              },
             )
           ],
         ),
@@ -288,7 +266,7 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  Widget renderImage(DestinationModel destination, double imageWith) {
+  Widget renderImage(PhotoModel photo, double imageWith, int index) {
     return Container(
       margin: EdgeInsets.only(bottom: 25),
       child: Stack(
@@ -296,7 +274,7 @@ class _HomeScreenState extends State<HomeScreen> {
           ClipRRect(
             borderRadius: BorderRadius.circular(12),
             child: Image.network(
-              destination.imgUrl,
+              photo.photoUrl!,
               width: imageWith,
             ),
           ),
@@ -307,7 +285,7 @@ class _HomeScreenState extends State<HomeScreen> {
               AssetHelper.iconHeart,
               width: 18,
               height: 13.99,
-              color: destination.isLike ? Color(0xffF77777) : Colors.white,
+              color: index / 2 == 0 ? Color(0xffF77777) : Colors.white,
             ),
           ),
           Positioned(
@@ -317,7 +295,7 @@ class _HomeScreenState extends State<HomeScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  destination.name,
+                  photo.photoName!,
                   style: TextStyle(
                     fontSize: 14,
                     fontWeight: FontWeight.w500,
@@ -344,7 +322,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         width: 5,
                       ),
                       Text(
-                        destination.star.toString(),
+                        index.toString(),
                         style: TextStyle(
                           fontSize: 10,
                           fontWeight: FontWeight.w400,

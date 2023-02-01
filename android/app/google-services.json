@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "1012509086997",
+    "project_id": "flutter-travel-app-acabe",
+    "storage_bucket": "flutter-travel-app-acabe.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1012509086997:android:354fa60ab874be7709c51c",
+        "android_client_info": {
+          "package_name": "com.example.flutter_travel_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1012509086997-dgabi93o9lh6dvrl12tc6rjooilco4cg.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.flutter_travel_app",
+            "certificate_hash": "c3c1d21f145879bd30f40a28e75e80e219583289"
+          }
+        },
+        {
+          "client_id": "1012509086997-3a4cosr0e2e901ps7h7gbgq55ur97cu3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBbEjJbKdwcV86MNEVkmketQDsX_n8AYGc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1012509086997-3a4cosr0e2e901ps7h7gbgq55ur97cu3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

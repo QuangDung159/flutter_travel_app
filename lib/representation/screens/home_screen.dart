@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_travel_app/core/constants/dimension_constants.dart';
 import 'package:flutter_travel_app/core/helpers/asset_helper.dart';
 import 'package:flutter_travel_app/core/helpers/image_helper.dart';
+import 'package:flutter_travel_app/core/services/google_services.dart';
 import 'package:flutter_travel_app/core/services/photo_services.dart';
 import 'package:flutter_travel_app/data/models/photo_model.dart';
 import 'package:flutter_travel_app/representation/screens/all_screen.dart';
@@ -23,6 +24,17 @@ class _HomeScreenState extends State<HomeScreen> {
   void initState() {
     super.initState();
     listPhoto = PhotoServices.fetchListPhoto();
+  }
+
+  Future<void> handleGoogleSignIn() async {
+    try {
+      final res = await GoogleServices.login();
+      if (res != null) {
+        print(res);
+      }
+    } catch (e) {
+      throw Exception(e);
+    }
   }
 
   Widget _renderItemCategory(
@@ -117,13 +129,18 @@ class _HomeScreenState extends State<HomeScreen> {
           SizedBox(
             width: kMinPadding,
           ),
-          Container(
-            width: 40,
-            height: 40,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(10),
+          GestureDetector(
+            onTap: () {
+              handleGoogleSignIn();
+            },
+            child: Container(
+              width: 40,
+              height: 40,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10),
+              ),
+              child: ImageHelper.loadFromAsset(AssetHelper.imageIntro2),
             ),
-            child: ImageHelper.loadFromAsset(AssetHelper.imageIntro2),
           )
         ],
       ),
@@ -232,34 +249,34 @@ class _HomeScreenState extends State<HomeScreen> {
             SizedBox(
               height: 17,
             ),
-            FutureBuilder(
-              future: listPhoto,
-              builder: (context, snapshot) {
-                if (snapshot.hasData) {
-                  final data = snapshot.data!;
-                  return Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: renderListImage(data, context),
-                  );
-                } else {
-                  if (snapshot.hasData) {
-                    return const Center(
-                      child: Text(
-                        'Fail',
-                      ),
-                    );
-                  }
-                  return const Center(
-                    child: SizedBox(
-                      width: 30,
-                      height: 30,
-                      child: CircularProgressIndicator(),
-                    ),
-                  );
-                }
-              },
-            )
+            // FutureBuilder(
+            //   future: listPhoto,
+            //   builder: (context, snapshot) {
+            //     if (snapshot.hasData) {
+            //       final data = snapshot.data!;
+            //       return Row(
+            //         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            //         crossAxisAlignment: CrossAxisAlignment.start,
+            //         children: renderListImage(data, context),
+            //       );
+            //     } else {
+            //       if (snapshot.hasData) {
+            //         return const Center(
+            //           child: Text(
+            //             'Fail',
+            //           ),
+            //         );
+            //       }
+            //       return const Center(
+            //         child: SizedBox(
+            //           width: 30,
+            //           height: 30,
+            //           child: CircularProgressIndicator(),
+            //         ),
+            //       );
+            //     }
+            //   },
+            // )
           ],
         ),
       ),

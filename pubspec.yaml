@@ -43,6 +43,7 @@ dependencies:
   get: ^4.6.5
   dotted_border: ^2.0.0+3
   http: ^0.13.5
+  google_sign_in: ^5.4.4
 
 dev_dependencies:
   flutter_test:

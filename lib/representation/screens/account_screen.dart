@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_travel_app/core/Controllers/getx_google_info_controller.dart';
 import 'package:flutter_travel_app/core/constants/dimension_constants.dart';
+import 'package:flutter_travel_app/core/helpers/common_helper.dart';
+import 'package:flutter_travel_app/core/services/google_services.dart';
 import 'package:flutter_travel_app/representation/widgets/app_bar_container.dart';
+import 'package:flutter_travel_app/representation/widgets/button_widget.dart';
+import 'package:get/get.dart';
 
 class AccountScreen extends StatefulWidget {
   const AccountScreen({super.key});
@@ -10,24 +15,112 @@ class AccountScreen extends StatefulWidget {
 }
 
 class _AccountScreenState extends State<AccountScreen> {
+  GetxGoogleInfoController googleInfo = Get.find<GetxGoogleInfoController>();
+
   @override
   Widget build(BuildContext context) {
-    return AppBarContainer(
-      implementLeading: true,
-      titleString: 'Hi Jamel',
-      child: Column(
-        children: [
-          Container(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                SizedBox(
-                  height: containerPaddingWithAppBar + 25,
+    return Obx(
+      () => AppBarContainer(
+        titleString:
+            'Hi ${googleInfo.displayName.value != '' ? googleInfo.displayName.value : 'Buddy'}',
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              SizedBox(
+                height: containerPaddingWithAppBar + 25,
+              ),
+              if (googleInfo.photoUrl.value != '')
+                Column(
+                  children: [
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(12),
+                      child: Image.network(
+                        googleInfo.photoUrl.value,
+                        width: 200,
+                        height: 200,
+                      ),
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
+                  ],
                 ),
-                Text(
-                  'Sorry, this feature is under development. Please get back later. Thank you!',
-                )
-              ],
+              renderAccountInfo(
+                'Name',
+                googleInfo.displayName.value != ''
+                    ? googleInfo.displayName.value
+                    : 'Buddy',
+              ),
+              SizedBox(
+                height: 20,
+              ),
+              renderAccountInfo(
+                'Email',
+                googleInfo.email.value != '' ? googleInfo.email.value : 'N/a',
+              ),
+              SizedBox(
+                height: 20,
+              ),
+              ButtonWidget(
+                title: 'Log out',
+                onTap: () {
+                  CommonHelper.showMyDialog(
+                    context: context,
+                    actions: [
+                      TextButton(
+                        child: const Text('Log out'),
+                        onPressed: () {
+                          GoogleServices.logout();
+                          Navigator.of(context).pop();
+                        },
+                      ),
+                      TextButton(
+                        child: const Text('Cancel'),
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                        },
+                      ),
+                    ],
+                    title: Text('Are you sure want to log out?'),
+                    content: null,
+                    barrierDismissible: false,
+                  );
+                },
+              )
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget renderAccountInfo(String label, String value) {
+    return Container(
+      padding: EdgeInsets.symmetric(
+        horizontal: 15,
+        vertical: 12,
+      ),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(12),
+        color: Colors.white,
+      ),
+      alignment: Alignment.centerLeft,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            label,
+            style: TextStyle(
+              fontSize: 12,
+            ),
+          ),
+          SizedBox(
+            height: 6,
+          ),
+          Text(
+            value,
+            style: TextStyle(
+              fontWeight: FontWeight.w500,
             ),
           ),
         ],

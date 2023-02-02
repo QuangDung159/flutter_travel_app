@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class CommonHelper {
-  static Future<void> showMyDialog({
+  static void showMyDialog({
     required BuildContext context,
     required List<Widget> actions,
     required Widget title,

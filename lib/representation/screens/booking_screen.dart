@@ -8,7 +8,6 @@ class BookingScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AppBarContainer(
-      implementLeading: true,
       titleString: 'Your Bookings',
       child: Column(
         children: [

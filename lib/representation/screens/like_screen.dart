@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_travel_app/core/constants/dimension_constants.dart';
 import 'package:flutter_travel_app/representation/widgets/app_bar_container.dart';
 
-class BookingScreen extends StatelessWidget {
-  const BookingScreen({super.key});
+class LikeScreen extends StatelessWidget {
+  const LikeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return AppBarContainer(
       implementLeading: true,
-      titleString: 'Your Bookings',
+      titleString: 'Favorite Destination',
       child: Column(
         children: [
           Container(

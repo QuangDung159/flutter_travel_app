@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_travel_app/core/constants/color_constants.dart';
 import 'package:flutter_travel_app/core/constants/dimension_constants.dart';
+import 'package:flutter_travel_app/representation/screens/booking_screen.dart';
 import 'package:flutter_travel_app/representation/screens/home_screen.dart';
+import 'package:flutter_travel_app/representation/screens/like_screen.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
 
 class MainScreen extends StatefulWidget {
@@ -22,8 +24,8 @@ class _MainScreenState extends State<MainScreen> {
         index: _currentIndex,
         children: [
           HomeScreen(),
-          Container(color: Colors.black),
-          Container(color: Colors.green),
+          LikeScreen(),
+          BookingScreen(),
           Container(color: Colors.yellow,),
         ],
       ),

@@ -263,14 +263,14 @@ class _HomeScreenState extends State<HomeScreen> {
                     fontWeight: FontWeight.w500,
                   ),
                 ),
-                Text(
-                  'See All',
-                  style: TextStyle(
-                    fontSize: 14,
-                    fontWeight: FontWeight.w500,
-                    color: Color(0xff6155CC),
-                  ),
-                ),
+                // Text(
+                //   'See All',
+                //   style: TextStyle(
+                //     fontSize: 14,
+                //     fontWeight: FontWeight.w500,
+                //     color: Color(0xff6155CC),
+                //   ),
+                // ),
               ],
             ),
             SizedBox(

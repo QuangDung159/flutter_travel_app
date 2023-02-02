@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_travel_app/core/constants/color_constants.dart';
 import 'package:flutter_travel_app/core/constants/dimension_constants.dart';
+import 'package:flutter_travel_app/representation/screens/account_screen.dart';
 import 'package:flutter_travel_app/representation/screens/booking_screen.dart';
 import 'package:flutter_travel_app/representation/screens/home_screen.dart';
 import 'package:flutter_travel_app/representation/screens/like_screen.dart';
@@ -26,7 +27,7 @@ class _MainScreenState extends State<MainScreen> {
           HomeScreen(),
           LikeScreen(),
           BookingScreen(),
-          Container(color: Colors.yellow,),
+          AccountScreen(),
         ],
       ),
       bottomNavigationBar: SalomonBottomBar(

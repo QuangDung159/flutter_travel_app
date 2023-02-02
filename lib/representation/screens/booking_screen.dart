@@ -20,7 +20,8 @@ class BookingScreen extends StatelessWidget {
                   height: containerPaddingWithAppBar + 25,
                 ),
                 Text(
-                    'Sorry, this feature is under development. Please get back later. Thank you!')
+                  'Sorry, this feature is under development. Please get back later. Thank you!',
+                )
               ],
             ),
           ),

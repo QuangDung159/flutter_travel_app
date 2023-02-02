@@ -41,4 +41,6 @@ class AssetHelper {
   static const String iconMastercard = '$iconDir/icon_mastercard.png';
   static const String iconCheckout = '$iconDir/icon_checkout.png';
   static const String iconCheckin = '$iconDir/icon_checkin.png';
+  static const String iconFacebook = '$iconDir/icon_facebook.png';
+  static const String iconGoogle = '$iconDir/icon_google.png';
 }

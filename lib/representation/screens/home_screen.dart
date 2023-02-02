@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_travel_app/core/constants/dimension_constants.dart';
 import 'package:flutter_travel_app/core/helpers/asset_helper.dart';
 import 'package:flutter_travel_app/core/helpers/image_helper.dart';
-import 'package:flutter_travel_app/core/services/google_services.dart';
 import 'package:flutter_travel_app/core/services/photo_services.dart';
 import 'package:flutter_travel_app/data/models/photo_model.dart';
 import 'package:flutter_travel_app/representation/screens/all_screen.dart';
@@ -25,17 +24,6 @@ class _HomeScreenState extends State<HomeScreen> {
   void initState() {
     super.initState();
     listPhoto = PhotoServices.fetchListPhoto();
-  }
-
-  Future<void> handleGoogleSignIn() async {
-    try {
-      final res = await GoogleServices.login();
-      if (res != null) {
-        print(res);
-      }
-    } catch (e) {
-      throw Exception(e);
-    }
   }
 
   Widget _renderItemCategory(
@@ -132,7 +120,6 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
           GestureDetector(
             onTap: () {
-              // handleGoogleSignIn();
               Navigator.of(context).pushNamed(LoginScreen.routerName);
             },
             child: Container(

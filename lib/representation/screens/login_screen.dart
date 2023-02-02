@@ -50,46 +50,46 @@ class _LoginScreenState extends State<LoginScreen> {
                     height: 20,
                   ),
                   renderLoginTextfield(true, 'Password', 'Password'),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Row(
-                        children: [
-                          GestureDetector(
-                            onTap: () => setState(() {
-                              isCheckedRemember = !isCheckedRemember;
-                            }),
-                            child: Container(
-                              width: 24,
-                              height: 24,
-                              decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: BorderRadius.circular(8),
-                              ),
-                              child: isCheckedRemember
-                                  ? Icon(
-                                      Icons.check,
-                                      size: 18,
-                                    )
-                                  : null,
-                            ),
-                          ),
-                          SizedBox(
-                            width: 10,
-                          ),
-                          Text(
-                            'Remember me',
-                          )
-                        ],
-                      ),
-                      Text(
-                        'Forgot password?',
-                      ),
-                    ],
-                  ),
+                  // SizedBox(
+                  //   height: 20,
+                  // ),
+                  // Row(
+                  //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  //   children: [
+                  //     Row(
+                  //       children: [
+                  //         GestureDetector(
+                  //           onTap: () => setState(() {
+                  //             isCheckedRemember = !isCheckedRemember;
+                  //           }),
+                  //           child: Container(
+                  //             width: 24,
+                  //             height: 24,
+                  //             decoration: BoxDecoration(
+                  //               color: Colors.white,
+                  //               borderRadius: BorderRadius.circular(8),
+                  //             ),
+                  //             child: isCheckedRemember
+                  //                 ? Icon(
+                  //                     Icons.check,
+                  //                     size: 18,
+                  //                   )
+                  //                 : null,
+                  //           ),
+                  //         ),
+                  //         SizedBox(
+                  //           width: 10,
+                  //         ),
+                  //         Text(
+                  //           'Remember me',
+                  //         )
+                  //       ],
+                  //     ),
+                  //     Text(
+                  //       'Forgot password?',
+                  //     ),
+                  //   ],
+                  // ),
                   SizedBox(
                     height: 20,
                   ),

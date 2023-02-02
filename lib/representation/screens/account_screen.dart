@@ -10,6 +10,8 @@ import 'package:get/get.dart';
 class AccountScreen extends StatefulWidget {
   const AccountScreen({super.key});
 
+  static String routerName = '/account_screen';
+
   @override
   State<AccountScreen> createState() => _AccountScreenState();
 }
@@ -61,36 +63,45 @@ class _AccountScreenState extends State<AccountScreen> {
               SizedBox(
                 height: 20,
               ),
-              ButtonWidget(
-                title: 'Log out',
-                onTap: () {
-                  CommonHelper.showMyDialog(
-                    context: context,
-                    actions: [
-                      TextButton(
-                        child: const Text('Log out'),
-                        onPressed: () {
-                          GoogleServices.logout();
-                          Navigator.of(context).pop();
-                        },
-                      ),
-                      TextButton(
-                        child: const Text('Cancel'),
-                        onPressed: () {
-                          Navigator.of(context).pop();
-                        },
-                      ),
-                    ],
-                    title: Text('Are you sure want to log out?'),
-                    content: null,
-                    barrierDismissible: false,
-                  );
-                },
-              )
+              renderAccountButton(context)
             ],
           ),
         ),
       ),
+    );
+  }
+
+  Widget renderAccountButton(BuildContext context) {
+    bool isLogged = googleInfo.displayName.value != '';
+    return ButtonWidget(
+      title: isLogged ? 'Log out' : 'Log in',
+      onTap: () {
+        if (isLogged) {
+          CommonHelper.showMyDialog(
+            context: context,
+            actions: [
+              TextButton(
+                child: Text('Log out'),
+                onPressed: () {
+                  GoogleServices.logout();
+                  Navigator.of(context).pop();
+                },
+              ),
+              TextButton(
+                child: const Text('Cancel'),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+            ],
+            title: Text('Are you sure want to log out?'),
+            content: null,
+            barrierDismissible: false,
+          );
+        } else {
+          GoogleServices.login();
+        }
+      },
     );
   }
 

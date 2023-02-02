@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_travel_app/representation/screens/account_screen.dart';
 import 'package:flutter_travel_app/representation/screens/all_screen.dart';
 import 'package:flutter_travel_app/representation/screens/checkout_confirm_screen.dart';
 import 'package:flutter_travel_app/representation/screens/checkout_payment_screen.dart';
@@ -34,4 +35,5 @@ final Map<String, WidgetBuilder> routes = {
   CheckoutPaymentScreen.routerName: (context) => CheckoutPaymentScreen(),
   CheckoutConfirmScreen.routerName: (context) => CheckoutConfirmScreen(),
   LoginScreen.routerName: (context) => LoginScreen(),
+  AccountScreen.routerName: (context) => AccountScreen(),
 };

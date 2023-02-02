@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
+import 'package:flutter_travel_app/core/Controllers/getx_google_info_controller.dart';
 import 'package:flutter_travel_app/core/constants/color_constants.dart';
 import 'package:flutter_travel_app/core/helpers/local_storage_helper.dart';
 import 'package:flutter_travel_app/representation/screens/splash_screen.dart';
@@ -20,6 +21,19 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    GetxGoogleInfoController googleInfo = Get.put(GetxGoogleInfoController());
+
+    var displayName = LocalStorageHelper.getValue('DISPLAY_NAME');
+
+    if (displayName != null && displayName != '') {
+      googleInfo.setData(
+        displayName: displayName,
+        photoUrl: LocalStorageHelper.getValue('PHOTO_URL'),
+        openid: LocalStorageHelper.getValue('OPEN_ID'),
+        email: LocalStorageHelper.getValue('EMAIL'),
+      );
+    }
+
     return GetMaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(

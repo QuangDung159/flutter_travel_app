@@ -10,6 +10,8 @@ class GoogleServices {
       ? '1012509086997-2im2b2osa16vvmidoqop8g4b40ffer24.apps.googleusercontent.com'
       : '';
 
+  static final googleInfo = Get.put(GetxGoogleInfoController());
+
   // google signin
   static final GoogleSignIn _googleSignIn = GoogleSignIn(
     clientId: clientId,
@@ -19,10 +21,6 @@ class GoogleServices {
     try {
       var res = await _googleSignIn.signIn();
       if (res != null) {
-        final googleInfo = Get.put(GetxGoogleInfoController());
-
-        print('res.photoUrl: ${res.photoUrl}');
-
         googleInfo.setData(
           photoUrl: res.photoUrl,
           email: res.email,
@@ -41,5 +39,22 @@ class GoogleServices {
     }
   }
 
-  static Future logout() async => _googleSignIn.disconnect();
+  static Future logout() async {
+    try {
+      googleInfo.setData(
+        photoUrl: '',
+        email: '',
+        openid: '',
+        displayName: '',
+      );
+
+      LocalStorageHelper.setValue('PHOTO_URL', '');
+      LocalStorageHelper.setValue('EMAIL', '');
+      LocalStorageHelper.setValue('DISPLAY_NAME', '');
+      LocalStorageHelper.setValue('OPEN_ID', '');
+      _googleSignIn.disconnect();
+    } catch (e) {
+      throw Exception(e);
+    }
+  }
 }

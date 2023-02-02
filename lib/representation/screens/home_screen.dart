@@ -3,6 +3,7 @@ import 'package:flutter_travel_app/core/Controllers/getx_google_info_controller.
 import 'package:flutter_travel_app/core/constants/dimension_constants.dart';
 import 'package:flutter_travel_app/core/helpers/asset_helper.dart';
 import 'package:flutter_travel_app/core/helpers/image_helper.dart';
+import 'package:flutter_travel_app/core/services/google_services.dart';
 import 'package:flutter_travel_app/core/services/photo_services.dart';
 import 'package:flutter_travel_app/data/models/photo_model.dart';
 import 'package:flutter_travel_app/representation/screens/all_screen.dart';
@@ -123,12 +124,17 @@ class _HomeScreenState extends State<HomeScreen> {
           SizedBox(
             width: kMinPadding,
           ),
-          GestureDetector(
-            onTap: () {
-              Navigator.of(context).pushNamed(LoginScreen.routerName);
-            },
-            child: Obx(
-              () => Container(
+          Obx(
+            () => GestureDetector(
+              onTap: () {
+                if (googleInfo.displayName.value != '') {
+                  // todo: logout
+                  GoogleServices.logout();
+                } else {
+                  Navigator.of(context).pushNamed(LoginScreen.routerName);
+                }
+              },
+              child: Container(
                 width: 40,
                 height: 40,
                 decoration: BoxDecoration(
@@ -136,9 +142,9 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
                 child: googleInfo.photoUrl.value != ''
                     ? ClipRRect(
-                      borderRadius: BorderRadius.circular(10),
-                      child: Image.network(googleInfo.photoUrl.value),
-                    )
+                        borderRadius: BorderRadius.circular(10),
+                        child: Image.network(googleInfo.photoUrl.value),
+                      )
                     : ImageHelper.loadFromAsset(AssetHelper.imageIntro2),
               ),
             ),

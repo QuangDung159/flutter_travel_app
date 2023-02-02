@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_travel_app/core/Controllers/getx_google_info_controller.dart';
 import 'package:flutter_travel_app/core/constants/dimension_constants.dart';
 import 'package:flutter_travel_app/core/helpers/asset_helper.dart';
+import 'package:flutter_travel_app/core/helpers/common_helper.dart';
 import 'package:flutter_travel_app/core/helpers/image_helper.dart';
 import 'package:flutter_travel_app/core/services/google_services.dart';
 import 'package:flutter_travel_app/core/services/photo_services.dart';
@@ -128,8 +129,27 @@ class _HomeScreenState extends State<HomeScreen> {
             () => GestureDetector(
               onTap: () {
                 if (googleInfo.displayName.value != '') {
-                  // todo: logout
-                  GoogleServices.logout();
+                  CommonHelper.showMyDialog(
+                    context: context,
+                    actions: [
+                      TextButton(
+                        child: const Text('Log out'),
+                        onPressed: () {
+                          GoogleServices.logout();
+                          Navigator.of(context).pop();
+                        },
+                      ),
+                      TextButton(
+                        child: const Text('Cancel'),
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                        },
+                      ),
+                    ],
+                    title: Text('Are you sure want to log out?'),
+                    content: null,
+                    barrierDismissible: false,
+                  );
                 } else {
                   Navigator.of(context).pushNamed(LoginScreen.routerName);
                 }

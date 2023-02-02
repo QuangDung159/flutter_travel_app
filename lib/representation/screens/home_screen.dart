@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_travel_app/core/Controllers/getx_google_info_controller.dart';
 import 'package:flutter_travel_app/core/constants/dimension_constants.dart';
 import 'package:flutter_travel_app/core/helpers/asset_helper.dart';
 import 'package:flutter_travel_app/core/helpers/image_helper.dart';
@@ -9,6 +10,7 @@ import 'package:flutter_travel_app/representation/screens/hotel_booking_screen.d
 import 'package:flutter_travel_app/representation/screens/login_screen.dart';
 import 'package:flutter_travel_app/representation/screens/plane_screen.dart';
 import 'package:flutter_travel_app/representation/widgets/app_bar_container.dart';
+import 'package:get/get.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -19,6 +21,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   late Future<List<PhotoModel>> listPhoto;
+  final googleInfo = Get.put(GetxGoogleInfoController());
 
   @override
   void initState() {
@@ -92,11 +95,13 @@ class _HomeScreenState extends State<HomeScreen> {
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                'Hi James',
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 20,
+              Obx(
+                () => Text(
+                  'Hi ${googleInfo.displayName.value != '' ? googleInfo.displayName.value : 'Buddy'}',
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 20,
+                  ),
                 ),
               ),
               SizedBox(
@@ -122,13 +127,20 @@ class _HomeScreenState extends State<HomeScreen> {
             onTap: () {
               Navigator.of(context).pushNamed(LoginScreen.routerName);
             },
-            child: Container(
-              width: 40,
-              height: 40,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10),
+            child: Obx(
+              () => Container(
+                width: 40,
+                height: 40,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: googleInfo.photoUrl.value != ''
+                    ? ClipRRect(
+                      borderRadius: BorderRadius.circular(10),
+                      child: Image.network(googleInfo.photoUrl.value),
+                    )
+                    : ImageHelper.loadFromAsset(AssetHelper.imageIntro2),
               ),
-              child: ImageHelper.loadFromAsset(AssetHelper.imageIntro2),
             ),
           )
         ],

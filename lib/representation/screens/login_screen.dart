@@ -13,6 +13,7 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   bool isShowPassword = false;
+  bool isCheckedRemember = false;
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +33,63 @@ class _LoginScreenState extends State<LoginScreen> {
                   SizedBox(
                     height: 20,
                   ),
-                  renderLoginTextfield(true, 'Password', 'Password')
+                  renderLoginTextfield(true, 'Password', 'Password'),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Row(
+                        children: [
+                          GestureDetector(
+                            onTap: () => setState(() {
+                              isCheckedRemember = !isCheckedRemember;
+                            }),
+                            child: Container(
+                              width: 24,
+                              height: 24,
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(8),
+                              ),
+                              child: isCheckedRemember
+                                  ? Stack(
+                                      children: [
+                                        Positioned(
+                                          top: 3,
+                                          left: 3,
+                                          child: Icon(
+                                            Icons.check,
+                                            size: 18,
+                                          ),
+                                        ),
+                                      ],
+                                    )
+                                  : null,
+                            ),
+                          ),
+                          SizedBox(
+                            width: 10,
+                          ),
+                          Text(
+                            'Remember me',
+                            style: TextStyle(
+                              fontSize: 14,
+                              fontWeight: FontWeight.w400,
+                            ),
+                          )
+                        ],
+                      ),
+                      Text(
+                        'Forgot password?',
+                        style: TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.w400,
+                        ),
+                      ),
+                    ],
+                  )
                 ],
               ),
             ),

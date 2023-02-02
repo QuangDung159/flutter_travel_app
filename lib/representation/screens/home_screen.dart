@@ -7,6 +7,7 @@ import 'package:flutter_travel_app/core/services/photo_services.dart';
 import 'package:flutter_travel_app/data/models/photo_model.dart';
 import 'package:flutter_travel_app/representation/screens/all_screen.dart';
 import 'package:flutter_travel_app/representation/screens/hotel_booking_screen.dart';
+import 'package:flutter_travel_app/representation/screens/login_screen.dart';
 import 'package:flutter_travel_app/representation/screens/plane_screen.dart';
 import 'package:flutter_travel_app/representation/widgets/app_bar_container.dart';
 
@@ -131,7 +132,8 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
           GestureDetector(
             onTap: () {
-              handleGoogleSignIn();
+              // handleGoogleSignIn();
+              Navigator.of(context).pushNamed(LoginScreen.routerName);
             },
             child: Container(
               width: 40,

@@ -9,6 +9,7 @@ import 'package:flutter_travel_app/representation/screens/hotel_detail_screen.da
 import 'package:flutter_travel_app/representation/screens/hotel_screen.dart';
 import 'package:flutter_travel_app/representation/screens/hotels_screen.dart';
 import 'package:flutter_travel_app/representation/screens/intro_screen.dart';
+import 'package:flutter_travel_app/representation/screens/login_screen.dart';
 import 'package:flutter_travel_app/representation/screens/main_screen.dart';
 import 'package:flutter_travel_app/representation/screens/plane_screen.dart';
 import 'package:flutter_travel_app/representation/screens/select_date_screen.dart';
@@ -32,4 +33,5 @@ final Map<String, WidgetBuilder> routes = {
   CheckoutScreen.routerName: (context) => CheckoutScreen(),
   CheckoutPaymentScreen.routerName: (context) => CheckoutPaymentScreen(),
   CheckoutConfirmScreen.routerName: (context) => CheckoutConfirmScreen(),
+  LoginScreen.routerName: (context) => LoginScreen(),
 };

@@ -122,7 +122,7 @@ class _HomeScreenState extends State<HomeScreen> {
           GestureDetector(
             onTap: () {
               NotificationServices.showNotification(
-                title: 'Local notification',
+                title: 'Demo local notification',
                 body: 'Navigate to hotel booking screen',
                 usingCustomSound: true,
                 payload: HotelBookingScreen.routerName,
@@ -145,8 +145,14 @@ class _HomeScreenState extends State<HomeScreen> {
                     actions: [
                       TextButton(
                         child: const Text('Log out'),
-                        onPressed: () {
-                          GoogleServices.logout();
+                        onPressed: () async {
+                          await GoogleServices.logout();
+
+                          NotificationServices.showNotification(
+                            body: 'See you again!',
+                            usingCustomSound: true,
+                          );
+
                           Navigator.of(context, rootNavigator: true).pop();
                         },
                       ),

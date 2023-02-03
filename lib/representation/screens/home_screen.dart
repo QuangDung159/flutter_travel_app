@@ -122,9 +122,10 @@ class _HomeScreenState extends State<HomeScreen> {
           GestureDetector(
             onTap: () {
               NotificationServices.showNotification(
-                title: 'title',
-                body: 'body',
+                title: 'Local notification',
+                body: 'Navigate to hotel booking screen',
                 usingCustomSound: true,
+                payload: HotelBookingScreen.routerName,
               );
             },
             child: Icon(

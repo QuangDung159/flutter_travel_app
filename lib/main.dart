@@ -2,6 +2,8 @@
 
 import 'dart:async';
 import 'dart:io';
+
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -11,6 +13,7 @@ import 'package:flutter_travel_app/core/constants/color_constants.dart';
 import 'package:flutter_travel_app/core/helpers/local_storage_helper.dart';
 import 'package:flutter_travel_app/core/services/notification_services.dart';
 import 'package:flutter_travel_app/data/models/received_notification_model.dart';
+import 'package:flutter_travel_app/representation/screens/home_screen.dart';
 import 'package:flutter_travel_app/representation/screens/hotel_booking_screen.dart';
 import 'package:flutter_travel_app/representation/screens/main_screen.dart';
 import 'package:flutter_travel_app/representation/screens/splash_screen.dart';
@@ -189,7 +192,11 @@ Future<void> main() async {
   );
   // end local notification
 
-  runApp(const MyApp());
+  runApp(
+    MaterialApp(
+      home: MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatefulWidget {
@@ -205,6 +212,103 @@ class _MyAppState extends State<MyApp> {
   @override
   void initState() {
     super.initState();
+
+    _isAndroidPermissionGranted();
+    _requestPermissions();
+    _configureDidReceiveLocalNotificationSubject();
+    _configureSelectNotificationSubject();
+  }
+
+  Future<void> _isAndroidPermissionGranted() async {
+    if (Platform.isAndroid) {
+      final bool granted = await flutterLocalNotificationsPlugin
+              .resolvePlatformSpecificImplementation<
+                  AndroidFlutterLocalNotificationsPlugin>()
+              ?.areNotificationsEnabled() ??
+          false;
+
+      setState(() {
+        _notificationsEnabled = granted;
+      });
+    }
+  }
+
+  Future<void> _requestPermissions() async {
+    if (Platform.isIOS || Platform.isMacOS) {
+      await flutterLocalNotificationsPlugin
+          .resolvePlatformSpecificImplementation<
+              IOSFlutterLocalNotificationsPlugin>()
+          ?.requestPermissions(
+            alert: true,
+            badge: true,
+            sound: true,
+          );
+      await flutterLocalNotificationsPlugin
+          .resolvePlatformSpecificImplementation<
+              MacOSFlutterLocalNotificationsPlugin>()
+          ?.requestPermissions(
+            alert: true,
+            badge: true,
+            sound: true,
+          );
+    } else if (Platform.isAndroid) {
+      final AndroidFlutterLocalNotificationsPlugin? androidImplementation =
+          flutterLocalNotificationsPlugin.resolvePlatformSpecificImplementation<
+              AndroidFlutterLocalNotificationsPlugin>();
+
+      final bool? granted = await androidImplementation?.requestPermission();
+      setState(() {
+        _notificationsEnabled = granted ?? false;
+      });
+    }
+  }
+
+  void _configureDidReceiveLocalNotificationSubject() {
+    didReceiveLocalNotificationStream.stream
+        .listen((ReceivedNotificationModel receivedNotification) async {
+      await showDialog(
+        context: context,
+        builder: (BuildContext context) => CupertinoAlertDialog(
+          title: receivedNotification.title != null
+              ? Text(receivedNotification.title!)
+              : null,
+          content: receivedNotification.body != null
+              ? Text(receivedNotification.body!)
+              : null,
+          actions: <Widget>[
+            CupertinoDialogAction(
+              isDefaultAction: true,
+              onPressed: () async {
+                Navigator.of(context, rootNavigator: true).pop();
+                await Navigator.of(context).push(
+                  MaterialPageRoute<void>(
+                    builder: (BuildContext context) => HotelBookingScreen(),
+                  ),
+                );
+              },
+              child: const Text('Ok'),
+            )
+          ],
+        ),
+      );
+    });
+  }
+
+  void _configureSelectNotificationSubject() {
+    selectNotificationStream.stream.listen((String? payload) async {
+      await Navigator.of(context).push(MaterialPageRoute<void>(
+        builder: (BuildContext context) => navigationByPayload(payload),
+      ));
+    });
+  }
+
+  Widget navigationByPayload(String? payload) {
+    switch (payload) {
+      case '/hotel_booking_screen':
+        return HotelBookingScreen();
+      default:
+        return HomeScreen();
+    }
   }
 
   @override

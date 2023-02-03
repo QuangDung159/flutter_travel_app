@@ -1,5 +1,6 @@
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_travel_app/main.dart';
+import 'package:timezone/timezone.dart' as tz;
 
 class NotificationServices {
   static Future<void> showNotification({
@@ -8,6 +9,7 @@ class NotificationServices {
     String? soundName,
     String? payload,
     bool? usingCustomSound = false,
+    Duration? duration,
   }) async {
     bool isPlayCustomSound = usingCustomSound != null && usingCustomSound;
 
@@ -44,12 +46,57 @@ class NotificationServices {
       );
     }
 
-    await flutterLocalNotificationsPlugin.show(
+    if (duration != null) {
+      await zonedSchedule(
+        title: title,
+        body: body,
+        duration: duration,
+        notificationDetails: notificationDetails,
+      );
+    } else {
+      await flutterLocalNotificationsPlugin.show(
+        id++,
+        title,
+        body,
+        notificationDetails,
+        payload: payload,
+      );
+    }
+  }
+
+  static Future<void> zonedSchedule({
+    String? title,
+    String? body,
+    String? payload,
+    required Duration duration,
+    required NotificationDetails notificationDetails,
+  }) async {
+    await flutterLocalNotificationsPlugin.zonedSchedule(
       id++,
       title,
       body,
+      tz.TZDateTime.now(tz.local).add(duration),
       notificationDetails,
+      androidAllowWhileIdle: true,
+      uiLocalNotificationDateInterpretation:
+          UILocalNotificationDateInterpretation.absoluteTime,
       payload: payload,
     );
+  }
+
+  static Future<void> repeatNotification() async {
+    const AndroidNotificationDetails androidNotificationDetails =
+        AndroidNotificationDetails(
+            'repeating channel id', 'repeating channel name',
+            channelDescription: 'repeating description');
+    const NotificationDetails notificationDetails =
+        NotificationDetails(android: androidNotificationDetails);
+    await flutterLocalNotificationsPlugin.periodicallyShow(
+        id++,
+        'repeating title',
+        'repeating body',
+        RepeatInterval.everyMinute,
+        notificationDetails,
+        androidAllowWhileIdle: true);
   }
 }

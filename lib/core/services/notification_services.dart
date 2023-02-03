@@ -6,8 +6,11 @@ class NotificationServices {
     String? title,
     String? body,
     String? soundName,
-    required String payload,
+    String? payload,
+    bool? usingCustomSound = false,
   }) async {
+    bool isPlayCustomSound = usingCustomSound != null && usingCustomSound;
+
     AndroidNotificationDetails androidNotificationDetails =
         AndroidNotificationDetails(
       'your channel id',
@@ -16,49 +19,45 @@ class NotificationServices {
       importance: Importance.max,
       priority: Priority.high,
       ticker: 'ticker',
+      sound: isPlayCustomSound
+          ? RawResourceAndroidNotificationSound('slow_spring_board')
+          : null,
     );
 
-    NotificationDetails notificationDetails =
-        NotificationDetails(android: androidNotificationDetails);
+    if (isPlayCustomSound) {
+      DarwinNotificationDetails darwinNotificationDetails =
+          DarwinNotificationDetails(sound: 'slow_spring_board.aiff');
 
-    await flutterLocalNotificationsPlugin.show(
-      id++,
-      title,
-      body,
-      notificationDetails,
-      payload: payload,
-    );
-  }
+      final LinuxNotificationDetails linuxPlatformChannelSpecifics =
+          LinuxNotificationDetails(
+        sound: AssetsLinuxSound('sound/slow_spring_board.mp3'),
+      );
 
-  static Future<void> showNotificationCustomSound() async {
-    const AndroidNotificationDetails androidNotificationDetails =
-        AndroidNotificationDetails(
-      'your other channel id',
-      'your other channel name',
-      channelDescription: 'your other channel description',
-      sound: RawResourceAndroidNotificationSound('slow_spring_board'),
-    );
+      final NotificationDetails notificationDetails = NotificationDetails(
+        android: androidNotificationDetails,
+        iOS: darwinNotificationDetails,
+        macOS: darwinNotificationDetails,
+        linux: linuxPlatformChannelSpecifics,
+      );
 
-    const DarwinNotificationDetails darwinNotificationDetails =
-        DarwinNotificationDetails(sound: 'slow_spring_board.aiff');
+      await flutterLocalNotificationsPlugin.show(
+        id++,
+        title,
+        body,
+        notificationDetails,
+        payload: payload,
+      );
+    } else {
+      NotificationDetails notificationDetails =
+          NotificationDetails(android: androidNotificationDetails);
 
-    final LinuxNotificationDetails linuxPlatformChannelSpecifics =
-        LinuxNotificationDetails(
-      sound: AssetsLinuxSound('sound/slow_spring_board.mp3'),
-    );
-
-    final NotificationDetails notificationDetails = NotificationDetails(
-      android: androidNotificationDetails,
-      iOS: darwinNotificationDetails,
-      macOS: darwinNotificationDetails,
-      linux: linuxPlatformChannelSpecifics,
-    );
-
-    await flutterLocalNotificationsPlugin.show(
-      id++,
-      'custom sound notification title',
-      'custom sound notification body',
-      notificationDetails,
-    );
+      await flutterLocalNotificationsPlugin.show(
+        id++,
+        title,
+        body,
+        notificationDetails,
+        payload: payload,
+      );
+    }
   }
 }

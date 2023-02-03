@@ -5,6 +5,7 @@ import 'package:flutter_travel_app/core/helpers/common_helper.dart';
 import 'package:flutter_travel_app/core/services/google_services.dart';
 import 'package:flutter_travel_app/representation/widgets/app_bar_container.dart';
 import 'package:flutter_travel_app/representation/widgets/button_widget.dart';
+import 'package:flutter_travel_app/representation/widgets/login_methods_widget.dart';
 import 'package:get/get.dart';
 
 class AccountScreen extends StatefulWidget {
@@ -63,7 +64,54 @@ class _AccountScreenState extends State<AccountScreen> {
               SizedBox(
                 height: 20,
               ),
-              renderAccountButton(context)
+              renderAccountButton(context),
+              if (googleInfo.email.value == '')
+                Column(
+                  children: [
+                    SizedBox(
+                      height: 20,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Flexible(
+                          flex: 1,
+                          child: Container(
+                            decoration: BoxDecoration(
+                              border: Border.all(
+                                color: Color(0xffBDBDBD),
+                                width: 0.5,
+                              ),
+                            ),
+                          ),
+                        ),
+                        Flexible(
+                          flex: 1,
+                          child: Container(
+                            child: Text(
+                              'or log in with',
+                            ),
+                          ),
+                        ),
+                        Flexible(
+                          flex: 1,
+                          child: Container(
+                            decoration: BoxDecoration(
+                              border: Border.all(
+                                color: Color(0xffBDBDBD),
+                                width: 0.5,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    LoginMethodsWidget(),
+                  ],
+                )
             ],
           ),
         ),

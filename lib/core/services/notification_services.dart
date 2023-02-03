@@ -24,6 +24,9 @@ class NotificationServices {
           : null,
     );
 
+    NotificationDetails notificationDetails =
+        NotificationDetails(android: androidNotificationDetails);
+
     if (isPlayCustomSound) {
       DarwinNotificationDetails darwinNotificationDetails =
           DarwinNotificationDetails(sound: 'slow_spring_board.aiff');
@@ -33,31 +36,20 @@ class NotificationServices {
         sound: AssetsLinuxSound('sound/slow_spring_board.mp3'),
       );
 
-      final NotificationDetails notificationDetails = NotificationDetails(
+      notificationDetails = NotificationDetails(
         android: androidNotificationDetails,
         iOS: darwinNotificationDetails,
         macOS: darwinNotificationDetails,
         linux: linuxPlatformChannelSpecifics,
       );
-
-      await flutterLocalNotificationsPlugin.show(
-        id++,
-        title,
-        body,
-        notificationDetails,
-        payload: payload,
-      );
-    } else {
-      NotificationDetails notificationDetails =
-          NotificationDetails(android: androidNotificationDetails);
-
-      await flutterLocalNotificationsPlugin.show(
-        id++,
-        title,
-        body,
-        notificationDetails,
-        payload: payload,
-      );
     }
+
+    await flutterLocalNotificationsPlugin.show(
+      id++,
+      title,
+      body,
+      notificationDetails,
+      payload: payload,
+    );
   }
 }

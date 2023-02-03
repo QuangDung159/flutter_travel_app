@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_travel_app/core/helpers/asset_helper.dart';
 import 'package:flutter_travel_app/core/helpers/image_helper.dart';
 import 'package:flutter_travel_app/core/services/google_services.dart';
+import 'package:flutter_travel_app/core/services/notification_services.dart';
 import 'package:flutter_travel_app/representation/screens/main_screen.dart';
 import 'package:flutter_travel_app/representation/widgets/login_method_button_widget.dart';
 
@@ -13,6 +14,12 @@ class LoginMethodsWidget extends StatelessWidget {
       final res = await GoogleServices.login();
       if (res != null) {
         Navigator.of(context).pushNamed(MainScreen.routerName);
+
+        NotificationServices.showNotification(
+          title: 'Hi ${res.displayName}',
+          body: 'Welcome back!',
+          usingCustomSound: true,
+        );
       }
     } catch (e) {
       throw Exception(e);

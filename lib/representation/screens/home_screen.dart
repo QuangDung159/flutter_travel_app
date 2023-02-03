@@ -5,6 +5,7 @@ import 'package:flutter_travel_app/core/helpers/asset_helper.dart';
 import 'package:flutter_travel_app/core/helpers/common_helper.dart';
 import 'package:flutter_travel_app/core/helpers/image_helper.dart';
 import 'package:flutter_travel_app/core/services/google_services.dart';
+import 'package:flutter_travel_app/core/services/notification_services.dart';
 import 'package:flutter_travel_app/core/services/photo_services.dart';
 import 'package:flutter_travel_app/data/models/photo_model.dart';
 import 'package:flutter_travel_app/representation/screens/all_screen.dart';
@@ -118,9 +119,19 @@ class _HomeScreenState extends State<HomeScreen> {
             ],
           ),
           Spacer(),
-          Icon(
-            Icons.notifications,
-            size: kDefaultIconSize,
+          GestureDetector(
+            onTap: () {
+              NotificationServices.showNotification(
+                title: 'Demo local notification',
+                body: 'Navigate to hotel booking screen',
+                usingCustomSound: true,
+                payload: HotelBookingScreen.routerName,
+              );
+            },
+            child: Icon(
+              Icons.notifications,
+              size: kDefaultIconSize,
+            ),
           ),
           SizedBox(
             width: kMinPadding,
@@ -134,15 +145,21 @@ class _HomeScreenState extends State<HomeScreen> {
                     actions: [
                       TextButton(
                         child: const Text('Log out'),
-                        onPressed: () {
-                          GoogleServices.logout();
-                          Navigator.of(context).pop();
+                        onPressed: () async {
+                          await GoogleServices.logout();
+
+                          NotificationServices.showNotification(
+                            body: 'See you again!',
+                            usingCustomSound: true,
+                          );
+
+                          Navigator.of(context, rootNavigator: true).pop();
                         },
                       ),
                       TextButton(
                         child: const Text('Cancel'),
                         onPressed: () {
-                          Navigator.of(context).pop();
+                          Navigator.of(context, rootNavigator: true).pop();
                         },
                       ),
                     ],

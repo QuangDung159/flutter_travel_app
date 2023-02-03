@@ -46,6 +46,10 @@ dependencies:
   google_sign_in: ^5.4.4
   ota_update: ^4.0.2
   flutter_local_notifications: ^13.0.0
+  path_provider: ^2.0.12
+  image: ^4.0.13
+  flutter_timezone: ^1.0.4
+  device_info_plus: ^8.0.0
 
 dev_dependencies:
   flutter_test:

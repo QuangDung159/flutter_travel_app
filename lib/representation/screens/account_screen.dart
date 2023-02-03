@@ -3,6 +3,7 @@ import 'package:flutter_travel_app/core/Controllers/getx_google_info_controller.
 import 'package:flutter_travel_app/core/constants/dimension_constants.dart';
 import 'package:flutter_travel_app/core/helpers/common_helper.dart';
 import 'package:flutter_travel_app/core/services/google_services.dart';
+import 'package:flutter_travel_app/core/services/notification_services.dart';
 import 'package:flutter_travel_app/representation/widgets/app_bar_container.dart';
 import 'package:flutter_travel_app/representation/widgets/button_widget.dart';
 import 'package:flutter_travel_app/representation/widgets/login_methods_widget.dart';
@@ -132,13 +133,19 @@ class _AccountScreenState extends State<AccountScreen> {
                 child: Text('Log out'),
                 onPressed: () {
                   GoogleServices.logout();
-                  Navigator.of(context).pop();
+
+                  NotificationServices.showNotification(
+                    body: 'See you again!',
+                    usingCustomSound: true,
+                  );
+
+                  Navigator.of(context, rootNavigator: true).pop();
                 },
               ),
               TextButton(
                 child: const Text('Cancel'),
                 onPressed: () {
-                  Navigator.of(context).pop();
+                  Navigator.of(context, rootNavigator: true).pop();
                 },
               ),
             ],
@@ -147,7 +154,7 @@ class _AccountScreenState extends State<AccountScreen> {
             barrierDismissible: false,
           );
         } else {
-          GoogleServices.login();
+          // todo
         }
       },
     );

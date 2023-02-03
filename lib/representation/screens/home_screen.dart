@@ -147,13 +147,13 @@ class _HomeScreenState extends State<HomeScreen> {
                         child: const Text('Log out'),
                         onPressed: () {
                           GoogleServices.logout();
-                          Navigator.of(context).pop();
+                          Navigator.of(context, rootNavigator: true).pop();
                         },
                       ),
                       TextButton(
                         child: const Text('Cancel'),
                         onPressed: () {
-                          Navigator.of(context).pop();
+                          Navigator.of(context, rootNavigator: true).pop();
                         },
                       ),
                     ],

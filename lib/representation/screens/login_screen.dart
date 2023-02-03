@@ -6,6 +6,8 @@ import 'package:flutter_travel_app/core/services/google_services.dart';
 import 'package:flutter_travel_app/representation/screens/main_screen.dart';
 import 'package:flutter_travel_app/representation/widgets/app_bar_container.dart';
 import 'package:flutter_travel_app/representation/widgets/button_widget.dart';
+import 'package:flutter_travel_app/representation/widgets/login_method_button_widget.dart';
+import 'package:flutter_travel_app/representation/widgets/login_methods_widget.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -135,74 +137,10 @@ class _LoginScreenState extends State<LoginScreen> {
                   SizedBox(
                     height: 20,
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      renderLoginMethodButton(
-                        ImageHelper.loadFromAsset(
-                          AssetHelper.iconGoogle,
-                          height: 22,
-                        ),
-                        Text(
-                          'Google',
-                          style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
-                        Colors.white,
-                        () => handleGoogleSignIn(),
-                      ),
-                      renderLoginMethodButton(
-                        Image.asset(
-                          AssetHelper.iconFacebook,
-                          width: 11,
-                        ),
-                        Text(
-                          'Facebook',
-                          style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.w500,
-                            color: Colors.white,
-                          ),
-                        ),
-                        Color(0xff3C5A9A),
-                        () => null,
-                      ),
-                    ],
-                  )
+                  LoginMethodsWidget()
                 ],
               ),
             ),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget renderLoginMethodButton(
-    Widget icon,
-    Widget title,
-    Color backgroundColor,
-    Future<dynamic>? Function() onTap,
-  ) {
-    return GestureDetector(
-      onTap: onTap,
-      child: Container(
-        width: 155,
-        height: 50,
-        decoration: BoxDecoration(
-          color: backgroundColor,
-          borderRadius: BorderRadius.circular(25),
-        ),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            icon,
-            SizedBox(
-              width: 15,
-            ),
-            title
           ],
         ),
       ),

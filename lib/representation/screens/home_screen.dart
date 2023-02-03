@@ -5,6 +5,7 @@ import 'package:flutter_travel_app/core/helpers/asset_helper.dart';
 import 'package:flutter_travel_app/core/helpers/common_helper.dart';
 import 'package:flutter_travel_app/core/helpers/image_helper.dart';
 import 'package:flutter_travel_app/core/services/google_services.dart';
+import 'package:flutter_travel_app/core/services/notification_services.dart';
 import 'package:flutter_travel_app/core/services/photo_services.dart';
 import 'package:flutter_travel_app/data/models/photo_model.dart';
 import 'package:flutter_travel_app/representation/screens/all_screen.dart';
@@ -118,9 +119,18 @@ class _HomeScreenState extends State<HomeScreen> {
             ],
           ),
           Spacer(),
-          Icon(
-            Icons.notifications,
-            size: kDefaultIconSize,
+          GestureDetector(
+            onTap: () {
+              NotificationServices.showNotification(
+                title: 'title',
+                body: 'body',
+                usingCustomSound: true,
+              );
+            },
+            child: Icon(
+              Icons.notifications,
+              size: kDefaultIconSize,
+            ),
           ),
           SizedBox(
             width: kMinPadding,

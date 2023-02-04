@@ -22,3 +22,11 @@ class CommonHelper {
     );
   }
 }
+
+void printCustom({String? title, content}) {
+  if (title != null && title != '') {
+    print('${title} ${content}');
+  } else {
+    print('${content}');
+  }
+}

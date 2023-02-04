@@ -199,6 +199,20 @@ Future<void> main() async {
   String? token = await FirebaseMessaging.instance.getToken();
   print(token);
 
+  FirebaseMessaging.onMessage.listen((RemoteMessage remoteMessage) {
+    RemoteNotification? notification = remoteMessage.notification;
+    // AndroidNotification? android = remoteMessage.notification?.android;
+
+    if (notification != null) {
+      NotificationServices.showNotification(
+        title: notification.title,
+        body: notification.body,
+        usingCustomSound: true,
+        payload: remoteMessage.data['payload'],
+      );
+    }
+  });
+
   runApp(
     MaterialApp(
       home: MyApp(),
@@ -243,8 +257,15 @@ class _MyAppState extends State<MyApp> {
     FirebaseMessaging.onMessageOpenedApp.listen(_handleMessage);
   }
 
-  void _handleMessage(RemoteMessage message) {
-    print(message.data);
+  void _handleMessage(RemoteMessage message) async {
+    if (message.data['payload'] == null || message.data['payload'] == '') {
+      return;
+    }
+
+    await Navigator.of(context).push(MaterialPageRoute<void>(
+      builder: (BuildContext context) =>
+          navigationByPayload(message.data['payload']),
+    ));
   }
 
   Future<void> _isAndroidPermissionGranted() async {

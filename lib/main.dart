@@ -3,6 +3,8 @@
 import 'dart:async';
 import 'dart:io';
 
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -70,6 +72,7 @@ void notificationTapBackground(NotificationResponse notificationResponse) {
 Future<void> main() async {
   await Hive.initFlutter();
   await LocalStorageHelper.initLocalStorage();
+  await Firebase.initializeApp();
   // LocalStorageHelper.setValue('ignoreIntroScreen', false);
 
   // start local notification
@@ -192,6 +195,24 @@ Future<void> main() async {
   );
   // end local notification
 
+  // start firebase notification
+  String? token = await FirebaseMessaging.instance.getToken();
+  print(token);
+
+  FirebaseMessaging.onMessage.listen((RemoteMessage remoteMessage) {
+    RemoteNotification? notification = remoteMessage.notification;
+    // AndroidNotification? android = remoteMessage.notification?.android;
+
+    if (notification != null) {
+      NotificationServices.showNotification(
+        title: notification.title,
+        body: notification.body,
+        usingCustomSound: true,
+        payload: remoteMessage.data['payload'],
+      );
+    }
+  });
+
   runApp(
     MaterialApp(
       home: MyApp(),
@@ -217,6 +238,34 @@ class _MyAppState extends State<MyApp> {
     _requestPermissions();
     _configureDidReceiveLocalNotificationSubject();
     _configureSelectNotificationSubject();
+
+    setupInteractedMessage();
+  }
+
+  Future<void> setupInteractedMessage() async {
+    // Get any messages which caused the application to open from
+    // a terminated state.
+    RemoteMessage? initialMessage =
+        await FirebaseMessaging.instance.getInitialMessage();
+
+    if (initialMessage != null) {
+      _handleMessage(initialMessage);
+    }
+
+    // Also handle any interaction when the app is in the background via a
+    // Stream listener
+    FirebaseMessaging.onMessageOpenedApp.listen(_handleMessage);
+  }
+
+  void _handleMessage(RemoteMessage message) async {
+    if (message.data['payload'] == null || message.data['payload'] == '') {
+      return;
+    }
+
+    await Navigator.of(context).push(MaterialPageRoute<void>(
+      builder: (BuildContext context) =>
+          navigationByPayload(message.data['payload']),
+    ));
   }
 
   Future<void> _isAndroidPermissionGranted() async {

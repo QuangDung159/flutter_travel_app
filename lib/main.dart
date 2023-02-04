@@ -245,12 +245,6 @@ class _MyAppState extends State<MyApp> {
 
   void _handleMessage(RemoteMessage message) {
     print(message.data);
-    if (message.data['type'] == 'chat') {
-      Navigator.pushNamed(
-        context,
-        HotelBookingScreen.routerName,
-      );
-    }
   }
 
   Future<void> _isAndroidPermissionGranted() async {

@@ -4,6 +4,7 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
@@ -13,6 +14,7 @@ import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_travel_app/core/Controllers/getx_google_info_controller.dart';
 import 'package:flutter_travel_app/core/constants/color_constants.dart';
 import 'package:flutter_travel_app/core/helpers/local_storage_helper.dart';
+import 'package:flutter_travel_app/core/services/dynamic_link_services.dart';
 import 'package:flutter_travel_app/core/services/notification_services.dart';
 import 'package:flutter_travel_app/data/models/received_notification_model.dart';
 import 'package:flutter_travel_app/representation/screens/home_screen.dart';
@@ -230,6 +232,18 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   bool _notificationsEnabled = false;
 
+  String? _linkMessage;
+  bool _isCreatingLink = false;
+  FirebaseDynamicLinks dynamicLinks = FirebaseDynamicLinks.instance;
+  final String _testString =
+      'To test: long press link and then copy and click from a non-browser '
+      "app. Make sure this isn't being tested on iOS simulator and iOS xcode "
+      'is properly setup. Look at firebase_dynamic_links/README.md for more '
+      'details.';
+
+  final String DynamicLink = 'https://example/helloworld';
+  final String Link = 'https://flutterfiretests.page.link/MEGs';
+
   @override
   void initState() {
     super.initState();
@@ -240,6 +254,47 @@ class _MyAppState extends State<MyApp> {
     _configureSelectNotificationSubject();
 
     setupInteractedMessage();
+
+    DynamicLinkServices.initDynamicLinks(
+      dynamicLinks: dynamicLinks,
+      context: context,
+    );
+  }
+
+  Future<void> _createDynamicLink(bool short) async {
+    setState(() {
+      _isCreatingLink = true;
+    });
+
+    final DynamicLinkParameters parameters = DynamicLinkParameters(
+      uriPrefix: 'https://flutterfiretests.page.link',
+      longDynamicLink: Uri.parse(
+        'https://flutterfiretests.page.link?efr=0&ibi=io.flutter.plugins.firebase.dynamiclinksexample&apn=io.flutter.plugins.firebase.dynamiclinksexample&imv=0&amv=0&link=https%3A%2F%2Fexample%2Fhelloworld&ofl=https://ofl-example.com',
+      ),
+      link: Uri.parse(DynamicLink),
+      androidParameters: const AndroidParameters(
+        packageName: 'io.flutter.plugins.firebase.dynamiclinksexample',
+        minimumVersion: 0,
+      ),
+      iosParameters: const IOSParameters(
+        bundleId: 'io.flutter.plugins.firebase.dynamiclinksexample',
+        minimumVersion: '0',
+      ),
+    );
+
+    Uri url;
+    if (short) {
+      final ShortDynamicLink shortLink =
+          await dynamicLinks.buildShortLink(parameters);
+      url = shortLink.shortUrl;
+    } else {
+      url = await dynamicLinks.buildLink(parameters);
+    }
+
+    setState(() {
+      _linkMessage = url.toString();
+      _isCreatingLink = false;
+    });
   }
 
   Future<void> setupInteractedMessage() async {

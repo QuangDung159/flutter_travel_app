@@ -7,26 +7,26 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:1012509086997:android:354fa60ab874be7709c51c",
+        "mobilesdk_app_id": "1:1012509086997:android:4e2e81951d4b63c409c51c",
         "android_client_info": {
-          "package_name": "com.example.flutter_travel_app"
+          "package_name": "com.lqd.flutter_travel_app"
         }
       },
       "oauth_client": [
         {
-          "client_id": "1012509086997-dgabi93o9lh6dvrl12tc6rjooilco4cg.apps.googleusercontent.com",
+          "client_id": "1012509086997-n80bitjaa7cnn7lkjg8bbb7hmgcs88jk.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.example.flutter_travel_app",
-            "certificate_hash": "c3c1d21f145879bd30f40a28e75e80e219583289"
+            "package_name": "com.lqd.flutter_travel_app",
+            "certificate_hash": "b73f4172a328b50717aac0d3883034d8dbe50d4a"
           }
         },
         {
-          "client_id": "1012509086997-nqfja7jmpmq7pdm6hgjtdt9ctflrhpkd.apps.googleusercontent.com",
+          "client_id": "1012509086997-sh3f0ask2dtp7bi3nem3b59b00m1o25a.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.example.flutter_travel_app",
-            "certificate_hash": "b73f4172a328b50717aac0d3883034d8dbe50d4a"
+            "package_name": "com.lqd.flutter_travel_app",
+            "certificate_hash": "c3c1d21f145879bd30f40a28e75e80e219583289"
           }
         },
         {

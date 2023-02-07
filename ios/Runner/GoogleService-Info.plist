@@ -3,9 +3,9 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>1012509086997-2im2b2osa16vvmidoqop8g4b40ffer24.apps.googleusercontent.com</string>
+	<string>1012509086997-5595hcq0p2gnmi5m5bqoqjrictle7bef.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.1012509086997-2im2b2osa16vvmidoqop8g4b40ffer24</string>
+	<string>com.googleusercontent.apps.1012509086997-5595hcq0p2gnmi5m5bqoqjrictle7bef</string>
 	<key>ANDROID_CLIENT_ID</key>
 	<string>1012509086997-dgabi93o9lh6dvrl12tc6rjooilco4cg.apps.googleusercontent.com</string>
 	<key>API_KEY</key>
@@ -15,7 +15,7 @@
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.example.flutterTravelApp</string>
+	<string>com.lqd.flutterTravelApp</string>
 	<key>PROJECT_ID</key>
 	<string>flutter-travel-app-acabe</string>
 	<key>STORAGE_BUCKET</key>
@@ -31,6 +31,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:1012509086997:ios:a894c87d2aaea03509c51c</string>
+	<string>1:1012509086997:ios:e1cede60c895707909c51c</string>
 </dict>
 </plist>

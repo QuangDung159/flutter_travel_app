@@ -4,6 +4,7 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
@@ -12,7 +13,9 @@ import 'package:flutter/services.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_travel_app/core/Controllers/getx_google_info_controller.dart';
 import 'package:flutter_travel_app/core/constants/color_constants.dart';
+import 'package:flutter_travel_app/core/helpers/common_helper.dart';
 import 'package:flutter_travel_app/core/helpers/local_storage_helper.dart';
+import 'package:flutter_travel_app/core/services/dynamic_link_services.dart';
 import 'package:flutter_travel_app/core/services/notification_services.dart';
 import 'package:flutter_travel_app/data/models/received_notification_model.dart';
 import 'package:flutter_travel_app/representation/screens/home_screen.dart';
@@ -230,6 +233,18 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   bool _notificationsEnabled = false;
 
+  String? _linkMessage;
+  bool _isCreatingLink = false;
+  FirebaseDynamicLinks dynamicLinks = FirebaseDynamicLinks.instance;
+  final String _testString =
+      'To test: long press link and then copy and click from a non-browser '
+      "app. Make sure this isn't being tested on iOS simulator and iOS xcode "
+      'is properly setup. Look at firebase_dynamic_links/README.md for more '
+      'details.';
+
+  final String DynamicLink = 'https://example/helloworld';
+  final String Link = 'https://flutterfiretests.page.link/MEGs';
+
   @override
   void initState() {
     super.initState();
@@ -240,6 +255,14 @@ class _MyAppState extends State<MyApp> {
     _configureSelectNotificationSubject();
 
     setupInteractedMessage();
+
+    DynamicLinkServices.onReceiveTerminateAppDynamicLink(context);
+    DynamicLinkServices.onReceiveDynamicLink(context);
+
+    // DynamicLinkServices.initDynamicLinks(
+    //   dynamicLinks: dynamicLinks,
+    //   context: context,
+    // );
   }
 
   Future<void> setupInteractedMessage() async {
@@ -264,7 +287,7 @@ class _MyAppState extends State<MyApp> {
 
     await Navigator.of(context).push(MaterialPageRoute<void>(
       builder: (BuildContext context) =>
-          navigationByPayload(message.data['payload']),
+          navigationByRouterName(message.data['payload']),
     ));
   }
 
@@ -346,18 +369,9 @@ class _MyAppState extends State<MyApp> {
   void _configureSelectNotificationSubject() {
     selectNotificationStream.stream.listen((String? payload) async {
       await Navigator.of(context).push(MaterialPageRoute<void>(
-        builder: (BuildContext context) => navigationByPayload(payload),
+        builder: (BuildContext context) => navigationByRouterName(payload),
       ));
     });
-  }
-
-  Widget navigationByPayload(String? payload) {
-    switch (payload) {
-      case '/hotel_booking_screen':
-        return HotelBookingScreen();
-      default:
-        return HomeScreen();
-    }
   }
 
   @override

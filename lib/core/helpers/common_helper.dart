@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_travel_app/representation/screens/home_screen.dart';
+import 'package:flutter_travel_app/representation/screens/hotel_booking_screen.dart';
 
 class CommonHelper {
   static void showMyDialog({
@@ -28,5 +30,14 @@ void printCustom({String? title, content}) {
     print('${title} ${content}');
   } else {
     print('${content}');
+  }
+}
+
+Widget navigationByRouterName(String? routerName) {
+  switch (routerName) {
+    case '/hotel_booking_screen':
+      return HotelBookingScreen();
+    default:
+      return HomeScreen();
   }
 }

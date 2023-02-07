@@ -261,42 +261,6 @@ class _MyAppState extends State<MyApp> {
     );
   }
 
-  Future<void> _createDynamicLink(bool short) async {
-    setState(() {
-      _isCreatingLink = true;
-    });
-
-    final DynamicLinkParameters parameters = DynamicLinkParameters(
-      uriPrefix: 'https://flutterfiretests.page.link',
-      longDynamicLink: Uri.parse(
-        'https://flutterfiretests.page.link?efr=0&ibi=io.flutter.plugins.firebase.dynamiclinksexample&apn=io.flutter.plugins.firebase.dynamiclinksexample&imv=0&amv=0&link=https%3A%2F%2Fexample%2Fhelloworld&ofl=https://ofl-example.com',
-      ),
-      link: Uri.parse(DynamicLink),
-      androidParameters: const AndroidParameters(
-        packageName: 'io.flutter.plugins.firebase.dynamiclinksexample',
-        minimumVersion: 0,
-      ),
-      iosParameters: const IOSParameters(
-        bundleId: 'io.flutter.plugins.firebase.dynamiclinksexample',
-        minimumVersion: '0',
-      ),
-    );
-
-    Uri url;
-    if (short) {
-      final ShortDynamicLink shortLink =
-          await dynamicLinks.buildShortLink(parameters);
-      url = shortLink.shortUrl;
-    } else {
-      url = await dynamicLinks.buildLink(parameters);
-    }
-
-    setState(() {
-      _linkMessage = url.toString();
-      _isCreatingLink = false;
-    });
-  }
-
   Future<void> setupInteractedMessage() async {
     // Get any messages which caused the application to open from
     // a terminated state.

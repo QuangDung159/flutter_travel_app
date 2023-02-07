@@ -13,6 +13,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_travel_app/core/Controllers/getx_google_info_controller.dart';
 import 'package:flutter_travel_app/core/constants/color_constants.dart';
+import 'package:flutter_travel_app/core/helpers/common_helper.dart';
 import 'package:flutter_travel_app/core/helpers/local_storage_helper.dart';
 import 'package:flutter_travel_app/core/services/dynamic_link_services.dart';
 import 'package:flutter_travel_app/core/services/notification_services.dart';
@@ -255,10 +256,13 @@ class _MyAppState extends State<MyApp> {
 
     setupInteractedMessage();
 
-    DynamicLinkServices.initDynamicLinks(
-      dynamicLinks: dynamicLinks,
-      context: context,
-    );
+    DynamicLinkServices.onReceiveTerminateAppDynamicLink(context);
+    DynamicLinkServices.onReceiveDynamicLink(context);
+
+    // DynamicLinkServices.initDynamicLinks(
+    //   dynamicLinks: dynamicLinks,
+    //   context: context,
+    // );
   }
 
   Future<void> setupInteractedMessage() async {
@@ -283,7 +287,7 @@ class _MyAppState extends State<MyApp> {
 
     await Navigator.of(context).push(MaterialPageRoute<void>(
       builder: (BuildContext context) =>
-          navigationByPayload(message.data['payload']),
+          navigationByRouterName(message.data['payload']),
     ));
   }
 
@@ -365,18 +369,9 @@ class _MyAppState extends State<MyApp> {
   void _configureSelectNotificationSubject() {
     selectNotificationStream.stream.listen((String? payload) async {
       await Navigator.of(context).push(MaterialPageRoute<void>(
-        builder: (BuildContext context) => navigationByPayload(payload),
+        builder: (BuildContext context) => navigationByRouterName(payload),
       ));
     });
-  }
-
-  Widget navigationByPayload(String? payload) {
-    switch (payload) {
-      case '/hotel_booking_screen':
-        return HotelBookingScreen();
-      default:
-        return HomeScreen();
-    }
   }
 
   @override

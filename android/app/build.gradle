@@ -61,11 +61,21 @@ android {
             storeFile file('debug-keystore.jks')
             storePassword 'android'
         }
+
+        release {
+            keyAlias 'release-keystore'
+            keyPassword 'android'
+            storeFile file('release-keystore.jks')
+            storePassword 'android'
+        }
     }
 
     buildTypes {
         debug {
             signingConfig signingConfigs.debug
+        }
+        release {
+            signingConfig signingConfigs.release
         }
     }
 }

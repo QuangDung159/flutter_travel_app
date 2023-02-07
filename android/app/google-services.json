@@ -22,6 +22,14 @@
           }
         },
         {
+          "client_id": "1012509086997-nqfja7jmpmq7pdm6hgjtdt9ctflrhpkd.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.flutter_travel_app",
+            "certificate_hash": "b73f4172a328b50717aac0d3883034d8dbe50d4a"
+          }
+        },
+        {
           "client_id": "1012509086997-3a4cosr0e2e901ps7h7gbgq55ur97cu3.apps.googleusercontent.com",
           "client_type": 3
         }
@@ -37,6 +45,13 @@
             {
               "client_id": "1012509086997-3a4cosr0e2e901ps7h7gbgq55ur97cu3.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "1012509086997-2im2b2osa16vvmidoqop8g4b40ffer24.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.flutterTravelApp"
+              }
             }
           ]
         }

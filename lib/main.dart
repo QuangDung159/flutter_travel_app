@@ -19,6 +19,7 @@ import 'package:flutter_travel_app/core/services/notification_services.dart';
 import 'package:flutter_travel_app/data/models/received_notification_model.dart';
 import 'package:flutter_travel_app/representation/screens/hotel_booking_screen.dart';
 import 'package:flutter_travel_app/representation/screens/main_screen.dart';
+import 'package:flutter_travel_app/representation/screens/splash_screen.dart';
 import 'package:flutter_travel_app/routes.dart';
 import 'package:get/get.dart';
 import 'package:hive_flutter/hive_flutter.dart';
@@ -230,7 +231,6 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   bool _notificationsEnabled = false;
-  OtaEvent? currentEvent;
 
   // String? _linkMessage;
   // // bool _isCreatingLink = false;
@@ -262,8 +262,6 @@ class _MyAppState extends State<MyApp> {
     //   dynamicLinks: dynamicLinks,
     //   context: context,
     // );
-
-    tryOtaUpdate();
   }
 
   Future<void> setupInteractedMessage() async {
@@ -375,29 +373,6 @@ class _MyAppState extends State<MyApp> {
     });
   }
 
-  Future<void> tryOtaUpdate() async {
-    try {
-      String apkLink = 'https://doc-08-3o-docs.googleusercontent.com/docs/securesc/af5kce5kl7le6v84mk14ss6cob2qc8k9/dh5mcpciivkk7r0i9cl5ifnl4gfe5heo/1675847475000/05611245833157123706/05611245833157123706/1WLK1lt4Xr2Cisl1vrHlu0uxBnBizJ6cZ?e=download&ax=AB85Z1CRZWYulet_eI5DdDF64KpFGJhBeti54nQJjJHE5sSoetpJhLXgrETy4a5I2KQ5gjAQ6iJpgP-JMFFT5sKQooU_PRE3DROf9iWFDnle7WRArCx7AupcEisTXdBWr1ZoZIntr4EbZ89y_Ay60mBg4d31hfh1ZgDXDP6UqVxrgKk48aUD3CYPKBmvwPufxSfeqK7J4ur-rOY-Nz0I-CDVGV3E3icycHV5pcsUtOyuFburk1Z3IrgNq8m2iy3i_h103LolVhAENB5NHml6NA1_LSi8wS89ImisN8dyvPg1Hj-nuvD6ZRq_9Mjg7MQKAfkETtYjkrjc8Uu4oHBW624l0IOfT7jVuDWvL0Dp9Y1rHjWPSAlh3HmMpGx3a_dFPLLxjNTFUmJrta9DZ9RhhKguALelPFxQJ-KDU41GjvqXGHc_Vl4GiVm7bULf3_tbPBiijZSCf1Occ_UemEYQZkcJDbudziDmfUMw7fcyGYbCf9ml_QhDb9vujTQu7VzUIS8gRZGZgnRp919epHPY6JwK6akb5qTptyovvskG-U86NcZdzdwi6bbm9tN5yiD9LVSJsNf9gH75KlDQR3BmJ6ApnmT-LfY-x8E7vg7Tb3Xjvo8WEaell8z21pe5mVnsNJ0cXJRTk2oQ_Jmlq3KOjjA2n7qfNg5jAa7HsOxuAsI_fnUJaIsKDOMZBIRHLiMAr0EaZbvAKTdsD7xyTO0iwZhIwsL6HfE4WqbUv1sFbWp-_CFrQJ8uenlpKbAX3c889y-Fp2bTEasYqdlsn6LWCylnYPzpmT9xq_yAAVgjZsGgZjWuzq0WknFvqIo6uVoIY_-kbEW1_CVIL5xGaKRZuuInt9LnwflwAqBybFn1GhUmXrc-X9EHp063L2kTGM4_6NrcujuUx6c6KTcDAWDzbQ7nzhq0rkoRWvqPICKdJ0OYHke61hRdR4-x0hEERYJVy2yTDYTWlVtYpFGH2FxXNL1DKAB6o2bG5zANKPzfAn81YAeutUrUpO2MAZVpI-ZAhPmSB3Do5_xIrrrJYEUo&uuid=9e785398-bdde-460d-b88d-440c0b0f265b&authuser=0&nonce=rch0pu2ihpmic&user=05611245833157123706&hash=8km659b83u5olomrjeqsdg26591tvhkj';
-      //LINK CONTAINS APK OF FLUTTER HELLO WORLD FROM FLUTTER SDK EXAMPLES
-      OtaUpdate()
-          .execute(
-        apkLink,
-        destinationFilename: 'flutter-travel-app.apk',
-        //FOR NOW ANDROID ONLY - ABILITY TO VALIDATE CHECKSUM OF FILE:
-        // sha256checksum:
-        //     'd6da28451a1e15cf7a75f2c3f151befad3b80ad0bb232ab15c20897e54f21478',
-      )
-          .listen(
-        (OtaEvent event) {
-          setState(() => currentEvent = event);
-        },
-      );
-      // ignore: avoid_catches_without_on_clauses
-    } catch (e) {
-      print('Failed to make OTA update. Details: $e');
-    }
-  }
-
   @override
   void dispose() {
     didReceiveLocalNotificationStream.close();
@@ -429,24 +404,7 @@ class _MyAppState extends State<MyApp> {
         backgroundColor: ColorPalette.backgroundScaffoldColor,
       ),
       debugShowCheckedModeBanner: false,
-      // home: SplashScreen(),
-      home: Scaffold(
-        appBar: AppBar(
-          title: const Text('Plugin example app'),
-        ),
-        body: Center(
-          child: Column(
-            children: [
-              Text(
-                'OTA status: ${currentEvent != null ? currentEvent?.status : ''} : ${currentEvent != null ? currentEvent!.value : ''} \n',
-              ),
-              Text(
-                'Test 1',
-              ),
-            ],
-          ),
-        ),
-      ),
+      home: SplashScreen(),
       routes: routes,
     );
   }

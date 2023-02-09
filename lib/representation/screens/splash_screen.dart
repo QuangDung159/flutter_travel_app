@@ -22,6 +22,9 @@ class SplashScreen extends StatefulWidget {
 class _SplashScreenState extends State<SplashScreen> {
   OtaEvent? currentEvent;
   bool needUpdate = false;
+  String versionName = '';
+  String versionCode = '';
+
   GetxAppConfigController appConfigController =
       Get.find<GetxAppConfigController>();
 
@@ -51,12 +54,22 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    // redirectIntroScreen();
+    redirectIntroScreen();
 
     // AppConfigServices.fetchApkDownloadUrl()
     //     .then((value) => tryOtaUpdate(value));
 
     // checkoutRequireUpdate();
+
+    PackageInfo.fromPlatform().then((packageInfo) {
+      String version = packageInfo.version;
+      String buildNumber = packageInfo.buildNumber;
+
+      setState(() {
+        versionName = version;
+        versionCode = buildNumber;
+      });
+    });
   }
 
   Future<void> checkoutRequireUpdate() async {
@@ -68,9 +81,6 @@ class _SplashScreenState extends State<SplashScreen> {
     String version = packageInfo.version;
     String buildNumber = packageInfo.buildNumber;
 
-    printCustom(title: 'version :>>', content: version);
-    printCustom(title: 'appVersionName :>>', content: appVersionName);
-
     if (version != appVersionName) {
       return;
     }
@@ -78,8 +88,6 @@ class _SplashScreenState extends State<SplashScreen> {
     if (buildNumber == appVersionCode) {
       return;
     }
-
-    printCustom(title: 'apkDownloadUrl :>>', content: apkDownloadUrl);
 
     // tryOtaUpdate(apkDownloadUrl);
   }
@@ -120,16 +128,12 @@ class _SplashScreenState extends State<SplashScreen> {
           AssetHelper.imageCircleSplash,
           width: MediaQuery.of(context).size.width,
         ),
-        // renderUpdateProgress(context),
-        Obx(
-          () => renderUpdateProgress(context),
-        ),
+        renderUpdateProgress(context),
       ],
     );
   }
 
   Widget renderUpdateProgress(BuildContext context) {
-    checkoutRequireUpdate();
     return Positioned(
       top: MediaQuery.of(context).size.height / 2 + 50,
       width: MediaQuery.of(context).size.width,
@@ -138,18 +142,18 @@ class _SplashScreenState extends State<SplashScreen> {
         padding: EdgeInsets.all(12),
         child: Column(
           children: [
+            // Text(
+            //   'OTA status: ${currentEvent != null ? currentEvent?.status : ''} : ${currentEvent != null ? currentEvent!.value : ''} \n',
+            //   textAlign: TextAlign.center,
+            //   style: TextStyle(
+            //     fontSize: 12,
+            //     fontWeight: FontWeight.w400,
+            //     color: Colors.white,
+            //     decoration: TextDecoration.none,
+            //   ),
+            // ),
             Text(
-              'OTA status: ${currentEvent != null ? currentEvent?.status : ''} : ${currentEvent != null ? currentEvent!.value : ''} \n',
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                fontSize: 12,
-                fontWeight: FontWeight.w400,
-                color: Colors.white,
-                decoration: TextDecoration.none,
-              ),
-            ),
-            Text(
-              'Test',
+              'Version ${versionName} (build ${versionCode})',
               style: TextStyle(
                 fontSize: 12,
                 fontWeight: FontWeight.w400,

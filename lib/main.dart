@@ -4,7 +4,6 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:firebase_core/firebase_core.dart';
-import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
@@ -24,6 +23,7 @@ import 'package:flutter_travel_app/representation/screens/splash_screen.dart';
 import 'package:flutter_travel_app/routes.dart';
 import 'package:get/get.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:ota_update/ota_update.dart';
 
 int id = 0;
 
@@ -232,17 +232,17 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   bool _notificationsEnabled = false;
 
-  String? _linkMessage;
-  bool _isCreatingLink = false;
-  FirebaseDynamicLinks dynamicLinks = FirebaseDynamicLinks.instance;
-  final String _testString =
-      'To test: long press link and then copy and click from a non-browser '
-      "app. Make sure this isn't being tested on iOS simulator and iOS xcode "
-      'is properly setup. Look at firebase_dynamic_links/README.md for more '
-      'details.';
+  // String? _linkMessage;
+  // // bool _isCreatingLink = false;
+  // FirebaseDynamicLinks dynamicLinks = FirebaseDynamicLinks.instance;
+  // final String _testString =
+  //     'To test: long press link and then copy and click from a non-browser '
+  //     "app. Make sure this isn't being tested on iOS simulator and iOS xcode "
+  //     'is properly setup. Look at firebase_dynamic_links/README.md for more '
+  //     'details.';
 
-  final String DynamicLink = 'https://example/helloworld';
-  final String Link = 'https://flutterfiretests.page.link/MEGs';
+  // final String DynamicLink = 'https://example/helloworld';
+  // final String Link = 'https://flutterfiretests.page.link/MEGs';
 
   @override
   void initState() {

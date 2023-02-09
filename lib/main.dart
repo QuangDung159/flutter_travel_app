@@ -14,6 +14,7 @@ import 'package:flutter_travel_app/core/Controllers/getx_google_info_controller.
 import 'package:flutter_travel_app/core/constants/color_constants.dart';
 import 'package:flutter_travel_app/core/helpers/common_helper.dart';
 import 'package:flutter_travel_app/core/helpers/local_storage_helper.dart';
+import 'package:flutter_travel_app/core/services/app_config_services.dart';
 import 'package:flutter_travel_app/core/services/dynamic_link_services.dart';
 import 'package:flutter_travel_app/core/services/notification_services.dart';
 import 'package:flutter_travel_app/data/models/received_notification_model.dart';
@@ -23,7 +24,6 @@ import 'package:flutter_travel_app/representation/screens/splash_screen.dart';
 import 'package:flutter_travel_app/routes.dart';
 import 'package:get/get.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:ota_update/ota_update.dart';
 
 int id = 0;
 
@@ -262,6 +262,8 @@ class _MyAppState extends State<MyApp> {
     //   dynamicLinks: dynamicLinks,
     //   context: context,
     // );
+
+    AppConfigServices.setupRemoteConfig();
   }
 
   Future<void> setupInteractedMessage() async {

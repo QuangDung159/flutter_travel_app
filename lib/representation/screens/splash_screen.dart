@@ -3,7 +3,6 @@ import 'package:flutter_travel_app/core/helpers/asset_helper.dart';
 import 'package:flutter_travel_app/core/helpers/common_helper.dart';
 import 'package:flutter_travel_app/core/helpers/image_helper.dart';
 import 'package:flutter_travel_app/core/helpers/local_storage_helper.dart';
-import 'package:flutter_travel_app/core/services/app_config_services.dart';
 import 'package:flutter_travel_app/representation/screens/intro_screen.dart';
 import 'package:flutter_travel_app/representation/screens/main_screen.dart';
 import 'package:ota_update/ota_update.dart';

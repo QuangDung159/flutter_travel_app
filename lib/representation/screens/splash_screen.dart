@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_travel_app/core/Controllers/getx_app_config_controller.dart';
 import 'package:flutter_travel_app/core/helpers/asset_helper.dart';
 import 'package:flutter_travel_app/core/helpers/common_helper.dart';
 import 'package:flutter_travel_app/core/helpers/image_helper.dart';
 import 'package:flutter_travel_app/core/helpers/local_storage_helper.dart';
 import 'package:flutter_travel_app/representation/screens/intro_screen.dart';
 import 'package:flutter_travel_app/representation/screens/main_screen.dart';
+import 'package:get/get.dart';
 import 'package:ota_update/ota_update.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -18,6 +21,9 @@ class SplashScreen extends StatefulWidget {
 
 class _SplashScreenState extends State<SplashScreen> {
   OtaEvent? currentEvent;
+  bool needUpdate = false;
+  GetxAppConfigController appConfigController =
+      Get.find<GetxAppConfigController>();
 
   void redirectIntroScreen() async {
     final ignoreIntroScreen =
@@ -45,10 +51,37 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    redirectIntroScreen();
+    // redirectIntroScreen();
 
     // AppConfigServices.fetchApkDownloadUrl()
     //     .then((value) => tryOtaUpdate(value));
+
+    // checkoutRequireUpdate();
+  }
+
+  Future<void> checkoutRequireUpdate() async {
+    var apkDownloadUrl = appConfigController.apkDownloadUrl.value;
+    var appVersionName = appConfigController.appVersionName.value;
+    var appVersionCode = appConfigController.appVersionCode.value;
+
+    PackageInfo packageInfo = await PackageInfo.fromPlatform();
+    String version = packageInfo.version;
+    String buildNumber = packageInfo.buildNumber;
+
+    printCustom(title: 'version :>>', content: version);
+    printCustom(title: 'appVersionName :>>', content: appVersionName);
+
+    if (version != appVersionName) {
+      return;
+    }
+
+    if (buildNumber == appVersionCode) {
+      return;
+    }
+
+    printCustom(title: 'apkDownloadUrl :>>', content: apkDownloadUrl);
+
+    // tryOtaUpdate(apkDownloadUrl);
   }
 
   Future<void> tryOtaUpdate(String apkUrl) async {
@@ -87,38 +120,46 @@ class _SplashScreenState extends State<SplashScreen> {
           AssetHelper.imageCircleSplash,
           width: MediaQuery.of(context).size.width,
         ),
-        Positioned(
-          top:  MediaQuery.of(context).size.height / 2 + 50,
-          width: MediaQuery.of(context).size.width,
-          child: Container(
-            width: 200,
-            padding: EdgeInsets.all(12),
-            child: Column(
-              children: [
-                Text(
-                  'OTA status: ${currentEvent != null ? currentEvent?.status : ''} : ${currentEvent != null ? currentEvent!.value : ''} \n',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontSize: 12,
-                    fontWeight: FontWeight.w400,
-                    color: Colors.white,
-                    decoration: TextDecoration.none,
-                  ),
-                ),
-                Text(
-                  'Test',
-                  style: TextStyle(
-                    fontSize: 12,
-                    fontWeight: FontWeight.w400,
-                    color: Colors.white,
-                    decoration: TextDecoration.none,
-                  ),
-                ),
-              ],
-            ),
-          ),
+        // renderUpdateProgress(context),
+        Obx(
+          () => renderUpdateProgress(context),
         ),
       ],
+    );
+  }
+
+  Widget renderUpdateProgress(BuildContext context) {
+    checkoutRequireUpdate();
+    return Positioned(
+      top: MediaQuery.of(context).size.height / 2 + 50,
+      width: MediaQuery.of(context).size.width,
+      child: Container(
+        width: 200,
+        padding: EdgeInsets.all(12),
+        child: Column(
+          children: [
+            Text(
+              'OTA status: ${currentEvent != null ? currentEvent?.status : ''} : ${currentEvent != null ? currentEvent!.value : ''} \n',
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontSize: 12,
+                fontWeight: FontWeight.w400,
+                color: Colors.white,
+                decoration: TextDecoration.none,
+              ),
+            ),
+            Text(
+              'Test',
+              style: TextStyle(
+                fontSize: 12,
+                fontWeight: FontWeight.w400,
+                color: Colors.white,
+                decoration: TextDecoration.none,
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }

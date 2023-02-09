@@ -46,10 +46,10 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    // redirectIntroScreen();
+    redirectIntroScreen();
 
-    AppConfigServices.fetchApkDownloadUrl()
-        .then((value) => tryOtaUpdate(value));
+    // AppConfigServices.fetchApkDownloadUrl()
+    //     .then((value) => tryOtaUpdate(value));
   }
 
   Future<void> tryOtaUpdate(String apkUrl) async {
@@ -107,7 +107,7 @@ class _SplashScreenState extends State<SplashScreen> {
                   ),
                 ),
                 Text(
-                  'Test 1',
+                  'Test',
                   style: TextStyle(
                     fontSize: 12,
                     fontWeight: FontWeight.w400,

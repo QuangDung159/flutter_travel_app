@@ -199,7 +199,7 @@ Future<void> main() async {
 
   // start firebase notification
   String? token = await FirebaseMessaging.instance.getToken();
-  print(token);
+  printCustom(title: 'fcm token :>>', content: token);
 
   FirebaseMessaging.onMessage.listen((RemoteMessage remoteMessage) {
     RemoteNotification? notification = remoteMessage.notification;

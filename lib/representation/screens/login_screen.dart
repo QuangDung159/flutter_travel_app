@@ -1,12 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_travel_app/core/constants/dimension_constants.dart';
-import 'package:flutter_travel_app/core/helpers/asset_helper.dart';
-import 'package:flutter_travel_app/core/helpers/image_helper.dart';
-import 'package:flutter_travel_app/core/services/google_services.dart';
-import 'package:flutter_travel_app/representation/screens/main_screen.dart';
 import 'package:flutter_travel_app/representation/widgets/app_bar_container.dart';
 import 'package:flutter_travel_app/representation/widgets/button_widget.dart';
-import 'package:flutter_travel_app/representation/widgets/login_method_button_widget.dart';
 import 'package:flutter_travel_app/representation/widgets/login_methods_widget.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -21,17 +16,6 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   bool isShowPassword = false;
   bool isCheckedRemember = false;
-
-  Future<void> handleGoogleSignIn() async {
-    try {
-      final res = await GoogleServices.login();
-      if (res != null) {
-        Navigator.of(context).pushNamed(MainScreen.routerName);
-      }
-    } catch (e) {
-      throw Exception(e);
-    }
-  }
 
   @override
   Widget build(BuildContext context) {

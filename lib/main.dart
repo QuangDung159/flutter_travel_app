@@ -5,8 +5,6 @@ import 'dart:io';
 
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
@@ -18,8 +16,6 @@ import 'package:flutter_travel_app/core/services/app_config_services.dart';
 import 'package:flutter_travel_app/core/services/dynamic_link_services.dart';
 import 'package:flutter_travel_app/core/services/notification_services.dart';
 import 'package:flutter_travel_app/data/models/received_notification_model.dart';
-import 'package:flutter_travel_app/representation/screens/hotel_booking_screen.dart';
-import 'package:flutter_travel_app/representation/screens/main_screen.dart';
 import 'package:flutter_travel_app/representation/screens/splash_screen.dart';
 import 'package:flutter_travel_app/routes.dart';
 import 'package:get/get.dart';
@@ -81,102 +77,8 @@ Future<void> main() async {
   // needed if you intend to initialize in the `main` function
   WidgetsFlutterBinding.ensureInitialized();
 
-  await NotificationServices.configureLocalTimeZone();
-
-  final NotificationAppLaunchDetails? notificationAppLaunchDetails = !kIsWeb &&
-          Platform.isLinux
-      ? null
-      : await flutterLocalNotificationsPlugin.getNotificationAppLaunchDetails();
-
-  String initialRoute = MainScreen.routerName;
-
-  if (notificationAppLaunchDetails?.didNotificationLaunchApp ?? false) {
-    selectedNotificationPayload =
-        notificationAppLaunchDetails!.notificationResponse?.payload;
-    initialRoute = HotelBookingScreen.routerName;
-  }
-
-  const AndroidInitializationSettings initializationSettingsAndroid =
-      AndroidInitializationSettings('app_icon');
-
-  final List<DarwinNotificationCategory> darwinNotificationCategories =
-      <DarwinNotificationCategory>[
-    DarwinNotificationCategory(
-      darwinNotificationCategoryText,
-      actions: <DarwinNotificationAction>[
-        DarwinNotificationAction.text(
-          'text_1',
-          'Action 1',
-          buttonTitle: 'Send',
-          placeholder: 'Placeholder',
-        ),
-      ],
-    ),
-    DarwinNotificationCategory(
-      darwinNotificationCategoryPlain,
-      actions: <DarwinNotificationAction>[
-        DarwinNotificationAction.plain('id_1', 'Action 1'),
-        DarwinNotificationAction.plain(
-          'id_2',
-          'Action 2 (destructive)',
-          options: <DarwinNotificationActionOption>{
-            DarwinNotificationActionOption.destructive,
-          },
-        ),
-        DarwinNotificationAction.plain(
-          navigationActionId,
-          'Action 3 (foreground)',
-          options: <DarwinNotificationActionOption>{
-            DarwinNotificationActionOption.foreground,
-          },
-        ),
-        DarwinNotificationAction.plain(
-          'id_4',
-          'Action 4 (auth required)',
-          options: <DarwinNotificationActionOption>{
-            DarwinNotificationActionOption.authenticationRequired,
-          },
-        ),
-      ],
-      options: <DarwinNotificationCategoryOption>{
-        DarwinNotificationCategoryOption.hiddenPreviewShowTitle,
-      },
-    )
-  ];
-
-  /// Note: permissions aren't requested here just to demonstrate that can be
-  /// done later
-  final DarwinInitializationSettings initializationSettingsDarwin =
-      DarwinInitializationSettings(
-    requestAlertPermission: false,
-    requestBadgePermission: false,
-    requestSoundPermission: false,
-    onDidReceiveLocalNotification:
-        (int id, String? title, String? body, String? payload) async {
-      didReceiveLocalNotificationStream.add(
-        ReceivedNotificationModel(
-          id: id,
-          title: title,
-          body: body,
-          payload: payload,
-        ),
-      );
-    },
-    notificationCategories: darwinNotificationCategories,
-  );
-
-  final LinuxInitializationSettings initializationSettingsLinux =
-      LinuxInitializationSettings(
-    defaultActionName: 'Open notification',
-    defaultIcon: AssetsLinuxIcon('icons/app_icon.png'),
-  );
-
-  final InitializationSettings initializationSettings = InitializationSettings(
-    android: initializationSettingsAndroid,
-    iOS: initializationSettingsDarwin,
-    macOS: initializationSettingsDarwin,
-    linux: initializationSettingsLinux,
-  );
+  InitializationSettings initializationSettings =
+      await NotificationServices.initializeLocalNotificationSettings();
 
   await flutterLocalNotificationsPlugin.initialize(
     initializationSettings,
@@ -250,10 +152,13 @@ class _MyAppState extends State<MyApp> {
 
     _isAndroidPermissionGranted();
     _requestPermissions();
-    _configureDidReceiveLocalNotificationSubject();
-    _configureSelectNotificationSubject();
+    // NotificationServices.configureDidReceiveLocalNotificationSubject(context);
 
-    setupInteractedMessage();
+    // local notification onTap
+    NotificationServices.onTapLocalNotification(context);
+
+    // firebase notification onTap
+    NotificationServices.setupInteractedFirebaseMessage(context);
 
     DynamicLinkServices.onReceiveTerminateAppDynamicLink(context);
     DynamicLinkServices.onReceiveDynamicLink(context);
@@ -264,32 +169,6 @@ class _MyAppState extends State<MyApp> {
     // );
 
     AppConfigServices.setupRemoteConfig();
-  }
-
-  Future<void> setupInteractedMessage() async {
-    // Get any messages which caused the application to open from
-    // a terminated state.
-    RemoteMessage? initialMessage =
-        await FirebaseMessaging.instance.getInitialMessage();
-
-    if (initialMessage != null) {
-      _handleMessage(initialMessage);
-    }
-
-    // Also handle any interaction when the app is in the background via a
-    // Stream listener
-    FirebaseMessaging.onMessageOpenedApp.listen(_handleMessage);
-  }
-
-  void _handleMessage(RemoteMessage message) async {
-    if (message.data['payload'] == null || message.data['payload'] == '') {
-      return;
-    }
-
-    await Navigator.of(context).push(MaterialPageRoute<void>(
-      builder: (BuildContext context) =>
-          navigationByRouterName(message.data['payload']),
-    ));
   }
 
   Future<void> _isAndroidPermissionGranted() async {
@@ -334,45 +213,6 @@ class _MyAppState extends State<MyApp> {
         _notificationsEnabled = granted ?? false;
       });
     }
-  }
-
-  void _configureDidReceiveLocalNotificationSubject() {
-    didReceiveLocalNotificationStream.stream
-        .listen((ReceivedNotificationModel receivedNotification) async {
-      await showDialog(
-        context: context,
-        builder: (BuildContext context) => CupertinoAlertDialog(
-          title: receivedNotification.title != null
-              ? Text(receivedNotification.title!)
-              : null,
-          content: receivedNotification.body != null
-              ? Text(receivedNotification.body!)
-              : null,
-          actions: <Widget>[
-            CupertinoDialogAction(
-              isDefaultAction: true,
-              onPressed: () async {
-                Navigator.of(context, rootNavigator: true).pop();
-                await Navigator.of(context).push(
-                  MaterialPageRoute<void>(
-                    builder: (BuildContext context) => HotelBookingScreen(),
-                  ),
-                );
-              },
-              child: const Text('Ok'),
-            )
-          ],
-        ),
-      );
-    });
-  }
-
-  void _configureSelectNotificationSubject() {
-    selectNotificationStream.stream.listen((String? payload) async {
-      await Navigator.of(context).push(MaterialPageRoute<void>(
-        builder: (BuildContext context) => navigationByRouterName(payload),
-      ));
-    });
   }
 
   @override

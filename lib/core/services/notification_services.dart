@@ -1,9 +1,16 @@
 import 'dart:io';
 
+import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_timezone/flutter_timezone.dart';
+import 'package:flutter_travel_app/core/helpers/common_helper.dart';
+import 'package:flutter_travel_app/data/models/received_notification_model.dart';
 import 'package:flutter_travel_app/main.dart';
+import 'package:flutter_travel_app/representation/screens/hotel_booking_screen.dart';
+import 'package:flutter_travel_app/representation/screens/main_screen.dart';
 import 'package:timezone/data/latest_all.dart' as tz;
 import 'package:timezone/timezone.dart' as tz;
 
@@ -187,5 +194,184 @@ class NotificationServices {
         uiLocalNotificationDateInterpretation:
             UILocalNotificationDateInterpretation.absoluteTime,
         matchDateTimeComponents: DateTimeComponents.dayOfWeekAndTime);
+  }
+
+  static void onTapLocalNotification(BuildContext context) {
+    selectNotificationStream.stream.listen((String? payload) async {
+      printCustom(title: 'payload :>>', content: payload);
+      await Navigator.of(context).push(MaterialPageRoute<void>(
+        builder: (context) => navigationByRouterName(payload),
+      ));
+    });
+  }
+
+  static Future<InitializationSettings> initializeLocalNotificationSettings(
+      {String? initialRoute}) async {
+    await NotificationServices.configureLocalTimeZone();
+
+    final NotificationAppLaunchDetails? notificationAppLaunchDetails =
+        !kIsWeb && Platform.isLinux
+            ? null
+            : await flutterLocalNotificationsPlugin
+                .getNotificationAppLaunchDetails();
+
+    if (initialRoute == null || initialRoute == '') {
+      initialRoute = MainScreen.routerName;
+    }
+
+    if (notificationAppLaunchDetails?.didNotificationLaunchApp ?? false) {
+      selectedNotificationPayload =
+          notificationAppLaunchDetails!.notificationResponse?.payload;
+      printCustom(
+          title: 'selectedNotificationPayload :>>',
+          content: selectedNotificationPayload);
+    }
+
+    const AndroidInitializationSettings initializationSettingsAndroid =
+        AndroidInitializationSettings('app_icon');
+
+    final List<DarwinNotificationCategory> darwinNotificationCategories =
+        <DarwinNotificationCategory>[
+      DarwinNotificationCategory(
+        darwinNotificationCategoryText,
+        actions: <DarwinNotificationAction>[
+          DarwinNotificationAction.text(
+            'text_1',
+            'Action 1',
+            buttonTitle: 'Send',
+            placeholder: 'Placeholder',
+          ),
+        ],
+      ),
+      DarwinNotificationCategory(
+        darwinNotificationCategoryPlain,
+        actions: <DarwinNotificationAction>[
+          DarwinNotificationAction.plain('id_1', 'Action 1'),
+          DarwinNotificationAction.plain(
+            'id_2',
+            'Action 2 (destructive)',
+            options: <DarwinNotificationActionOption>{
+              DarwinNotificationActionOption.destructive,
+            },
+          ),
+          DarwinNotificationAction.plain(
+            navigationActionId,
+            'Action 3 (foreground)',
+            options: <DarwinNotificationActionOption>{
+              DarwinNotificationActionOption.foreground,
+            },
+          ),
+          DarwinNotificationAction.plain(
+            'id_4',
+            'Action 4 (auth required)',
+            options: <DarwinNotificationActionOption>{
+              DarwinNotificationActionOption.authenticationRequired,
+            },
+          ),
+        ],
+        options: <DarwinNotificationCategoryOption>{
+          DarwinNotificationCategoryOption.hiddenPreviewShowTitle,
+        },
+      )
+    ];
+
+    /// Note: permissions aren't requested here just to demonstrate that can be
+    /// done later
+    final DarwinInitializationSettings initializationSettingsDarwin =
+        DarwinInitializationSettings(
+      requestAlertPermission: false,
+      requestBadgePermission: false,
+      requestSoundPermission: false,
+      onDidReceiveLocalNotification:
+          (int id, String? title, String? body, String? payload) async {
+        didReceiveLocalNotificationStream.add(
+          ReceivedNotificationModel(
+            id: id,
+            title: title,
+            body: body,
+            payload: payload,
+          ),
+        );
+      },
+      notificationCategories: darwinNotificationCategories,
+    );
+
+    final LinuxInitializationSettings initializationSettingsLinux =
+        LinuxInitializationSettings(
+      defaultActionName: 'Open notification',
+      defaultIcon: AssetsLinuxIcon('icons/app_icon.png'),
+    );
+
+    final InitializationSettings initializationSettings =
+        InitializationSettings(
+      android: initializationSettingsAndroid,
+      iOS: initializationSettingsDarwin,
+      macOS: initializationSettingsDarwin,
+      linux: initializationSettingsLinux,
+    );
+
+    return initializationSettings;
+  }
+
+    static void configureDidReceiveLocalNotificationSubject(BuildContext context) {
+    didReceiveLocalNotificationStream.stream
+        .listen((ReceivedNotificationModel receivedNotification) async {
+      printCustom(
+          title: 'receivedNotification :>>', content: receivedNotification);
+          
+      await showDialog(
+        context: context,
+        builder: (BuildContext context) => CupertinoAlertDialog(
+          title: receivedNotification.title != null
+              ? Text(receivedNotification.title!)
+              : null,
+          content: receivedNotification.body != null
+              ? Text(receivedNotification.body!)
+              : null,
+          actions: <Widget>[
+            CupertinoDialogAction(
+              isDefaultAction: true,
+              onPressed: () async {
+                Navigator.of(context, rootNavigator: true).pop();
+                await Navigator.of(context).push(
+                  MaterialPageRoute<void>(
+                    builder: (BuildContext context) => HotelBookingScreen(),
+                  ),
+                );
+              },
+              child: const Text('Ok'),
+            )
+          ],
+        ),
+      );
+    });
+  }
+
+  static Future<void> setupInteractedFirebaseMessage(BuildContext context) async {
+    // Get any messages which caused the application to open from
+    // a terminated state.
+    RemoteMessage? initialMessage =
+        await FirebaseMessaging.instance.getInitialMessage();
+
+    if (initialMessage != null) {
+      _handleMessage(initialMessage, context);
+    }
+
+    // Also handle any interaction when the app is in the background via a
+    // Stream listener
+    FirebaseMessaging.onMessageOpenedApp.listen((event) {
+      _handleMessage(event, context);
+    });
+  }
+
+  static void _handleMessage(RemoteMessage message, BuildContext context) async {
+    if (message.data['payload'] == null || message.data['payload'] == '') {
+      return;
+    }
+
+    await Navigator.of(context).push(MaterialPageRoute<void>(
+      builder: (context) =>
+          navigationByRouterName(message.data['payload']),
+    ));
   }
 }

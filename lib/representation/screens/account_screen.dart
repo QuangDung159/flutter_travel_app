@@ -4,6 +4,7 @@ import 'package:flutter_travel_app/core/constants/dimension_constants.dart';
 import 'package:flutter_travel_app/core/helpers/common_helper.dart';
 import 'package:flutter_travel_app/core/services/google_services.dart';
 import 'package:flutter_travel_app/core/services/notification_services.dart';
+import 'package:flutter_travel_app/representation/screens/hotel_booking_screen.dart';
 import 'package:flutter_travel_app/representation/widgets/app_bar_container.dart';
 import 'package:flutter_travel_app/representation/widgets/button_widget.dart';
 import 'package:flutter_travel_app/representation/widgets/login_methods_widget.dart';
@@ -137,6 +138,7 @@ class _AccountScreenState extends State<AccountScreen> {
                   NotificationServices.showNotification(
                     body: 'See you again!',
                     usingCustomSound: true,
+                    payload: HotelBookingScreen.routerName,
                   );
 
                   Navigator.of(context, rootNavigator: true).pop();

@@ -151,6 +151,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           NotificationServices.showNotification(
                             body: 'See you again!',
                             usingCustomSound: true,
+                            payload: HotelBookingScreen.routerName,
                           );
 
                           Navigator.of(context, rootNavigator: true).pop();

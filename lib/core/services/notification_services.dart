@@ -11,6 +11,7 @@ import 'package:flutter_travel_app/data/models/received_notification_model.dart'
 import 'package:flutter_travel_app/main.dart';
 import 'package:flutter_travel_app/representation/screens/hotel_booking_screen.dart';
 import 'package:flutter_travel_app/representation/screens/main_screen.dart';
+import 'package:get/get.dart';
 import 'package:timezone/data/latest_all.dart' as tz;
 import 'package:timezone/timezone.dart' as tz;
 
@@ -196,12 +197,11 @@ class NotificationServices {
         matchDateTimeComponents: DateTimeComponents.dayOfWeekAndTime);
   }
 
-  static void onTapLocalNotification(BuildContext context) {
+  static void onTapLocalNotification() {
     selectNotificationStream.stream.listen((String? payload) async {
       printCustom(title: 'payload :>>', content: payload);
-      await Navigator.of(context).push(MaterialPageRoute<void>(
-        builder: (context) => navigationByRouterName(payload),
-      ));
+
+      Get.to(() => navigationByRouterName(payload));
     });
   }
 
@@ -313,12 +313,13 @@ class NotificationServices {
     return initializationSettings;
   }
 
-    static void configureDidReceiveLocalNotificationSubject(BuildContext context) {
+  static void configureDidReceiveLocalNotificationSubject(
+      BuildContext context) {
     didReceiveLocalNotificationStream.stream
         .listen((ReceivedNotificationModel receivedNotification) async {
       printCustom(
           title: 'receivedNotification :>>', content: receivedNotification);
-          
+
       await showDialog(
         context: context,
         builder: (BuildContext context) => CupertinoAlertDialog(
@@ -333,11 +334,7 @@ class NotificationServices {
               isDefaultAction: true,
               onPressed: () async {
                 Navigator.of(context, rootNavigator: true).pop();
-                await Navigator.of(context).push(
-                  MaterialPageRoute<void>(
-                    builder: (BuildContext context) => HotelBookingScreen(),
-                  ),
-                );
+                Get.to(() => HotelBookingScreen());
               },
               child: const Text('Ok'),
             )
@@ -347,31 +344,26 @@ class NotificationServices {
     });
   }
 
-  static Future<void> setupInteractedFirebaseMessage(BuildContext context) async {
+  static Future<void> setupInteractedFirebaseMessage() async {
     // Get any messages which caused the application to open from
     // a terminated state.
     RemoteMessage? initialMessage =
         await FirebaseMessaging.instance.getInitialMessage();
 
     if (initialMessage != null) {
-      _handleMessage(initialMessage, context);
+      _handleMessage(initialMessage);
     }
 
     // Also handle any interaction when the app is in the background via a
     // Stream listener
-    FirebaseMessaging.onMessageOpenedApp.listen((event) {
-      _handleMessage(event, context);
-    });
+    FirebaseMessaging.onMessageOpenedApp.listen(_handleMessage);
   }
 
-  static void _handleMessage(RemoteMessage message, BuildContext context) async {
+  static void _handleMessage(RemoteMessage message) async {
     if (message.data['payload'] == null || message.data['payload'] == '') {
       return;
     }
 
-    await Navigator.of(context).push(MaterialPageRoute<void>(
-      builder: (context) =>
-          navigationByRouterName(message.data['payload']),
-    ));
+    Get.to(() => navigationByRouterName(message.data['payload']));
   }
 }

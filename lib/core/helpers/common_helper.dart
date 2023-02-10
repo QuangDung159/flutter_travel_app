@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_travel_app/representation/screens/account_screen.dart';
+import 'package:flutter_travel_app/representation/screens/booking_screen.dart';
+import 'package:flutter_travel_app/representation/screens/checkout_confirm_screen.dart';
 import 'package:flutter_travel_app/representation/screens/home_screen.dart';
 import 'package:flutter_travel_app/representation/screens/hotel_booking_screen.dart';
+import 'package:flutter_travel_app/representation/screens/hotels_screen.dart';
 
 class CommonHelper {
   static void showMyDialog({
@@ -37,6 +41,14 @@ Widget navigationByRouterName(String? routerName) {
   switch (routerName) {
     case '/hotel_booking_screen':
       return HotelBookingScreen();
+    case '/hotels_screen':
+      return HotelsScreen();
+    case '/account_screen':
+      return AccountScreen();
+    case '/booking_screen':
+      return BookingScreen();
+    case '/checkout_confirm_screen':
+      return CheckoutConfirmScreen();
     default:
       return HomeScreen();
   }

@@ -1,6 +1,7 @@
 import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_travel_app/core/helpers/common_helper.dart';
+import 'package:get/get.dart';
 
 class DynamicLinkServices {
   static Future<void> initDynamicLinks({
@@ -15,25 +16,25 @@ class DynamicLinkServices {
     });
   }
 
-  static onReceiveDynamicLink(BuildContext context) {
+  static onReceiveDynamicLink() {
     FirebaseDynamicLinks.instance.onLink.listen((dynamicLinkData) {
       printCustom(title: 'dynamicLinkData :>>', content: dynamicLinkData);
-      handleDynamicUrl(dynamicLinkData.link.toString(), context);
+      handleDynamicUrl(dynamicLinkData.link.toString());
     }).onError((error) {
       throw Exception(error);
     });
   }
 
-  static onReceiveTerminateAppDynamicLink(BuildContext context) async {
+  static onReceiveTerminateAppDynamicLink() async {
     final PendingDynamicLinkData? initialLink =
         await FirebaseDynamicLinks.instance.getInitialLink();
 
     if (initialLink != null) {
-      handleDynamicUrl(initialLink.link.toString(), context);
+      handleDynamicUrl(initialLink.link.toString());
     }
   }
 
-  static handleDynamicUrl(String url, BuildContext context) async {
+  static handleDynamicUrl(String url) async {
     List<Map<String, String>> params = getParamsFromUrl(url);
 
     var routerName = '';
@@ -49,10 +50,7 @@ class DynamicLinkServices {
       }
     });
 
-    await Navigator.of(context).push(MaterialPageRoute<void>(
-      builder: (BuildContext context) =>
-          navigationByRouterName('/${routerName}'),
-    ));
+    Get.to(() => navigationByRouterName('/${routerName}'));
   }
 
   static getParamsFromUrl(String url) {

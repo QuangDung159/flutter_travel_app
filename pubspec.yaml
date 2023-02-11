@@ -47,7 +47,7 @@ dependencies:
   ota_update: ^4.0.2
   flutter_local_notifications: ^13.0.0
   path_provider: ^2.0.12
-  image: ^4.0.13
+  image: ^3.0.0-nullsafety.0
   flutter_timezone: ^1.0.4
   device_info_plus: ^8.0.0
   firebase_messaging: ^14.2.1
@@ -58,6 +58,8 @@ dependencies:
   package_info_plus: ^3.0.2
 
 dev_dependencies:
+  # flutter pub run flutter_launcher_icons -f flutter_launcher_icons.yaml
+  flutter_launcher_icons: ^0.11.0
   flutter_test:
     sdk: flutter
 

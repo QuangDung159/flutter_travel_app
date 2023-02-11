@@ -1,7 +1,6 @@
 import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_travel_app/core/helpers/common_helper.dart';
-import 'package:flutter_travel_app/core/helpers/local_storage_helper.dart';
 import 'package:get/get.dart';
 
 class DynamicLinkServices {
@@ -31,7 +30,6 @@ class DynamicLinkServices {
         await FirebaseDynamicLinks.instance.getInitialLink();
 
     if (initialLink != null) {
-      LocalStorageHelper.setValue('ignoreIntroScreen', true);
       handleDynamicUrl(initialLink.link.toString());
     }
   }

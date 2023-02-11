@@ -31,7 +31,9 @@ class _HomeScreenState extends State<HomeScreen> {
   void initState() {
     super.initState();
     listPhoto = PhotoServices.fetchListPhoto();
-    DynamicLinkServices.onReceiveTerminateAppDynamicLink();
+    Future.delayed(Duration(seconds: 2), () {
+      DynamicLinkServices.onReceiveTerminateAppDynamicLink();
+    });
   }
 
   Widget _renderItemCategory(

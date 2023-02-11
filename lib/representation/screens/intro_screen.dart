@@ -124,28 +124,29 @@ class _IntroScreenState extends State<IntroScreen> {
                   ),
                 ),
                 StreamBuilder<int>(
-                    initialData: 0,
-                    stream: _pageStreamController.stream,
-                    builder: (context, snapshot) {
-                      return Expanded(
-                        flex: 3,
-                        child: ButtonWidget(
-                          title: snapshot.data == 2 ? 'Get started' : 'Next',
-                          onTap: () {
-                            if (snapshot.data != 2) {
-                              _pageController.nextPage(
-                                  curve: Curves.ease,
-                                  duration: const Duration(milliseconds: 700));
-                            } else {
-                              Navigator.of(context)
-                                  .pushNamed(MainScreen.routerName);
-                              LocalStorageHelper.setValue(
-                                  'ignoreIntroScreen', true);
-                            }
-                          },
-                        ),
-                      );
-                    })
+                  initialData: 0,
+                  stream: _pageStreamController.stream,
+                  builder: (context, snapshot) {
+                    return Expanded(
+                      flex: 3,
+                      child: ButtonWidget(
+                        title: snapshot.data == 2 ? 'Get started' : 'Next',
+                        onTap: () {
+                          if (snapshot.data != 2) {
+                            _pageController.nextPage(
+                                curve: Curves.ease,
+                                duration: const Duration(milliseconds: 700));
+                          } else {
+                            Navigator.of(context)
+                                .pushNamed(MainScreen.routerName);
+                            LocalStorageHelper.setValue(
+                                'ignoreIntroScreen', true);
+                          }
+                        },
+                      ),
+                    );
+                  },
+                )
               ],
             ),
           )

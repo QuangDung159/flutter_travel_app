@@ -4,6 +4,7 @@ import 'package:flutter_travel_app/core/constants/dimension_constants.dart';
 import 'package:flutter_travel_app/core/helpers/asset_helper.dart';
 import 'package:flutter_travel_app/core/helpers/common_helper.dart';
 import 'package:flutter_travel_app/core/helpers/image_helper.dart';
+import 'package:flutter_travel_app/core/services/dynamic_link_services.dart';
 import 'package:flutter_travel_app/core/services/google_services.dart';
 import 'package:flutter_travel_app/core/services/notification_services.dart';
 import 'package:flutter_travel_app/core/services/photo_services.dart';
@@ -30,6 +31,7 @@ class _HomeScreenState extends State<HomeScreen> {
   void initState() {
     super.initState();
     listPhoto = PhotoServices.fetchListPhoto();
+    DynamicLinkServices.onReceiveTerminateAppDynamicLink();
   }
 
   Widget _renderItemCategory(

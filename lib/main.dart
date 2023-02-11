@@ -160,7 +160,7 @@ class _MyAppState extends State<MyApp> {
     // firebase notification onTap
     NotificationServices.setupInteractedFirebaseMessage();
 
-    DynamicLinkServices.onReceiveTerminateAppDynamicLink();
+    // DynamicLinkServices.onReceiveTerminateAppDynamicLink();
     DynamicLinkServices.onReceiveDynamicLink();
 
     // DynamicLinkServices.initDynamicLinks(

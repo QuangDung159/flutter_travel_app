@@ -9,7 +9,7 @@ class DynamicLinkServices {
     required BuildContext context,
   }) async {
     dynamicLinks.onLink.listen((dynamicLinkData) {
-      Navigator.pushNamed(context, dynamicLinkData.link.path);
+      // Navigator.pushNamed(context, dynamicLinkData.link.path);
     }).onError((error) {
       print('onLink error');
       print(error.message);
